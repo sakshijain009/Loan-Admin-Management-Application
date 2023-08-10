@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 //import jakarta.validation.constraints.Min;
-//import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotBlank;
 //import jakarta.validation.constraints.NotEmpty;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -125,7 +125,7 @@ public class Employee {
 	
 	@Column(name="password", length=20)
 //	@Min(8, message="Password length must be of length 8")
-//	@NotBlank(message="Password cannot be empty")
+	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
 	@OneToMany(cascade=CascadeType.ALL)

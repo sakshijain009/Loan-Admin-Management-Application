@@ -9,13 +9,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @CrossOrigin("http://localhost:3000")
 public class EmployeeController {
 	@Autowired
 	EmployeeService empService;
 	@PostMapping("/addUser")
-	public Employee saveEmployee(@RequestBody Employee emp)
+	public Employee saveEmployee(@RequestBody @Valid Employee emp)
 	{
 		Employee e=empService.saveEmployee(emp);
 		return e;
