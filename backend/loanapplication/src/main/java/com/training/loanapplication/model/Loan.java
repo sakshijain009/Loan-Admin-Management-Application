@@ -18,6 +18,38 @@ public class Loan {
 	@Column(name="loan_id",length=6)
 	private Long id;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public short getDuration() {
+		return duration;
+	}
+
+	public void setDuration(short duration) {
+		this.duration = duration;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	@Column(name="loan_type",length=15)
 	private String type;	
 	

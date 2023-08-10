@@ -22,6 +22,46 @@ public class Issue {
 	@Column(name="issue_date",length=8)
 	private String issueDate;
 	
+	public String getIssue_id() {
+		return issue_id;
+	}
+
+	public void setIssue_id(String issue_id) {
+		this.issue_id = issue_id;
+	}
+
+	public String getIssueDate() {
+		return issueDate;
+	}
+
+	public void setIssueDate(String issueDate) {
+		this.issueDate = issueDate;
+	}
+
+	public String getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
 	@Column(name="return_date", length=8)
 	private String returnDate;
 	

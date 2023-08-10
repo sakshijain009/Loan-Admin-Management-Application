@@ -22,6 +22,38 @@ public class Card {
 	@Column(name="card_issue_date",length=10)
 	private String date;
 	
+	public int getCard_id() {
+		return card_id;
+	}
+
+	public void setCard_id(int card_id) {
+		this.card_id = card_id;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public Loan getLoan() {
+		return loan;
+	}
+
+	public void setLoan(Loan loan) {
+		this.loan = loan;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@OneToOne
 	@JoinColumn(name = "loan_id")
 	private Loan loan;
