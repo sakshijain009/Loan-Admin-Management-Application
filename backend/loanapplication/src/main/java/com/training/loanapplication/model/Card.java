@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,14 +18,11 @@ public class Card {
 	@Column(name="card_id")
 	private int card_id;
 	
-	@Column(name="employee_id")
-	private int employee_id;
-	
-	@Column(name="loan_id")
-	private int loan_id;
-	
 	@Column(name="card_issue_date",length=10)
 	private String date;
 	
-
+	@OneToOne
+	@JoinColumn(name = "loan_id")
+	private Loan loan;
+	
 }
