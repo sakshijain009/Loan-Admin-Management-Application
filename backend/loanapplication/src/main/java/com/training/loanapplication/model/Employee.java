@@ -6,9 +6,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+//import jakarta.validation.constraints.Min;
+//import jakarta.validation.constraints.NotBlank;
+//import jakarta.validation.constraints.NotEmpty;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+
+//import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="employee_master")
@@ -17,6 +22,7 @@ public class Employee {
 	
 	@Id
 	@Column(name="employee_id", length=6)
+//	@NotEmpty(message="Employee id cannot be empty or null")
 	private String id;
 	
 	@Column(name="employee_name", length=20)
@@ -118,6 +124,8 @@ public class Employee {
 	private String doj;
 	
 	@Column(name="password", length=20)
+//	@Min(8, message="Password length must be of length 8")
+//	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
 	@OneToMany(cascade=CascadeType.ALL)
