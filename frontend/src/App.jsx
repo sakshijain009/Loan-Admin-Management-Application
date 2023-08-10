@@ -9,7 +9,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/addUser' element={<Register/> } />
+          <Route path='/register' element={<Register/> } />
         </Routes>
       </Router>
     </>

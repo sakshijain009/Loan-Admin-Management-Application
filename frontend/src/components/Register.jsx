@@ -13,6 +13,7 @@ function AddUser() {
     const [gender, setGender] = React.useState("");
     const [dob, setDob] = React.useState("");
     const [doj, setDoj] = React.useState("");
+    const [pwd, setPwd] = React.useState("");
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -24,7 +25,8 @@ function AddUser() {
             des,
             gender,
             dob,
-            doj
+            doj,
+            pwd
         }).then(response => console.log(response)).catch(err => console.log(err));
         // fetch('http://localhost:8080/addUser', {
         //     method: 'POST',
@@ -43,31 +45,35 @@ function AddUser() {
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
                     onChange={
                         e => setEmpid(e.target.value)
-                    }/><br/>
+                    }/>
                 <TextField id="outlined-basic" label="Employee Name" variant="outlined" className='text_register'
                     onChange={
                         e => setName(e.target.value)
-                    }/><br/>
+                    }/>
                 <TextField id="outlined-basic" label="Employee Department" variant="outlined" className='text_register'
                     onChange={
                         e => setDept(e.target.value)
-                    }/><br/>
+                    }/>
                 <TextField id="outlined-basic" label="Employee Designation" variant="outlined" className='text_register'
                     onChange={
                         e => setDes(e.target.value)
-                    }/><br/>
+                    }/>
                 <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
                     onChange={
                         e => setGender(e.target.value)
-                    }/><br/>
+                    }/>
+                <TextField id="outlined-basic" label="Password" variant="outlined" className='text_register' type='password'
+                    onChange={
+                        e => setPwd(e.target.value)
+                    }/>
                 <TextField id="outlined-basic" label="Date of Birth (DDMMYYYY)" variant="outlined" className='text_register'
                     onChange={
                         e => setDob(e.target.value)
-                    }/><br/>
+                    }/>
                 <TextField id="outlined-basic" label="Date of Joining (DDMMYYYY)" variant="outlined" className='text_register'
                     onChange={
                         e => setDoj(e.target.value)
-                    }/><br/>
+                    }/>
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Submit</Button>
             </div>
