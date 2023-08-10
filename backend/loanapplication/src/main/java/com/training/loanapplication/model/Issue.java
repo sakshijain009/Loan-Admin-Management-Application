@@ -1,8 +1,14 @@
 package com.training.loanapplication.model;
 
+//import java.util.List;
+
+//import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+//import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -10,48 +16,21 @@ import jakarta.persistence.Table;
 public class Issue {
 	
 	@Id
-	@Column(name="id")
-	private Long id;
+	@Column(name="issue_id", length=6)
+	private String issue_id;
 	
-	@Column(name="issue_date",length=6)
+	@Column(name="issue_date",length=8)
 	private String issueDate;
 	
-	public String getIssueDate() {
-		return issueDate;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setIssueDate(String issueDate) {
-		this.issueDate = issueDate;
-	}
-
-	public void setReturnDate(String returnDate) {
-		this.returnDate = returnDate;
-	}
-
-	public void setIssueId(String issueId) {
-		this.issueId = issueId;
-	}
-
-	@Column(name="return_date",length=10)
+	@Column(name="return_date", length=8)
 	private String returnDate;
 	
-	public String getReturnDate() {
-		return returnDate;
-	}
-	
-	@Column(name="issue_id",length=10)
-	private String issueId;
-	
-	public String getIssueId() {
-		return issueId;
-	}
+    @ManyToOne
+    @JoinColumn(name="employee_id")
+    private Employee employee;
+    
+    @ManyToOne
+    @JoinColumn(name="item_id")
+    private Item item;
 
 }
