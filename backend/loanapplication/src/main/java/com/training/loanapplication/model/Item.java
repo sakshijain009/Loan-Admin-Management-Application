@@ -1,8 +1,13 @@
 package com.training.loanapplication.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -76,4 +81,8 @@ public class Item {
     
     @Column(name="item_make", length=25)
     private String item_make;
+    
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="issue_id")
+    private List<Issue>issue;
 }
