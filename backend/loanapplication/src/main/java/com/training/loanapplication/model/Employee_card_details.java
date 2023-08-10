@@ -36,7 +36,7 @@ public class Employee_card_details {
 		this.loan_ids = loan_ids;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="employee_id")
-	private List<Loan_card_master> loan_ids;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JoinColumn(name="employee_id")
+//	private List<Loan_card_master> loan_ids;
 }
