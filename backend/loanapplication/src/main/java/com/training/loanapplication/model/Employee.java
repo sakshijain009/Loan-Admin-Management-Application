@@ -1,9 +1,14 @@
 package com.training.loanapplication.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Table(name="employee_master")
@@ -31,5 +36,12 @@ public class Employee {
 	
 	@Column(name="doj", length=8)
 	private String doj;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="issue_id")
+    private List<Issue>issue;
 
 }
+
+
+
