@@ -26,7 +26,4 @@ public class Card {
 	private String date;
 	
 
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name="employee_id")
-//	private List<Loan_card_master> loan_ids;
 }

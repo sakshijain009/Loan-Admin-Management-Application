@@ -37,9 +37,16 @@ public class Employee {
 	@Column(name="doj", length=8)
 	private String doj;
 	
+	@Column(name="password", length=20)
+	private String password;
+	
 	@OneToMany(cascade=CascadeType.ALL)
     @JoinColumn(name="issue_id")
     private List<Issue>issue;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="card_id")
+    private List<Card>card;
 
 }
 
