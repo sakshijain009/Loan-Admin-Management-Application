@@ -20,21 +20,6 @@ public class Employee_card_details {
 	@Column(name="card_issue_date",length=10)
 	private String date;
 	
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public List<Loan_card_master> getLoan_ids() {
-		return loan_ids;
-	}
-
-	public void setLoan_ids(List<Loan_card_master> loan_ids) {
-		this.loan_ids = loan_ids;
-	}
 
 //	@OneToMany(cascade = CascadeType.ALL)
 //	@JoinColumn(name="employee_id")

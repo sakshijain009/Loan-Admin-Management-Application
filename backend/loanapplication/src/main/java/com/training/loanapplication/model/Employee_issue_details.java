@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -12,6 +13,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name="issue_details")
 public class Employee_issue_details {
+	
+	@Id
+	@Column(name="id")
+	private Long id;
 	
 	@Column(name="issue_date",length=10)
 	private String issueDate;
