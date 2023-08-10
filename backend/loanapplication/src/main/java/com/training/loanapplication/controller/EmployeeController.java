@@ -12,7 +12,7 @@ import com.training.loanapplication.service.EmployeeService;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin("http://localhost:5173")
 public class EmployeeController {
 	@Autowired
 	EmployeeService empService;
