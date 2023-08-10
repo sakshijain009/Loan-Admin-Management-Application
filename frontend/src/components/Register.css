@@ -6,6 +6,10 @@
     transform: translate(-50%, -50%);
 }
 
+.register h2{
+    margin-top: 40px;
+}
+
 .text_register {
     width: 100% !important;
     margin-top: 10px !important;
