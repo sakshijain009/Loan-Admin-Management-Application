@@ -1,5 +1,7 @@
 package com.training.loanapplication.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,9 +22,9 @@ public class AdminController {
 	AdminService adminService;
 	
 	@PostMapping("/admin")
-	public Admin checkAdmin(@RequestBody @Valid Admin admin)
+	public String checkAdmin(@RequestBody @Valid Admin admin)
 	{
-		Admin a = adminService.checkAdmin(admin);
-		return a;
+		String result = adminService.checkAdmin(admin);
+		return result;
 	}
 }
