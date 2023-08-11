@@ -1,0 +1,21 @@
+.login {
+    width: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login h2{
+    margin-top: 40px;
+}
+
+.text_login {
+    width: 100% !important;
+    margin-top: 10px !important;
+}
+
+.login_button {
+    margin-top: 20px !important;
+    width: 100% !important;
+}
