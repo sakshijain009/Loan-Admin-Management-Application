@@ -7,19 +7,30 @@ import './Login.css';
 
 const Login = () => {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [empid, setEmpid] = useState("");
+    const [pwd, setPwd] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log("Form Submitted");
-        let resp = {username, password};
+        console.log("Login Submit")
+        let resp = {empid, pwd};
         console.log(resp);
-        // alert('Form Submitted Successfully');
-        // <Alert severity="success">This is a success alert — check it out!</Alert>
-        // axios.post('http://localhost:8080/addUser', resp)
-        // .then(response => console.log(response))
-        // .catch(err => console.log(err));
+        const response = await fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    "id": empid,
+                    "password": pwd
+                }
+            )
+        });
+
+        const json = await response.json();
+
+        console.log(json);
     }
 
     return (
@@ -30,11 +41,11 @@ const Login = () => {
 
                 <TextField id="outlined-basic" label="Username" variant="outlined" className='text_login'
                     onChange={
-                        e => setUsername(e.target.value)
+                        e => setEmpid(e.target.value)
                     }/>
                 <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
-                        e => setPassword(e.target.value)
+                        e => setPwd(e.target.value)
                     }/>
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Submit</Button>
