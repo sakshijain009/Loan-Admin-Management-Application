@@ -118,10 +118,10 @@ public class Employee {
 	@Column(name="designation", length=25)
 	private String designation;
 	
-	@Column(name="dob", length=8)
+	@Column(name="dob")
 	private String dob;
 	
-	@Column(name="doj", length=8)
+	@Column(name="doj")
 	private String doj;
 	
 	@Column(name="password", length=20)

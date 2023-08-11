@@ -31,21 +31,45 @@ function AddUser() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log("Form Submitted");
-        let resp = {
-            empid,
-            name,
-            dept,
-            des,
-            gender,
-            dob,
-            doj,
-            pwd
-        };
-        console.log(resp);
-        alert('Form Submitted Successfully'); <Alert severity="success">This is a success alert — check it out!</Alert>
-    axios.post('http://localhost:8080/addUser', resp).then(response => console.log(response)).catch(err => console.log(err));
+
+        const response = await fetch("http://localhost:8080/addUser", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(
+                {
+                    "id": empid,
+                    "name": name,
+                    "department": dept,
+                    "designation": des,
+                    "gender": gender,
+                    "dob": dob,
+                    "doj": doj,
+                    "password": pwd
+                }
+            )
+        });
+
+        const json = await response.json();
+
+        console.log(json);
+        //     console.log("Form Submitted");
+        //     let resp = {
+        //         empid,
+        //         name,
+        //         dept,
+        //         des,
+        //         gender,
+        //         dob,
+        //         doj,
+        //         pwd
+        //     };
+        //     console.log(resp);
+        //     alert('Form Submitted Successfully'); <Alert severity="success">This is a success alert — check it out!</Alert>
+        // axios.post('http://localhost:8080/addUser', resp).then(response => console.log(response)).catch(err => console.log(err));
     }
+
     return (
         <>
             <Appbar/>
