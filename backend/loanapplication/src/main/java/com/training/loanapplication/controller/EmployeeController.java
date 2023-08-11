@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.LoginEmployee;
 import com.training.loanapplication.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -21,5 +22,11 @@ public class EmployeeController {
 	{
 		Employee e=empService.saveEmployee(emp);
 		return e;
+	}
+	
+	@PostMapping("/checkLogin")
+	public String validateEmployee(@RequestBody LoginEmployee e)
+	{
+		return empService.validateEmployee(e);
 	}
 }
