@@ -48,7 +48,7 @@ const Login = () => {
                         e => setPwd(e.target.value)
                     }/>
                  <Button variant="contained" className='login_button'
-                    onClick={handleSubmit}>Submit</Button>
+                    onClick={handleSubmit}>Login</Button>
             </div>
 
             
