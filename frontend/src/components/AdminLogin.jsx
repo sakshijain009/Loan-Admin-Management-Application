@@ -5,7 +5,7 @@ import Appbar from './Appbar';
 
 import './Login.css';
 
-const Login = () => {
+const AdminLogin = () => {
 
     const [empid, setEmpid] = useState("");
     const [pwd, setPwd] = useState("");
@@ -15,7 +15,7 @@ const Login = () => {
         console.log("Login Submit")
         let resp = {empid, pwd};
         console.log(resp);
-        const response = await fetch("http://localhost:8080/checkLogin", {
+        const response = await fetch("http://localhost:8080/checkAdmin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -37,7 +37,7 @@ const Login = () => {
     <>
         <Appbar />
             <div className='login'>
-                <h2>Login User</h2>
+                <h2>Login Admin</h2>
 
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_login'
                     onChange={
@@ -56,4 +56,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default AdminLogin;

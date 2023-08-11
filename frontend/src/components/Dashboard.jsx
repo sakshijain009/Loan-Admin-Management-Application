@@ -1,6 +1,6 @@
 import React from 'react'
 import Appbar from './Appbar'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './dashboard.css';
 
 function Dashboard(){
@@ -8,7 +8,7 @@ function Dashboard(){
     const navigate = useNavigate();
 
     function adminLogin() {
-        // navigate('/login')
+        navigate('/loginadmin');
     }
 
     function userLogin() {
