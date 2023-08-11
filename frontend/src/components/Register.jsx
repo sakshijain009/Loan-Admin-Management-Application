@@ -13,10 +13,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import dayjs from 'dayjs';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
 
 function AddUser() {
@@ -32,7 +32,8 @@ function AddUser() {
     async function handleSubmit(e) {
         e.preventDefault()
         console.log("Form Submitted");
-        let resp = {empid,
+        let resp = {
+            empid,
             name,
             dept,
             des,
@@ -42,15 +43,12 @@ function AddUser() {
             pwd
         };
         console.log(resp);
-        alert('Form Submitted Successfully');
-        <Alert severity="success">This is a success alert — check it out!</Alert>
-        axios.post('http://localhost:8080/addUser', resp)
-        .then(response => console.log(response))
-        .catch(err => console.log(err));
+        alert('Form Submitted Successfully'); <Alert severity="success">This is a success alert — check it out!</Alert>
+    axios.post('http://localhost:8080/addUser', resp).then(response => console.log(response)).catch(err => console.log(err));
     }
     return (
         <>
-            <Appbar />
+            <Appbar/>
             <div className='register'>
                 {/* <h2>Register User</h2> */}
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
@@ -68,32 +66,34 @@ function AddUser() {
                 <TextField id="outlined-basic" label="Employee Designation" variant="outlined" className='text_register'
                     onChange={
                         e => setDes(e.target.value)
-                    }/>
-                {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
+                    }/> {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
                     onChange={
                         e => setGender(e.target.value)
                     }/> */}
-                <Box sx={{ minWidth: 120, paddingTop:1}}>
+                <Box sx={
+                    {
+                        minWidth: 120,
+                        paddingTop: 1
+                    }
+                }>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={gender}
-                                label="Gender"
-                                onChange={e => setGender(e.target.value)}
-                            >
+                        <Select labelId="demo-simple-select-label" id="demo-simple-select"
+                            value={gender}
+                            label="Gender"
+                            onChange={
+                                e => setGender(e.target.value)
+                        }>
                             <MenuItem value={'M'}>Male</MenuItem>
                             <MenuItem value={'F'}>Female</MenuItem>
                             <MenuItem value={'O'}>Other</MenuItem>
-                            </Select>
+                        </Select>
                     </FormControl>
                 </Box>
                 <TextField id="outlined-basic" label="Password" variant="outlined" className='text_register' type='password'
                     onChange={
                         e => setPwd(e.target.value)
-                    }/>
-                {/* <TextField id="outlined-basic" label="Date of Birth (DDMMYYYY)" variant="outlined" className='text_register'
+                    }/> {/* <TextField id="outlined-basic" label="Date of Birth (DDMMYYYY)" variant="outlined" className='text_register'
                     onChange={
                         e => setDob(e.target.value)
                     }/>
@@ -101,18 +101,28 @@ function AddUser() {
                     onChange={
                         e => setDoj(e.target.value)
                     }/> */}
-                <LocalizationProvider dateAdapter={AdapterDayjs} >
-                    <DemoContainer components={['DatePicker']}>
-                        <DatePicker label="Date of Birth" className='text_register' value={dob} format="DD/MM/YYYY" onChange={
-                        e => setDob(e)
-                    }/>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={
+                        ['DatePicker']
+                    }>
+                        <DatePicker label="Date of Birth" className='text_register'
+                            value={dob}
+                            format="DD/MM/YYYY"
+                            onChange={
+                                e => setDob(e)
+                            }/>
                     </DemoContainer>
                 </LocalizationProvider>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DatePicker']}>
-                        <DatePicker label="Date of Joining" className='text_register' value={doj} format="DD/MM/YYYY" onChange={
-                        e => setDoj(e)
-                    }/>
+                    <DemoContainer components={
+                        ['DatePicker']
+                    }>
+                        <DatePicker label="Date of Joining" className='text_register'
+                            value={doj}
+                            format="DD/MM/YYYY"
+                            onChange={
+                                e => setDoj(e)
+                            }/>
                     </DemoContainer>
                 </LocalizationProvider>
 
