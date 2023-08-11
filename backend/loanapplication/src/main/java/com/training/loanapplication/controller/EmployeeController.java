@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.LoginEmployee;
+import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -15,8 +16,10 @@ import jakarta.validation.Valid;
 @RestController
 @CrossOrigin("http://localhost:5173")
 public class EmployeeController {
+	
 	@Autowired
 	EmployeeService empService;
+	
 	@PostMapping("/addUser")
 	public Employee saveEmployee(@RequestBody @Valid Employee emp)
 	{
@@ -24,8 +27,8 @@ public class EmployeeController {
 		return e;
 	}
 	
-	@PostMapping("/login")
-	public String validateEmployee(@RequestBody LoginEmployee e)
+	@PostMapping("/checkLogin")
+	public LoginResult validateEmployee(@RequestBody LoginEmployee e)
 	{
 		return empService.validateEmployee(e);
 	}
