@@ -15,22 +15,22 @@ const AdminLogin = () => {
         console.log("Login Submit")
         let resp = {empid, pwd};
         console.log(resp);
-        const response = await fetch("http://localhost:8080/checkAdmin", {
+        const response = await fetch("http://localhost:8080/admin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(
                 {
-                    "id": empid,
+                    "username": empid,
                     "password": pwd
                 }
             )
         });
 
-        const json = await response;
+        const json = await response.json();
 
-        console.log(json.body);
+        console.log(json);
     }
 
     return (

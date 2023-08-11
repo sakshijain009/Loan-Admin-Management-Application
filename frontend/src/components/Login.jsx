@@ -28,9 +28,9 @@ const Login = () => {
             )
         });
 
-        const json = await response;
+        const json = await response.json();
 
-        console.log(json.body);
+        console.log(json);
     }
 
     return (

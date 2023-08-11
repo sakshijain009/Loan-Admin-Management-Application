@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Admin;
 //import com.training.loanapplication.model.Employee;
-import com.training.loanapplication.model.LoginResult;
+//import com.training.loanapplication.model.LoginResult;
+import com.training.loanapplication.model.Message;
 import com.training.loanapplication.service.AdminService;
 
 import jakarta.validation.Valid;
@@ -23,7 +24,7 @@ public class AdminController {
 	AdminService adminService;
 	
 	@PostMapping("/admin")
-	public LoginResult checkAdmin(@RequestBody @Valid Admin admin)
+	public Message checkAdmin(@RequestBody @Valid Admin admin)
 	{
 		return adminService.checkAdmin(admin);
 		

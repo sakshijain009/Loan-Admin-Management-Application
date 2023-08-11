@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.LoginEmployee;
-import com.training.loanapplication.model.LoginResult;
+//import com.training.loanapplication.model.LoginResult;
+import com.training.loanapplication.model.Message;
 import com.training.loanapplication.service.EmployeeService;
 
 import jakarta.validation.Valid;
@@ -28,7 +29,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/checkLogin")
-	public LoginResult validateEmployee(@RequestBody LoginEmployee e)
+	public Message validateEmployee(@RequestBody LoginEmployee e)
 	{
 		return empService.validateEmployee(e);
 	}
