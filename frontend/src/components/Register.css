@@ -1,13 +1,19 @@
 .register {
     width: 50vw;
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    margin-bottom: 40px;
 }
 
 .register h2{
-    margin-top: 40px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .text_register {

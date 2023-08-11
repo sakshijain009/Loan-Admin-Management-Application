@@ -1,13 +1,15 @@
 .login {
     width: 50vw;
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .login h2{
     margin-top: 40px;
+    display: flex;
+    justify-content: center;
 }
 
 .text_login {
