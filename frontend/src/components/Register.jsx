@@ -61,7 +61,7 @@ function AddUser() {
         <>
             <Appbar/>
             <div className='register'>
-                {/* <h2>Register User</h2> */}
+                <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
                     onChange={
                         e => setEmpid(e.target.value)
