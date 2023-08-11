@@ -54,20 +54,7 @@ function AddUser() {
         const json = await response.json();
 
         console.log(json);
-        //     console.log("Form Submitted");
-        //     let resp = {
-        //         empid,
-        //         name,
-        //         dept,
-        //         des,
-        //         gender,
-        //         dob,
-        //         doj,
-        //         pwd
-        //     };
-        //     console.log(resp);
-        //     alert('Form Submitted Successfully'); <Alert severity="success">This is a success alert — check it out!</Alert>
-        // axios.post('http://localhost:8080/addUser', resp).then(response => console.log(response)).catch(err => console.log(err));
+        
     }
 
     return (
@@ -114,17 +101,10 @@ function AddUser() {
                         </Select>
                     </FormControl>
                 </Box>
-                <TextField id="outlined-basic" label="Password" variant="outlined" className='text_register' type='password'
+                <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
                         e => setPwd(e.target.value)
-                    }/> {/* <TextField id="outlined-basic" label="Date of Birth (DDMMYYYY)" variant="outlined" className='text_register'
-                    onChange={
-                        e => setDob(e.target.value)
-                    }/>
-                <TextField id="outlined-basic" label="Date of Joining (DDMMYYYY)" variant="outlined" className='text_register'
-                    onChange={
-                        e => setDoj(e.target.value)
-                    }/> */}
+                    }/> 
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={
                         ['DatePicker']
