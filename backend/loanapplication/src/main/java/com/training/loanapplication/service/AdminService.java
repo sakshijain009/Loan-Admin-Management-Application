@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.model.Admin;
+import com.training.loanapplication.model.LoginResult;
 
 import jakarta.validation.Valid;
 
@@ -16,18 +17,17 @@ public class AdminService {
 	@Autowired
 	AdminRepository adminRepository;
 
-	public String checkAdmin(@Valid Admin admin) {
+	public LoginResult checkAdmin(Admin admin) {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
 		Admin a = null;
-		
+		String result = "";
 		if(obj.isPresent()) {
 			a = obj.get();
 		}
 		
 		if(a==null) {
-			return null;
+			result="Invalid Employee Id";
 		}else {
-			String result = "";
 			
 			if(admin.getPassword().equals(a.getPassword())) {
 				result = "Admin can Log in";
@@ -35,8 +35,10 @@ public class AdminService {
 				result  = "Password is incorrect";
 			}
 			
-			return result;
 		}
+		LoginResult loginresult = new LoginResult();
+		loginresult.setCheck_login(result);
+		return loginresult;
 		
 	}
 
