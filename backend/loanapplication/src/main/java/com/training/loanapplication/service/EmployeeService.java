@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.LoginEmployee;
+import com.training.loanapplication.model.LoginResult;
 
 @Service
 public class EmployeeService {
@@ -21,7 +22,7 @@ public class EmployeeService {
 		return emp_obj;
 	}
 	
-	public String validateEmployee(LoginEmployee e)
+	public LoginResult validateEmployee(LoginEmployee e)
 	{
 		String result="";
 		Employee employee=null;
@@ -45,6 +46,8 @@ public class EmployeeService {
 				result="Login Failed";
 			}
 		}
-		return result;
+		LoginResult loginresult = new LoginResult();
+		loginresult.setCheck_login(result);
+		return loginresult;
 	}
 }
