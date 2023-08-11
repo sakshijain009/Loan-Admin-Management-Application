@@ -16,7 +16,7 @@ public class AdminService {
 	@Autowired
 	AdminRepository adminRepository;
 
-	public Admin checkAdmin(@Valid Admin admin) {
+	public String checkAdmin(@Valid Admin admin) {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
 		Admin a = null;
 		
@@ -27,14 +27,17 @@ public class AdminService {
 		if(a==null) {
 			return null;
 		}else {
+			String result = "";
+			
 			if(admin.getPassword().equals(a.getPassword())) {
-				String result = "Admin can Log in";
+				result = "Admin can Log in";
 			}else {
-				String result  = "Password is incorrect";
+				result  = "Password is incorrect";
 			}
+			
+			return result;
 		}
 		
-		return null;
 	}
 
 }
