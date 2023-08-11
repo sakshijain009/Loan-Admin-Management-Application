@@ -24,7 +24,7 @@ public class EmployeeController {
 		return e;
 	}
 	
-	@PostMapping("/checkLogin")
+	@PostMapping("/login")
 	public String validateEmployee(@RequestBody LoginEmployee e)
 	{
 		return empService.validateEmployee(e);
