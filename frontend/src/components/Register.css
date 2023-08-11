@@ -1,0 +1,21 @@
+.register {
+    width: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.register h2{
+    margin-top: 40px;
+}
+
+.text_register {
+    width: 100% !important;
+    margin-top: 10px !important;
+}
+
+.register_button {
+    margin-top: 20px !important;
+    width: 100% !important;
+}

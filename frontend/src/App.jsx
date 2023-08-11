@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import AddUser from './components/addUser';
+import Register from './components/Register';
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/addUser' element={<AddUser/> } />
+          <Route path='/register' element={<Register/> } />
         </Routes>
       </Router>
     </>
