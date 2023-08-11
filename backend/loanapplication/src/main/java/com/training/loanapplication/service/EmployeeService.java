@@ -11,8 +11,10 @@ import com.training.loanapplication.model.LoginEmployee;
 
 @Service
 public class EmployeeService {
+	
 	@Autowired
 	EmployeeRepository empRepo;
+	
 	public Employee saveEmployee(Employee emp)
 	{
 		Employee emp_obj=empRepo.save(emp);
