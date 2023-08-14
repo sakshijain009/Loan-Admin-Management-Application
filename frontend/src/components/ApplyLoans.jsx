@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Appbar from './Appbar';
-import {useState} from 'react';
 
 const ApplyLoans = ({user}) => {
 
