@@ -1,5 +1,7 @@
 package com.training.loanapplication.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ public class Card {
 	private int card_id;
 	
 	@Column(name="card_issue_date",length=10)
-	private String date;
+	private LocalDate date;
 	
 	public int getCard_id() {
 		return card_id;
@@ -30,20 +32,20 @@ public class Card {
 		this.card_id = card_id;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
 	public Loan getLoan() {
-		return loan;
+		return loan_id;
 	}
 
 	public void setLoan(Loan loan) {
-		this.loan = loan;
+		this.loan_id = loan;
 	}
 
 	public Employee getEmployee() {
@@ -56,7 +58,7 @@ public class Card {
 
 	@OneToOne
 	@JoinColumn(name = "loan_id")
-	private Loan loan;
+	private Loan loan_id;
 	
 	@ManyToOne
 	@JoinColumn(name = "employee_id")

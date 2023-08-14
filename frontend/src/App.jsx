@@ -33,8 +33,8 @@ function App() {
         <Routes>
         <Route path='/register' element={<Register user={user} loginUser={loginUser}/> } />
           <Route path='/login' element={<Login  user={user} loginUser={loginUser} /> } />
-        <Route path='/loginadmin' element={<AdminLogin/>} />
-        <Route path='/loginadmin' element={<AdminLogin/>} />
+          <Route path='/loginadmin' element={<AdminLogin/>} />
+          <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/register' element={<Register/> } />
           <Route path='/login' element={<Login/> } />
           <Route path='/' element={<Dashboard/>} />
