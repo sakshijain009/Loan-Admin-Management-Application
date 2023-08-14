@@ -32,9 +32,9 @@ function App() {
     <>
       <Router>
         <Routes>
-        <Route path='/register' element={<Register user={user} loginUser={loginUser} bt={"login"}/> } />
-          <Route path='/login' element={<Login  user={user} loginUser={loginUser} bt={"register"}/> } />
-          <Route path='/loginadmin' element={<AdminLogin bt={"Home"}/>} />
+        <Route path='/register' element={<Register user={user} loginUser={loginUser}/> } />
+          <Route path='/login' element={<Login  user={user} loginUser={loginUser} /> } />
+          <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/' element={<Dashboard/>} />
           <Route path='/home' element={<Dash/>} />
           <Route path='/applyloan' element={<ApplyLoans user={user}/>} />
