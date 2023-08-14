@@ -22,16 +22,16 @@ function Dashboard(){
     return (
         <>
             <Appbar/>
-            <div className="container">
-                <div className="card">
+            <div className="dashboard-container">
+                <div className="dashboard-card">
                     <span>Admin Login</span>
-                    <button onClick={adminLogin}>Login</button>
+                    <button className='dashboard-button' onClick={adminLogin}>Login</button>
                 </div>
-                <div className="card">
+                <div className="dashboard-card">
                 <span>User Register/Login</span>
-                    <div className="buttons">
-                    <button onClick={userRegister}>Register</button>
-                    <button onClick={userLogin}>Login</button>
+                    <div className="dashboard-buttons">
+                    <button className='dashboard-button' onClick={userRegister}>Register</button>
+                    <button className='dashboard-button' onClick={userLogin}>Login</button>
                     </div>
                 </div>
             </div>

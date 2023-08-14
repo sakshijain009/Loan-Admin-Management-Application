@@ -1,12 +1,13 @@
-.container {
+.dashboard-container {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: flex-start;
     margin-top: 5rem;
+    flex-wrap: wrap;
 }
 
-.card {
+.dashboard-card {
     /* font-size: large; */
     width: 400px;
     height: 300px;
@@ -14,23 +15,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(110, 158, 235);
-    color: white;
-    border-radius: 30px;
-}
-
-button {
-    margin: 1rem;
-    outline: none;
-    border-radius: 10px;
-    color: #646464;
     background-color: white;
-    width: 100px;
-    height: 50px;
-    border: none;
+    color: rgb(82, 79, 79);
+    border-radius: 30px;
+    border: 1px solid rgb(82, 79, 79);
+    margin-top: 1.5rem;
 }
 
-span {
+.dashboard-button {
+    text-decoration: none;
+    font: inherit;
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: rgb(82, 79, 79);
+    border: 1px solid rgb(82, 79, 79);
+    width: 7rem;
+    text-align: center;
+    border-radius: 6px;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin: 0.25rem;
+    margin-left: 1rem;
+}
+
+.dashboard-button:hover, .dashboard-button:active {
+    background-color: rgb(82, 79, 79);
+    color: white;
+}
+
+.dashboard-card span {
     font-size: 30px;
     font-weight: bold;
 }
