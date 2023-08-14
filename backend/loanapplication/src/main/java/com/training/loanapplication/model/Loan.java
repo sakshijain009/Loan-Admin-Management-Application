@@ -50,12 +50,18 @@ public class Loan {
 		this.card = card;
 	}
 
+	public Loan(String type, short duration) {
+		super();
+		this.type = type;
+		this.duration = duration;
+	}
+
 	@Column(name="loan_type",length=15)
 	private String type;	
 	
 	@Column(name="duration")
 	private short duration;
 	
-	@OneToOne(mappedBy = "loan", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "loan_id", cascade = CascadeType.ALL)
 	private Card card;
 }
