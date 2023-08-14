@@ -13,7 +13,7 @@ function Dash(){
                 <h3>User Dash Board</h3>
                 <div className="user-dashboard__buttons">
                     <Link className="user-dashboard__button">View Loans</Link>
-                    <Link className="user-dashboard__button">Apply for Loan</Link>
+                    <Link to="/applyloan" className="user-dashboard__button">Apply for Loan</Link>
                     <Link className="user-dashboard__button">View Items Purchased</Link>
                 </div>
             </div>
