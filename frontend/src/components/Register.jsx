@@ -18,8 +18,10 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
+import {useNavigate} from 'react-router-dom';
 
 function AddUser() {
+    const navigate = useNavigate();
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
     const [dept, setDept] = React.useState("");
@@ -31,7 +33,7 @@ function AddUser() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-
+        console.log("Registration successful");
         const response = await fetch("http://localhost:8080/addUser", {
             method: "POST",
             headers: {
@@ -50,11 +52,15 @@ function AddUser() {
                 }
             )
         });
-
         const json = await response.json();
-
         console.log(json);
-        
+        console.log(response.status);
+        if(response.status === 200){
+            navigate('/home');
+        }
+        else{
+            alert("Please fill the details correctly!");
+        }
     }
 
     return (

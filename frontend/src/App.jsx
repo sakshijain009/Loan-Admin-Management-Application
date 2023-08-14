@@ -5,7 +5,8 @@ import Login from './components/Login';
 import Dash from './components/Dash';
 import AdminLogin from './components/AdminLogin';
 import Dashboard from './components/Dashboard';
-import ViewLoanDetails from './components/ViewLoanDetails';
+import ApplyLoans from './components/ApplyLoans';
+
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
           <Route path='/login' element={<Login/> } />
           <Route path='/' element={<Dashboard/>} />
           <Route path='/home' element={<Dash/>} />
-          <Route path='/viewloandetails' element={<ViewLoanDetails/>} />
+          <Route path='/applyloan' element={<ApplyLoans user={user}/>} />
         </Routes>
       </Router>
     </>
