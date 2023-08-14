@@ -11,9 +11,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="employee_master")
@@ -69,19 +73,19 @@ public class Employee {
 		this.designation = designation;
 	}
 
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
-	public String getDoj() {
+	public LocalDate getDoj() {
 		return doj;
 	}
 
-	public void setDoj(String doj) {
+	public void setDoj(LocalDate doj) {
 		this.doj = doj;
 	}
 
@@ -118,11 +122,13 @@ public class Employee {
 	@Column(name="designation", length=25)
 	private String designation;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="dob")
-	private String dob;
+	private LocalDate dob;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="doj")
-	private String doj;
+	private LocalDate doj;
 	
 	@Column(name="password", length=20)
 	@Length(min=8,max=20, message="Password length must be between 8 and 20")
