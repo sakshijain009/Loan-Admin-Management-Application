@@ -5,8 +5,7 @@ import Login from './components/Login';
 import Dash from './components/Dash';
 import AdminLogin from './components/AdminLogin';
 import Dashboard from './components/Dashboard';
-import AdminLogin from './components/AdminLogin';
-
+import ViewLoanDetails from './components/ViewLoanDetails';
 
 function App() {
 
@@ -33,12 +32,13 @@ function App() {
         <Routes>
         <Route path='/register' element={<Register user={user} loginUser={loginUser}/> } />
           <Route path='/login' element={<Login  user={user} loginUser={loginUser} /> } />
-        <Route path='/loginadmin' element={<AdminLogin/>} />
-        <Route path='/loginadmin' element={<AdminLogin/>} />
+          <Route path='/loginadmin' element={<AdminLogin/>} />
+          <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/register' element={<Register/> } />
           <Route path='/login' element={<Login/> } />
           <Route path='/' element={<Dashboard/>} />
           <Route path='/home' element={<Dash/>} />
+          <Route path='/viewloandetails' element={<ViewLoanDetails/>} />
         </Routes>
       </Router>
     </>
