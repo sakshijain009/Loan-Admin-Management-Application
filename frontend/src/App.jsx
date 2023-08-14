@@ -8,8 +8,9 @@ import Dashboard from './components/Dashboard';
 import ApplyLoans from './components/ApplyLoans';
 
 
-function App() {
 
+function App() {
+  
   const [user,setUser] = useState("");
 
   useEffect(() => {
@@ -31,12 +32,9 @@ function App() {
     <>
       <Router>
         <Routes>
-        <Route path='/register' element={<Register user={user} loginUser={loginUser}/> } />
-          <Route path='/login' element={<Login  user={user} loginUser={loginUser} /> } />
-        <Route path='/loginadmin' element={<AdminLogin/>} />
-        <Route path='/loginadmin' element={<AdminLogin/>} />
-          <Route path='/register' element={<Register/> } />
-          <Route path='/login' element={<Login/> } />
+        <Route path='/register' element={<Register user={user} loginUser={loginUser} bt={"login"}/> } />
+          <Route path='/login' element={<Login  user={user} loginUser={loginUser} bt={"register"}/> } />
+          <Route path='/loginadmin' element={<AdminLogin bt={"Home"}/>} />
           <Route path='/' element={<Dashboard/>} />
           <Route path='/home' element={<Dash/>} />
           <Route path='/applyloan' element={<ApplyLoans user={user}/>} />

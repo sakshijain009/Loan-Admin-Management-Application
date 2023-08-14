@@ -20,7 +20,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
 import {useNavigate} from 'react-router-dom';
 
-function AddUser() {
+function AddUser({bt}) {
     const navigate = useNavigate();
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
@@ -65,7 +65,7 @@ function AddUser() {
 
     return (
         <>
-            <Appbar/>
+            <Appbar bt={bt}/>
             <div className='register'>
                 <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'

@@ -1,7 +1,12 @@
 import React from 'react';
 import Appbar from './Appbar';
+import {useState} from 'react';
 
 const ApplyLoans = ({name}) => {
+  const [category, setCategory] = useState("");
+  const [itemmake, setItemmake] = useState("");
+  const [item, setItem] = useState("");
+
   return (
     <>
             <Appbar />
