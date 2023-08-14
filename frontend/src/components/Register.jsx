@@ -18,9 +18,10 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
+import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 
-function AddUser({bt}) {
+function AddUser({user, loginUser, bt}) {
     const navigate = useNavigate();
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
@@ -30,6 +31,13 @@ function AddUser({bt}) {
     const [dob, setDob] = React.useState(dayjs('2023-01-01'));
     const [doj, setDoj] = React.useState(dayjs('2023-01-01'));
     const [pwd, setPwd] = React.useState("");
+
+    useEffect(() => {
+        if(user!=null && user.length > 0)
+        {
+            navigate('/login');
+        }
+    },[user])
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -56,6 +64,7 @@ function AddUser({bt}) {
         console.log(json);
         console.log(response.status);
         if(response.status === 200){
+            loginUser(empid);
             navigate('/home');
         }
         else{

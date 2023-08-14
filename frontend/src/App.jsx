@@ -36,8 +36,8 @@ function App() {
           <Route path='/login' element={<Login  user={user} loginUser={loginUser} /> } />
           <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/' element={<Dashboard/>} />
-          <Route path='/home' element={<Dash/>} />
-          <Route path='/applyloan' element={<ApplyLoans user={user}/>} />
+          <Route path='/home' element={<Dash user={user} loginUser={loginUser}/>} />
+          <Route path='/applyloan' element={<ApplyLoans user={user} loginUser={loginUser}/>} />
         </Routes>
       </Router>
     </>
