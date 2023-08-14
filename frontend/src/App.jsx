@@ -5,7 +5,6 @@ import Login from './components/Login';
 import Dash from './components/Dash';
 import AdminLogin from './components/AdminLogin';
 import Dashboard from './components/Dashboard';
-import AdminLogin from './components/AdminLogin';
 
 
 function App() {
