@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Appbar from './Appbar';
 import {useState} from 'react';
 
-const ApplyLoans = ({name}) => {
-  const [category, setCategory] = useState("");
-  const [itemmake, setItemmake] = useState("");
-  const [item, setItem] = useState("");
+const ApplyLoans = ({user}) => {
+
+    const [category, setCategory] = useState("");
+    const [itemMake, setItemMake] = useState("");
+    const [item, setItem] = useState("");
+
+    useEffect(() => {
+        const data = async () => {
+            const response = await fetch("http://localhost:8080/getallItems");
+            const json = await response.json();
+            sessionStorage.setItem("itemsDB", JSON.stringify(json));
+        };
+        data();
+    }, []);
+
 
   return (
     <>
@@ -16,9 +27,9 @@ const ApplyLoans = ({name}) => {
                 <h3>Select Product and Apply for Loan</h3>
                 <div className="loan-select">
                     <label for="employee">Employee ID</label>
-                    <input type="text" id="employee" placeholder="name" />
+                    <p id="employee">{user}</p>
 
-                    <label for="category">Item Category</label>
+                    {/* <label for="category">Item Category</label>
                     <select id="category" onChange={e => setCategory(e)}>
                         {categories.map((category) => (
                             <option value={category}>{category}</option>
@@ -42,7 +53,7 @@ const ApplyLoans = ({name}) => {
                     </select>
 
 
-                    <p>Item Value    {item.value}</p>
+                    <p>Item Value    {item.value}</p> */}
 
                 </div>
             </div>
