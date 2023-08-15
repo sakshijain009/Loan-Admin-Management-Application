@@ -12,18 +12,20 @@ function ApplyLoans({user}){
     const [itemMake, setItemMake] = useState("");
     const [item, setItem] = useState("");
     const [value, setValue] = useState(0);
-    const [categories, setCategories] = useState(["Furniture", "Home", "Kitchen", "Electronics"]);
+    const [categories, setCategories] = useState([]);
     const [makeArr, setMakeArr] = useState(["Wood", "Glass", "Steel"]);
     const [description, setDescription] = useState(["Chair", "Table", "TV"]);
-
+    const tempCategories = [];
     useEffect(() => {
         const data = async () => {
-            const response = await fetch("http://localhost:8080/getallItems");
+            const response = await fetch("http://localhost:8080/getAllCategory");
             const json = await response.json();
-            sessionStorage.setItem("itemsDB", JSON.stringify(json));
+            const res = JSON.stringify(json);
+            sessionStorage.setItem("itemsDB", res);
+            setCategories(json);
         };
         data();
-    }, []);
+    }, [category]);
 
     // useEffect((category) => {
     //     const data = async () => {
@@ -44,9 +46,9 @@ function ApplyLoans({user}){
                 <div className="loan-select" style={{display:'flex', justifyContent:'center'}}>
                     <div>
                     <Fixed lab={"Employee ID"} value={user} />
-                    <DropdownItem val={category} setVal={setCategory} lab={"Select Categories"} arr={categories} />
-                    <DropdownItem val={itemMake} setVal={setItemMake} lab={"Select Item Make"} arr={makeArr} />
-                    <DropdownItem val={item} setVal={setItem} lab={"Select Item"} arr={description}/>
+                    <DropdownItem flag={0} val={category} setVal={setCategory} lab={"Select Categories"} arr={categories} />
+                    <DropdownItem flag={1} val={itemMake} setVal={setItemMake} lab={"Select Item Make"} arr={makeArr} />
+                    <DropdownItem flag={2} val={item} setVal={setItem} lab={"Select Item"} arr={description}/>
 
                     <Fixed lab={"Price"} value={value} />
                     </div>
@@ -70,7 +72,8 @@ function Fixed({lab, value}){
     )
 }
 
-function DropdownItem({val, setVal, lab, arr}){
+function DropdownItem({flag, val, setVal, lab, arr}){
+
     return (
     <div>
         <FormControl autoWidth sx={{ m: 1, minWidth: 450}}>
@@ -79,7 +82,24 @@ function DropdownItem({val, setVal, lab, arr}){
                     labelId="demo-simple-select-autowidth-label"
                     id="demo-simple-select-autowidth"
                     value={val}
-                    onChange={e => setVal(e.target.value)}
+                    onChange={e => {
+                        setVal(e.target.value);
+                        if(flag==0){
+                            const data = async () => {
+                                const response = await fetch(`http://localhost:8080/${val}/getAllMake`, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                });
+                                const json = await response.json();
+                                sessionStorage.setItem("allMake", JSON.stringify(json));
+                                console.log("Yoyoyo")
+                                console.log(json);
+                            };
+                            data();
+                        } 
+                    }}
                     autoWidth
                     label={lab}
                 >
