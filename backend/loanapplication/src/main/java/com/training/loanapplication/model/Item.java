@@ -5,6 +5,9 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -16,29 +19,43 @@ import jakarta.persistence.Table;
 public class Item {
 	
 	@Id
-    @Column(name="item_id", length=6)
-    private String item_id;
+	@GeneratedValue
+    private Integer item_id;
 	
-    @Column(name="item_description", length=25)
-    private String decription;
+    @Column(name="item_description")
+    private String description;
     
     @Column(name="item_status", length=1)
     private String status;
+
+	@Column(name="item_category")
+	@Enumerated(EnumType.STRING)
+    private ItemCategory category;
     
-    public String getItem_id() {
+    @Column(name="item_value")
+    private int value;
+    
+    @Column(name="item_make", length=25)
+    private String make;
+    
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinColumn(name="issue_id")
+    private List<Issue>issue;
+
+	public Integer getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(String item_id) {
+	public void setItem_id(Integer item_id) {
 		this.item_id = item_id;
 	}
 
-	public String getDecription() {
-		return decription;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDecription(String decription) {
-		this.decription = decription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getStatus() {
@@ -49,11 +66,11 @@ public class Item {
 		this.status = status;
 	}
 
-	public String getCategory() {
+	public ItemCategory getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(ItemCategory category) {
 		this.category = category;
 	}
 
@@ -65,24 +82,20 @@ public class Item {
 		this.value = value;
 	}
 
-	public String getItem_make() {
-		return item_make;
+	public String getMake() {
+		return make;
 	}
 
-	public void setItem_make(String item_make) {
-		this.item_make = item_make;
+	public void setMake(String make) {
+		this.make = make;
 	}
 
-	@Column(name="item_category", length=20)
-    private String category;
+	public List<Issue> getIssue() {
+		return issue;
+	}
+
+	public void setIssue(List<Issue> issue) {
+		this.issue = issue;
+	}
     
-    @Column(name="item_value")
-    private int value;
-    
-    @Column(name="item_make", length=25)
-    private String item_make;
-    
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="issue_id")
-    private List<Issue>issue;
 }

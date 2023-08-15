@@ -24,11 +24,10 @@ public class ItemController {
 	@PostMapping("/addItem")
 	public Item saveItem(@RequestBody @Valid Item item)
 	{
-		Item i=itemService.saveItem(item);
-		return i;
+		return itemService.saveItem(item);
 	}
 	
-	@GetMapping("/getallItems")
+	@GetMapping("/getAllItems")
 	public List<Item> getallItems() 
 	{
 		return itemService.getallItems();

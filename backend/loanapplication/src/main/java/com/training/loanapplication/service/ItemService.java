@@ -19,13 +19,13 @@ public class ItemService {
 	
 	public Item saveItem(Item item)
 	{
-		Item item_obj=itemRepo.save(item);
+		Item item_obj = itemRepo.save(item);
 		return item_obj;
 	}
 	
 	public List<Item> getallItems()
 	{
-		List<Item> allItems=itemRepo.findAll();
+		List<Item> allItems = itemRepo.findAll();
 		return allItems;
 	}
 }
