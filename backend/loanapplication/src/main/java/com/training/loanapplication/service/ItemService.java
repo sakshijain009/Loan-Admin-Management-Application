@@ -37,4 +37,9 @@ public class ItemService {
 	{
 		return itemRepo.getDistinctMakesByCategory(category);
 	}
+	
+	public List<Item> getItemByMakeAndCategory(ItemCategory category, String make)
+	{
+		return itemRepo.getItemByMakeAndCategory(category, make);
+	}
 }

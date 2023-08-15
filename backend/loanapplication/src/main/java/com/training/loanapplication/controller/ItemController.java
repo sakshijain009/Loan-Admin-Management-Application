@@ -46,4 +46,10 @@ public class ItemController {
 	{
 		return itemService.getDistinctMakesByCategory(category);
 	}
+	
+	@GetMapping("/{category}/{make}/getAllItems")
+	public List<Item> getItemByMakeAndCategory(@PathVariable ItemCategory category, @PathVariable String make) 
+	{
+		return itemService.getItemByMakeAndCategory(category, make);
+	}
 }
