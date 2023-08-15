@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Item;
+import com.training.loanapplication.model.ItemCategory;
 import com.training.loanapplication.service.ItemService;
 
 import jakarta.validation.Valid;
@@ -24,13 +26,24 @@ public class ItemController {
 	@PostMapping("/addItem")
 	public Item saveItem(@RequestBody @Valid Item item)
 	{
-		Item i=itemService.saveItem(item);
-		return i;
+		return itemService.saveItem(item);
 	}
 	
-	@GetMapping("/getallItems")
-	public List<Item> getallItems() 
+	@GetMapping("/getAllItems")
+	public List<Item> getAllItems() 
 	{
 		return itemService.getallItems();
+	}
+	
+	@GetMapping("/getAllCategory")
+	public List<String> getAllCategory() 
+	{
+		return itemService.getAllCategory();
+	}
+	
+	@GetMapping("/{category}/getAllMake")
+	public List<String> getDistinctMakesByCategory(@PathVariable ItemCategory category) 
+	{
+		return itemService.getDistinctMakesByCategory(category);
 	}
 }

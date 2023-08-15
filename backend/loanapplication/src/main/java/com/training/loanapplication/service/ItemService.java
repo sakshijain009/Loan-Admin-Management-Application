@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.model.Item;
+import com.training.loanapplication.model.ItemCategory;
 
 
 @Service
@@ -19,13 +20,21 @@ public class ItemService {
 	
 	public Item saveItem(Item item)
 	{
-		Item item_obj=itemRepo.save(item);
-		return item_obj;
+		return itemRepo.save(item);
 	}
 	
 	public List<Item> getallItems()
 	{
-		List<Item> allItems=itemRepo.findAll();
-		return allItems;
+		return itemRepo.findAll();
+	}
+	
+	public List<String> getAllCategory()
+	{
+		return itemRepo.getAllCategory();
+	}
+	
+	public List<String> getDistinctMakesByCategory(ItemCategory category)
+	{
+		return itemRepo.getDistinctMakesByCategory(category);
 	}
 }
