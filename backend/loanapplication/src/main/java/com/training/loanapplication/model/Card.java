@@ -56,7 +56,7 @@ public class Card {
 		this.employee = employee;
 	}
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "loan_id")
 	private Loan loan_id;
 	
