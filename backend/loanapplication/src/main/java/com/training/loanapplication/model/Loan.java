@@ -1,36 +1,39 @@
 package com.training.loanapplication.model;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="loan_card_master")
+@Table(name="loan_master")
 
 public class Loan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="loan_id",length=6)
-	private Long id;
+	@Column(name="loan_id")
+	private int loan_id;
 	
-	public Long getId() {
-		return id;
+	public int getLoan_id() {
+		return loan_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setLoan_id(int id) {
+		this.loan_id = id;
 	}
 
-	public String getType() {
+	public ItemCategory getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(ItemCategory type) {
 		this.type = type;
 	}
 
@@ -42,26 +45,20 @@ public class Loan {
 		this.duration = duration;
 	}
 
-	public Card getCard() {
+	public List<Card> getCard() {
 		return card;
 	}
 
-	public void setCard(Card card) {
+	public void setCard(List<Card> card) {
 		this.card = card;
 	}
 
-	public Loan(String type, short duration) {
-		super();
-		this.type = type;
-		this.duration = duration;
-	}
-
 	@Column(name="loan_type",length=15)
-	private String type;	
+	private ItemCategory type;	
 	
 	@Column(name="duration")
 	private short duration;
 	
-	@OneToOne(mappedBy = "loan_id", cascade = CascadeType.ALL)
-	private Card card;
+	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Card> card;
 }

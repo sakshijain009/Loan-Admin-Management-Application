@@ -4,12 +4,12 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 //import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 import java.time.LocalDate;
@@ -73,19 +73,19 @@ public class Employee {
 		this.designation = designation;
 	}
 
-	public String getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
-	public String getDoj() {
+	public LocalDate getDoj() {
 		return doj;
 	}
 
-	public void setDoj(String doj) {
+	public void setDoj(LocalDate doj) {
 		this.doj = doj;
 	}
 
@@ -122,25 +122,23 @@ public class Employee {
 	@Column(name="designation", length=25)
 	private String designation;
 	
-//	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="dob")
-	private String dob;
+	private LocalDate dob;
 	
-//	@JsonFormat(pattern="yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="doj")
-	private String doj;
+	private LocalDate doj;
 	
 	@Column(name="password", length=20)
 	@Length(min=8,max=20, message="Password length must be between 8 and 20")
 	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="issue_id")
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Issue>issue;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="card_id")
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Card>card;
 
 }

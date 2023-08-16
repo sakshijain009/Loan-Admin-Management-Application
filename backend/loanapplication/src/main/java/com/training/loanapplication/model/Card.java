@@ -2,6 +2,8 @@ package com.training.loanapplication.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,7 +22,8 @@ public class Card {
 	@Column(name="card_id")
 	private int card_id;
 	
-	@Column(name="card_issue_date",length=10)
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="card_issue_date")
 	private LocalDate date;
 	
 	public int getCard_id() {
@@ -41,11 +43,11 @@ public class Card {
 	}
 
 	public Loan getLoan() {
-		return loan_id;
+		return loan;
 	}
 
 	public void setLoan(Loan loan) {
-		this.loan_id = loan;
+		this.loan = loan;
 	}
 
 	public Employee getEmployee() {
@@ -56,9 +58,9 @@ public class Card {
 		this.employee = employee;
 	}
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "loan_id")
-	private Loan loan_id;
+	private Loan loan;
 	
 	@ManyToOne
 	@JoinColumn(name = "employee_id")

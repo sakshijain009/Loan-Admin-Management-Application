@@ -1,10 +1,16 @@
 package com.training.loanapplication.model;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 //import java.util.List;
 
 //import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,34 +22,36 @@ import jakarta.persistence.Table;
 public class Issue {
 	
 	@Id
-	@Column(name="issue_id", length=6)
-	private String issue_id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="issue_id")
+	private int issue_id;
 	
-	@Column(name="issue_date",length=8)
-	private String issueDate;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="issue_date")
+	private LocalDate issueDate;
 	
-	public String getIssue_id() {
+	public int getIssue_id() {
 		return issue_id;
 	}
 
-	public void setIssue_id(String issue_id) {
+	public void setIssue_id(int issue_id) {
 		this.issue_id = issue_id;
 	}
 
-	public String getIssueDate() {
+	public LocalDate getIssueDate() {
 		return issueDate;
 	}
 
-	public void setIssueDate(String issueDate) {
+	public void setIssueDate(LocalDate issueDate) {
 		this.issueDate = issueDate;
 	}
 
-	public String getReturnDate() {
+	public LocalDate getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(String returnDate) {
-		this.returnDate = returnDate;
+	public void setReturnDate(LocalDate returnDate2) {
+		this.returnDate = returnDate2;
 	}
 
 	public Employee getEmployee() {
@@ -62,8 +70,9 @@ public class Issue {
 		this.item = item;
 	}
 
-	@Column(name="return_date", length=8)
-	private String returnDate;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="return_date")
+	private LocalDate returnDate;
 	
     @ManyToOne
     @JoinColumn(name="employee_id")

@@ -37,6 +37,9 @@ function ApplyLoans({user}) {
             const res = JSON.stringify(json);
             // sessionStorage.setItem("itemsDB", res);
             setMakeArr(json);
+            setItemMake("")
+            setItem("")
+            setValue(0)
         };
         data();
     }, [category]);
