@@ -37,9 +37,9 @@ public class EmployeeController {
 		return empService.validateEmployee(e);
 	}
 	
-//	@PostMapping("/applyLoan")
-//	public Message applyLoan(@RequestBody LoanModel loanModel)
-//	{
-//		return empService.applyLoan(loanModel);
-//	}
+	@PostMapping("/applyLoan")
+	public Message applyLoan(@RequestBody LoanModel loanModel)
+	{
+		return empService.applyLoan(loanModel);
+	}
 }
