@@ -2,6 +2,7 @@ package com.training.loanapplication.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 //import java.util.List;
@@ -74,10 +75,12 @@ public class Issue {
 	@Column(name="return_date")
 	private LocalDate returnDate;
 	
+	@JsonBackReference
     @ManyToOne
     @JoinColumn(name="employee_id")
     private Employee employee;
     
+	@JsonBackReference
     @ManyToOne
     @JoinColumn(name="item_id")
     private Item item;
