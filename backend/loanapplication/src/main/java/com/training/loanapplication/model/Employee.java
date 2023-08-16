@@ -73,19 +73,19 @@ public class Employee {
 		this.designation = designation;
 	}
 
-	public LocalDate getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(LocalDate dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
-	public LocalDate getDoj() {
+	public String getDoj() {
 		return doj;
 	}
 
-	public void setDoj(LocalDate doj) {
+	public void setDoj(String doj) {
 		this.doj = doj;
 	}
 
@@ -122,13 +122,13 @@ public class Employee {
 	@Column(name="designation", length=25)
 	private String designation;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+//	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="dob")
-	private LocalDate dob;
+	private String dob;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
+//	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="doj")
-	private LocalDate doj;
+	private String doj;
 	
 	@Column(name="password", length=20)
 	@Length(min=8,max=20, message="Password length must be between 8 and 20")

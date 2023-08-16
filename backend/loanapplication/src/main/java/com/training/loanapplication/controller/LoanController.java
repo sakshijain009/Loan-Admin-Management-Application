@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Loan;
+import com.training.loanapplication.model.LoanSubClass;
 import com.training.loanapplication.service.LoanService;
 
 import jakarta.validation.Valid;
@@ -26,9 +27,9 @@ public class LoanController {
 	LoanService loanService;
 	
 	@PostMapping("/addLoan")
-	public Loan saveLoan(@RequestBody @Valid Loan loan)
+	public Loan saveLoan(@RequestBody @Valid LoanSubClass loan)
 	{
-		Loan l=loanService.saveLoan(loan);
+		Loan l = loanService.saveLoan(loan);
 		return l;
 	}
 	

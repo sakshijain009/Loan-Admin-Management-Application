@@ -46,7 +46,7 @@ const Login = ({user, loginUser}) => {
 
     return (
     <>
-        <Appbar bt={"Register"}/>
+        <Appbar bt={"register"}/>
             <div className='login'>
                 <h2>Login User</h2>
 

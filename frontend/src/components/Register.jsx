@@ -18,8 +18,11 @@ import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
+import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
-function AddUser() {
+function AddUser({user, loginUser, bt}) {
+    const navigate = useNavigate();
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
     const [dept, setDept] = React.useState("");
@@ -29,9 +32,16 @@ function AddUser() {
     const [doj, setDoj] = React.useState(dayjs('2023-01-01'));
     const [pwd, setPwd] = React.useState("");
 
+    useEffect(() => {
+        if(user!=null && user.length > 0)
+        {
+            navigate('/login');
+        }
+    },[user])
+
     async function handleSubmit(e) {
         e.preventDefault()
-
+        console.log("Registration successful");
         const response = await fetch("http://localhost:8080/addUser", {
             method: "POST",
             headers: {
@@ -50,16 +60,21 @@ function AddUser() {
                 }
             )
         });
-
         const json = await response.json();
-
         console.log(json);
-        
+        console.log(response.status);
+        if(response.status === 200){
+            loginUser(empid);
+            navigate('/home');
+        }
+        else{
+            alert("Please fill the details correctly!");
+        }
     }
 
     return (
         <>
-            <Appbar/>
+            <Appbar bt={bt}/>
             <div className='register'>
                 <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'

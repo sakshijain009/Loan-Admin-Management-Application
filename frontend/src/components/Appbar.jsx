@@ -6,8 +6,10 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate } from 'react-router-dom';
 
-export default function ButtonAppBar() {
+export default function Appbar({bt}) {
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -24,7 +26,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Loan Management Application
           </Typography>
-          {/* <Button color="inherit">Login</Button> */}
+          <Button color="inherit" onClick={()=>(navigate(`/${bt}`))}>{bt}</Button>
         </Toolbar>
       </AppBar>
     </Box>
