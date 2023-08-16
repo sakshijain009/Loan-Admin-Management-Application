@@ -38,8 +38,13 @@ public class ItemService {
 		return itemRepo.getDistinctMakesByCategory(category);
 	}
 	
-	public List<Item> getItemByMakeAndCategory(ItemCategory category, String make)
+	public List<String> getDistinctDescriptionByMakeAndCategory(ItemCategory category, String make)
 	{
-		return itemRepo.getItemByMakeAndCategory(category, make);
+		return itemRepo.getDistinctDescriptionByMakeAndCategory(category, make);
+	}
+	
+	public Item getItemByMakeAndCategoryAndDescription(ItemCategory category, String make, String description)
+	{
+		return itemRepo.getItemByMakeAndCategoryAndDescription(category, make, description);
 	}
 }
