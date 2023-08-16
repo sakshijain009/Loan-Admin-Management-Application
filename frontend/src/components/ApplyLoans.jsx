@@ -43,7 +43,7 @@ function ApplyLoans({user}) {
 
     useEffect(() => {
         const data = async () => {
-            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/getAllItems`);
+            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/getAllDescriptions`);
             const json = await response.json();
             const res = JSON.stringify(json);
             // sessionStorage.setItem("itemsDB", res);
@@ -54,11 +54,11 @@ function ApplyLoans({user}) {
 
     useEffect(() => {
         const data = async () => {
-            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/${item}getAllItems`);
+            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/${item}/getItem`);
             const json = await response.json();
-            const res = JSON.stringify(json);
+            const res = JSON.stringify(json.value);
             // sessionStorage.setItem("itemsDB", res);
-            setValue(json);
+            setValue(json.value);
         };
         data();
     }, [item]);
