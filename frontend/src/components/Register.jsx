@@ -42,7 +42,7 @@ function AddUser({user, loginUser, bt}) {
     async function handleSubmit(e) {
         e.preventDefault()
         console.log("Registration successful");
-        const response = await fetch("http://localhost:8080/addUser", {
+        const response = await fetch("http://localhost:8080/api/users/addUser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

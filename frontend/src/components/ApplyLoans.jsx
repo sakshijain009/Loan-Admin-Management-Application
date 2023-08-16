@@ -63,6 +63,26 @@ function ApplyLoans({user}) {
         data();
     }, [item]);
 
+    function submitHandler() {
+        const data = async () => {
+            const response = await fetch(`http://localhost:8080/api/users`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    user,
+                    category,
+                    itemMake,
+                    item,
+                    value
+                })
+            });
+            // const json = await response.json();
+            // const res = JSON.stringify(json.value);
+            // sessionStorage.setItem("itemsDB", res);
+            setValue(json.value);
+        };
+        data();
+    }
+
     // useEffect((category) => {
     //     const data = async () => {
     //         const response = await fetch(`http://localhost:8080/getallItems/${category}`);
@@ -101,6 +121,7 @@ function ApplyLoans({user}) {
 
                     </div>
                     <Button variant="contained" className='apply_loan'
+                    onClick={submitHandler}
                         style={
                             {
                                 display: 'flex',

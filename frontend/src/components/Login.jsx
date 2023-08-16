@@ -27,7 +27,7 @@ const Login = ({user, loginUser}) => {
         loginUser(empid);
         let resp = {empid, pwd};
         console.log(resp);
-        const response = await fetch("http://localhost:8080/checkLogin", {
+        const response = await fetch("http://localhost:8080/api/users/checkLogin", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
