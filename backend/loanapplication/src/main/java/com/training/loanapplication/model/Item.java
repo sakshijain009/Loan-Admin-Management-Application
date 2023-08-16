@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -38,9 +39,8 @@ public class Item {
     @Column(name="item_make", length=25)
     private String make;
     
-    @OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="issue_id")
-    private List<Issue>issue;
+    @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Issue> issue;
 
 	public Integer getItem_id() {
 		return item_id;

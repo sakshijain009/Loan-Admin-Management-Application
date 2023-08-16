@@ -60,8 +60,6 @@ public class Loan {
 	@Column(name="duration")
 	private short duration;
 	
-	@OneToMany(mappedBy = "loan_id", 
-			fetch = FetchType.EAGER,
-			cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Card> card;
 }
