@@ -80,7 +80,7 @@ public class EmployeeService {
 		
 		Employee emp = empRepo.findById(loanModel.getEmployee_id()).get();
 		int loan_id = loanRepo.findIdByType(loanModel.getItem_category());
-		Loan loan = loanRepo.findById((long) loan_id).get();
+		Loan loan = loanRepo.findById(loan_id).get();
 		Item item = itemRepo.getItemByMakeAndCategoryAndDescription(loanModel.getItem_category(), loanModel.getItem_make(), loanModel.getItem_description());
 		
 		card.setEmployee(emp);
@@ -92,10 +92,13 @@ public class EmployeeService {
 			return new Message("Loan Application Failed");
 		}
 		
+		Short duration = loan.getDuration();
+		LocalDate returnDate = newCardCreated.getDate().plusYears((long) duration);
+		
 		issue.setEmployee(emp);
 		issue.setItem(item);
-		issue.setIssueDate(newCardCreated.getDate().toString());
-		issue.setReturnDate(null);
+		issue.setIssueDate(newCardCreated.getDate());
+		issue.setReturnDate(returnDate);
 		
 		Issue newIssueCreated = issueRepo.save(issue);
 		

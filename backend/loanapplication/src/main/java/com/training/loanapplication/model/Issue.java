@@ -46,12 +46,12 @@ public class Issue {
 		this.issueDate = issueDate;
 	}
 
-	public String getReturnDate() {
+	public LocalDate getReturnDate() {
 		return returnDate;
 	}
 
-	public void setReturnDate(String returnDate) {
-		this.returnDate = returnDate;
+	public void setReturnDate(LocalDate returnDate2) {
+		this.returnDate = returnDate2;
 	}
 
 	public Employee getEmployee() {
@@ -70,8 +70,9 @@ public class Issue {
 		this.item = item;
 	}
 
-	@Column(name="return_date", length=8)
-	private String returnDate;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="return_date")
+	private LocalDate returnDate;
 	
     @ManyToOne
     @JoinColumn(name="employee_id")
