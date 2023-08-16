@@ -94,7 +94,7 @@ function ApplyLoans({user}) {
                         <DropdownItem flag={2}
                             val={item}
                             setVal={setItem}
-                            lab={"Select Item"}
+                            lab={"Select Description"}
                             arr={description}/>
                         <Fixed lab={"Price"}
                             value={value}/>
