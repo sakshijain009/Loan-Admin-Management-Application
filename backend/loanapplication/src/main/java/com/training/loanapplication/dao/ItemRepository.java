@@ -17,5 +17,8 @@ public interface ItemRepository extends JpaRepository<Item, String> {
 	List<String> getDistinctMakesByCategory(ItemCategory category);
 	
 	@Query("SELECT i FROM Item as i WHERE i.category = :category AND i.make = :make")
-	List<Item> getItemByMakeAndCategory(ItemCategory category, String make);
+	List<String> getDistinctDescriptionByMakeAndCategory(ItemCategory category, String make);
+	
+	@Query("SELECT i FROM Item as i WHERE i.category = :category AND i.make = :make AND i.description = :description")
+	Item getItemByMakeAndCategoryAndDescription(ItemCategory category, String make, String description);
 }
