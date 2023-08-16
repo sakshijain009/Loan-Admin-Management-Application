@@ -60,6 +60,7 @@ function ApplyLoans({user}) {
             const response = await fetch(`http://localhost:8080/${category}/${itemMake}/${item}/getItem`);
             const json = await response.json();
             const res = JSON.stringify(json.value);
+            console.log(json);
             // sessionStorage.setItem("itemsDB", res);
             setValue(json.value);
         };
@@ -70,12 +71,15 @@ function ApplyLoans({user}) {
         const data = async () => {
             const response = await fetch(`http://localhost:8080/api/users/applyLoan`, {
                 method: 'POST',
+                headers: {
+                    "Content-Type":"application/json"
+                },
                 body: JSON.stringify({
-                    user,
-                    category,
-                    itemMake,
-                    item,
-                    value
+                    "employee_id":user,
+                    "item_description":item,
+                    "item_make":itemMake,
+                    "item_category":category,
+                    "item_value":value
                 })
             });
             const json = await response.json();
