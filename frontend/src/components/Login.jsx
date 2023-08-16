@@ -42,6 +42,9 @@ const Login = ({user, loginUser}) => {
 
         const json = await response.json();
         console.log(json);
+        if(response.status === 200){
+            navigate('/home');
+        }
     }
 
     return (
