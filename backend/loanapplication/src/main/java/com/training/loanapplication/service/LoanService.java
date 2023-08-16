@@ -3,13 +3,16 @@ package com.training.loanapplication.service;
 //import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.training.loanapplication.dao.CardRepository;
+import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Card;
+import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.LoanSubClass;
 
@@ -20,7 +23,6 @@ public class LoanService {
 	
 	@Autowired
 	LoanRepository loanRepo;
-	CardRepository cardRepo;
 	
 	@Autowired
 	CardRepository cardRepo;
