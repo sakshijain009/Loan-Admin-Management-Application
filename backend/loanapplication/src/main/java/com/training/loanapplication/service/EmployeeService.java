@@ -5,8 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
+import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.model.Card;
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.LoanModel;
 import com.training.loanapplication.model.LoginEmployee;
 //import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
@@ -16,6 +20,12 @@ public class EmployeeService {
 	
 	@Autowired
 	EmployeeRepository empRepo;
+	
+	@Autowired
+	LoanRepository loanRepo;
+	
+	@Autowired
+	CardRepository cardRepo;
 	
 	public Employee saveEmployee(Employee emp)
 	{
@@ -51,4 +61,13 @@ public class EmployeeService {
 		loginresult.setMessage(result);
 		return loginresult;
 	}
+
+//	public Message applyLoan(LoanModel loanModel) {
+//		Card card = new Card();
+//		
+//		Employee emp = empRepo.findById(loanModel.getEmployee_id()).get();
+//		Loan loan = loanRepo.findByType(loanModel.getItem_category()).get();
+//		
+//		return null;
+//	}
 }

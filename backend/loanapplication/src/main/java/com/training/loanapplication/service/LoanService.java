@@ -14,7 +14,6 @@ import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Card;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Loan;
-import com.training.loanapplication.model.LoanSubClass;
 
 import jakarta.validation.Valid;
 

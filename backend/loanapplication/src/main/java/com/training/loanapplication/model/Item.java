@@ -9,6 +9,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -20,8 +21,9 @@ import jakarta.persistence.Table;
 public class Item {
 	
 	@Id
-	@GeneratedValue
-    private Integer item_id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="item_id")
+    private int item_id;
 	
     @Column(name="item_description")
     private String description;
@@ -42,11 +44,11 @@ public class Item {
     @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Issue> issue;
 
-	public Integer getItem_id() {
+	public int getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(Integer item_id) {
+	public void setItem_id(int item_id) {
 		this.item_id = item_id;
 	}
 
