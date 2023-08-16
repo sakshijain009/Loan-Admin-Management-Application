@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.ItemCategory;
 
-public interface ItemRepository extends JpaRepository<Item, String> {
+public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	@Query("SELECT DISTINCT i.category FROM Item as i")
 	List<String> getAllCategory();
