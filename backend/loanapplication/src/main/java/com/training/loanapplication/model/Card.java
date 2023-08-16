@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,11 +40,11 @@ public class Card {
 	}
 
 	public Loan getLoan() {
-		return loan_id;
+		return loan;
 	}
 
 	public void setLoan(Loan loan) {
-		this.loan_id = loan;
+		this.loan = loan;
 	}
 
 	public Employee getEmployee() {
@@ -58,7 +57,7 @@ public class Card {
 
 	@ManyToOne
 	@JoinColumn(name = "loan_id")
-	private Loan loan_id;
+	private Loan loan;
 	
 	@ManyToOne
 	@JoinColumn(name = "employee_id")

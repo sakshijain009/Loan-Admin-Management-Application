@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,14 +19,14 @@ public class Loan {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="loan_id")
-	private Long id;
+	private int loan_id;
 	
-	public Long getId() {
-		return id;
+	public int getLoan_id() {
+		return loan_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setLoan_id(int id) {
+		this.loan_id = id;
 	}
 
 	public ItemCategory getType() {
@@ -60,8 +59,6 @@ public class Loan {
 	@Column(name="duration")
 	private short duration;
 	
-	@OneToMany(mappedBy = "loan_id", 
-			fetch = FetchType.EAGER,
-			cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Card> card;
 }

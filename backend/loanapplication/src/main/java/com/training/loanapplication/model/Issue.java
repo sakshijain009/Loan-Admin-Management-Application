@@ -5,6 +5,8 @@ package com.training.loanapplication.model;
 //import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,17 +18,18 @@ import jakarta.persistence.Table;
 public class Issue {
 	
 	@Id
-	@Column(name="issue_id", length=6)
-	private String issue_id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="issue_id")
+	private int issue_id;
 	
 	@Column(name="issue_date",length=8)
 	private String issueDate;
 	
-	public String getIssue_id() {
+	public int getIssue_id() {
 		return issue_id;
 	}
 
-	public void setIssue_id(String issue_id) {
+	public void setIssue_id(int issue_id) {
 		this.issue_id = issue_id;
 	}
 
