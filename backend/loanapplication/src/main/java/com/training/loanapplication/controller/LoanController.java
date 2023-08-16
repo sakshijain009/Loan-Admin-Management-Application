@@ -26,12 +26,12 @@ public class LoanController {
 	@Autowired
 	LoanService loanService;
 	
-//	@PostMapping("/addLoan")
-//	public Loan saveLoan(@RequestBody @Valid LoanSubClass loan)
-//	{
-//		Loan l = loanService.saveLoan(loan);
-//		return l;
-//	}
+	@PostMapping("/addLoan")
+	public Loan saveLoan(@RequestBody @Valid Loan loan)
+	{
+		Loan l = loanService.saveLoan(loan);
+		return l;
+	}
 	
 	@GetMapping("/getallLoans")
 	public List<Loan> getallLoans(@RequestHeader Map<String, String> header) 

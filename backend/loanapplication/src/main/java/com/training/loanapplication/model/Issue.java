@@ -1,5 +1,9 @@
 package com.training.loanapplication.model;
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 //import java.util.List;
 
 //import jakarta.persistence.CascadeType;
@@ -22,8 +26,9 @@ public class Issue {
 	@Column(name="issue_id")
 	private int issue_id;
 	
-	@Column(name="issue_date",length=8)
-	private String issueDate;
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="issue_date")
+	private LocalDate issueDate;
 	
 	public int getIssue_id() {
 		return issue_id;
@@ -33,11 +38,11 @@ public class Issue {
 		this.issue_id = issue_id;
 	}
 
-	public String getIssueDate() {
+	public LocalDate getIssueDate() {
 		return issueDate;
 	}
 
-	public void setIssueDate(String issueDate) {
+	public void setIssueDate(LocalDate issueDate) {
 		this.issueDate = issueDate;
 	}
 

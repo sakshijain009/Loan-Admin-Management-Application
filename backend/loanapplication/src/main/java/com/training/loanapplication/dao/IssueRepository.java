@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.training.loanapplication.model.Issue;
 
-public interface IssueRepository  extends JpaRepository<Issue,Long>{
+public interface IssueRepository  extends JpaRepository<Issue,Integer>{
 
 }

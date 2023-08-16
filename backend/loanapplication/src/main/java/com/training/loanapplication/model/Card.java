@@ -2,6 +2,8 @@ package com.training.loanapplication.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,8 @@ public class Card {
 	@Column(name="card_id")
 	private int card_id;
 	
-	@Column(name="card_issue_date",length=10)
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name="card_issue_date")
 	private LocalDate date;
 	
 	public int getCard_id() {
