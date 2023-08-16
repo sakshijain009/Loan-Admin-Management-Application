@@ -16,19 +16,52 @@ function ApplyLoans({user}) {
     const [item, setItem] = useState("");
     const [value, setValue] = useState(0);
     const [categories, setCategories] = useState([]);
-    const [makeArr, setMakeArr] = useState(["Wood", "Glass", "Steel"]);
-    const [description, setDescription] = useState(["Chair", "Table", "TV"]);
+    const [makeArr, setMakeArr] = useState([]);
+    const [description, setDescription] = useState([]);
     const tempCategories = [];
     useEffect(() => {
         const data = async () => {
             const response = await fetch("http://localhost:8080/getAllCategory");
             const json = await response.json();
             const res = JSON.stringify(json);
-            sessionStorage.setItem("itemsDB", res);
+            // sessionStorage.setItem("itemsDB", res);
             setCategories(json);
         };
         data();
+    }, []);
+
+    useEffect(() => {
+        const data = async () => {
+            const response = await fetch(`http://localhost:8080/${category}/getAllMake`);
+            const json = await response.json();
+            const res = JSON.stringify(json);
+            // sessionStorage.setItem("itemsDB", res);
+            setMakeArr(json);
+        };
+        data();
     }, [category]);
+
+    useEffect(() => {
+        const data = async () => {
+            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/getAllItems`);
+            const json = await response.json();
+            const res = JSON.stringify(json);
+            // sessionStorage.setItem("itemsDB", res);
+            setDescription(json);
+        };
+        data();
+    }, [itemMake]);
+
+    useEffect(() => {
+        const data = async () => {
+            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/${item}getAllItems`);
+            const json = await response.json();
+            const res = JSON.stringify(json);
+            // sessionStorage.setItem("itemsDB", res);
+            setValue(json);
+        };
+        data();
+    }, [item]);
 
     // useEffect((category) => {
     //     const data = async () => {
