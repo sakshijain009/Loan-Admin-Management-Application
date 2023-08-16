@@ -68,7 +68,7 @@ function ApplyLoans({user}) {
 
     function submitHandler() {
         const data = async () => {
-            const response = await fetch(`http://localhost:8080/api/users`, {
+            const response = await fetch(`http://localhost:8080/api/users/applyLoan`, {
                 method: 'POST',
                 body: JSON.stringify({
                     user,
@@ -78,10 +78,10 @@ function ApplyLoans({user}) {
                     value
                 })
             });
-            // const json = await response.json();
-            // const res = JSON.stringify(json.value);
+            const json = await response.json();
+            console.log(json.message);
             // sessionStorage.setItem("itemsDB", res);
-            setValue(json.value);
+            
         };
         data();
     }
