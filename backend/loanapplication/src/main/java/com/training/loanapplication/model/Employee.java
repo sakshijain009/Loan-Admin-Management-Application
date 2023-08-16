@@ -4,6 +4,7 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 //import jakarta.validation.constraints.Min;
@@ -135,12 +136,10 @@ public class Employee {
 	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="issue_id")
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Issue>issue;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="card_id")
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Card>card;
 
 }
