@@ -39,7 +39,7 @@ function App() {
           <Route path='/home' element={<Dash user={user} loginUser={loginUser}/>} />
           <Route path='/applyloan' element={<ApplyLoans user={user} loginUser={loginUser}/>} />
           <Route path='/viewloan' element={<ViewLoanDetails user={user} loginUser={loginUser}/>} />
-          <Route path='/viewitems' element={<ViewItems />} />
+          <Route path='/viewitems' element={<ViewItems user={user}/>} />
         </Routes>
       </Router>
     </>
