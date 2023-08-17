@@ -38,7 +38,7 @@ const ViewLoanDetails = ({user}) => {
   
     return (
       <div>
-        <h1 id="title">Items Purchased</h1>
+        <h1 id="title">Loans Applied</h1>
         <table id="users">
           <thead>
             <tr>
