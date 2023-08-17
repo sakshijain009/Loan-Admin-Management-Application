@@ -12,7 +12,7 @@ const ViewItems = ({user}) => {
                     "Content-Type": "application/json",
                     "emp_id": user
             }})
-            const dt = res.json();
+            const dt = await res.json();
             console.log(dt);
             setData(dt);
         }
@@ -24,11 +24,11 @@ const ViewItems = ({user}) => {
       return data.map(user1 => {
         return (
           <tr>
-            <td>{user1[0]}</td>
-            <td>{user1[1]}</td>
-            <td>{user1[2]}</td>
-            <td>{user1[3]}</td>
-            <td>{user1[4]}</td>
+            <td>{user1.issue_id}</td>
+            <td>{user1.item_description}</td>
+            <td>{user1.item_make}</td>
+            <td>{user1.item_category}</td>
+            <td>{user1.item_value}</td>
           </tr>
         )
       })
