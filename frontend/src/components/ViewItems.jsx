@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react'
 
 const ViewItems = () => {
-    const url = 'https://jsonplaceholder.typicode.com/users';
+    const url = 'http://localhost:8080/viewItems';
 
     const [data, setData] = useState([])
   
     useEffect(() => {
-      fetch(url).then(json => setData(json.data))
+      fetch(
+        url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+        }})
+      .then(json => setData(json.data))
     }, [])
   
     const renderTable = () => {
       return data.map(user => {
         return (
           <tr>
-            <td>{user.name}</td>
-            <td>{user.email}</td>
-            <td>{user.address.street}</td>
-            <td>{user.company.name}</td> 
+            <td>{user[0]}</td>
+            <td>{user[1]}</td>
+            <td>{user[2]}</td>
+            <td>{user[3]}</td>
+            <td>{user[4]}</td>
           </tr>
         )
       })
@@ -24,14 +31,15 @@ const ViewItems = () => {
   
     return (
       <div>
-        <h1 id="title">API Table</h1>
-        <table id="users"> //Your Table in post changed to table to make it work
+        <h1 id="title">Items Purchased</h1>
+        <table id="users">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Company</th>
+              <th>Issue_id</th>
+              <th>Item Description</th>
+              <th>Item Make</th>
+              <th>Item Category</th>
+              <th>Item Valuation</th>
             </tr>
           </thead>
           <tbody>{renderTable()}</tbody>
