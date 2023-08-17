@@ -40,7 +40,7 @@ public class LoanService {
 		System.out.println(header.get("emp_id"));
 //		List<Card> allCards=cardRepo.findByEmployee_id(header.get("emp_id"));
 //		System.out.println(allCards);
-		List<Loan> allLoans=loanRepo.findAll();
+		List<Loan> allLoans=loanRepo.getallLoans(header.get("emp_id"));
 		return allLoans;
 	}
 }
