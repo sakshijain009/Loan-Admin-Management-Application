@@ -1,6 +1,7 @@
 package com.training.loanapplication.service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,5 +109,13 @@ public class EmployeeService {
 		
 		return new Message("Sucess");
 
+	}
+	
+//	public List<Loan> findLoanByEmployeeId(String emp_id) {
+//		return loanRepo.findLoanByEmployeeId(emp_id);
+//	}
+	
+	public List<Employee> findCardByEmployeeId(String emp_id) {
+		return empRepo.findCardByEmployeeId(emp_id);
 	}
 }

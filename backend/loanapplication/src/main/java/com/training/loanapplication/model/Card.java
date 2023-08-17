@@ -59,12 +59,12 @@ public class Card {
 		this.employee = employee;
 	}
 	
-	@JsonBackReference
+//	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "loan_id")
 	private Loan loan;
 	
-	@JsonBackReference
+//	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;

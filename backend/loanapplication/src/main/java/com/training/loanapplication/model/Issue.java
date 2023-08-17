@@ -75,12 +75,12 @@ public class Issue {
 	@Column(name="return_date")
 	private LocalDate returnDate;
 	
-	@JsonBackReference
+//	@JsonBackReference
     @ManyToOne
     @JoinColumn(name="employee_id")
     private Employee employee;
     
-	@JsonBackReference
+//	@JsonBackReference
     @ManyToOne
     @JoinColumn(name="item_id")
     private Item item;

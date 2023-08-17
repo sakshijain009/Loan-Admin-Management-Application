@@ -83,7 +83,7 @@ function ApplyLoans({user}) {
                 })
             });
             const json = await response.json();
-            console.log(json.message);
+            alert(json.message);
             // sessionStorage.setItem("itemsDB", res);
             
         };
