@@ -1,6 +1,7 @@
 package com.training.loanapplication.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Item;
@@ -57,5 +59,11 @@ public class ItemController {
 	public Item getItemByMakeAndCategoryAndDescription(@PathVariable ItemCategory category, @PathVariable String make, @PathVariable String description) 
 	{
 		return itemService.getItemByMakeAndCategoryAndDescription(category, make, description);
+	}
+	
+	@GetMapping("/getAllItemsByEmpId")
+	public List<Object> getAllItemsByEmpId(@RequestHeader Map<String, String> header) 
+	{
+		return itemService.getAllItemsByEmpId(header);
 	}
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,12 +60,14 @@ public class Card {
 		this.employee = employee;
 	}
 	
-//	@JsonBackReference
+	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "loan_id")
 	private Loan loan;
 	
-//	@JsonBackReference
+	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;

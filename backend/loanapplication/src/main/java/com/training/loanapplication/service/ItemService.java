@@ -1,6 +1,7 @@
 package com.training.loanapplication.service;
 
 import java.util.List;
+import java.util.Map;
 
 //import java.util.Optional;
 
@@ -46,5 +47,12 @@ public class ItemService {
 	public Item getItemByMakeAndCategoryAndDescription(ItemCategory category, String make, String description)
 	{
 		return itemRepo.getItemByMakeAndCategoryAndDescription(category, make, description);
+	}
+	
+	public List<Object> getAllItemsByEmpId(Map<String, String> header)
+	{
+		System.out.println(header.get("emp_id"));
+		List<Object> allItems=itemRepo.getAllItemsByEmpId(header.get("emp_id"));
+		return allItems;
 	}
 }
