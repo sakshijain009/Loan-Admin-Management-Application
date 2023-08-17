@@ -49,10 +49,10 @@ public class ItemService {
 		return itemRepo.getItemByMakeAndCategoryAndDescription(category, make, description);
 	}
 	
-	public List<Object> getAllItemsByEmpId(Map<String, String> header)
+	public List<Map<String,Object>> getAllItemsByEmpId(Map<String, String> header)
 	{
 		System.out.println(header.get("emp_id"));
-		List<Object> allItems=itemRepo.getAllItemsByEmpId(header.get("emp_id"));
+		List<Map<String,Object>> allItems=itemRepo.getAllItemsByEmpId(header.get("emp_id"));
 		return allItems;
 	}
 }

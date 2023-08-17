@@ -62,7 +62,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("/viewItems")
-	public List<Object> getAllItemsByEmpId(@RequestHeader Map<String, String> header) 
+	public List<Map<String,Object>> getAllItemsByEmpId(@RequestHeader Map<String, String> header) 
 	{
 		return itemService.getAllItemsByEmpId(header);
 	}

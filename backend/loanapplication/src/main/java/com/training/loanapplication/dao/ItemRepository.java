@@ -1,6 +1,7 @@
 package com.training.loanapplication.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +24,5 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	Item getItemByMakeAndCategoryAndDescription(ItemCategory category, String make, String description);
 	
 	@Query(nativeQuery=true, value="SELECT iss.issue_id, it.item_description, it.item_make, it.item_category, it.item_value FROM issue_details iss INNER JOIN item_master it WHERE iss.employee_id=?1")
-	public List<Object> getAllItemsByEmpId(String emp_id);
+	public List<Map<String,Object>> getAllItemsByEmpId(String emp_id);
 }
