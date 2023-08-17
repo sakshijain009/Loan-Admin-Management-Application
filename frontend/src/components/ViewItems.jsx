@@ -6,6 +6,7 @@ const ViewItems = ({user}) => {
   
     useEffect(() => {
         const data = async () => {
+            user = sessionStorage.getItem('username');
             const res = await fetch('http://localhost:8080/viewItems', {
                 method: "GET",
                 headers: {
@@ -14,6 +15,8 @@ const ViewItems = ({user}) => {
             }})
             const dt = await res.json();
             console.log(dt);
+            
+            console.log(user)
             setData(dt);
         }
         data();
