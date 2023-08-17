@@ -61,7 +61,7 @@ public class ItemController {
 		return itemService.getItemByMakeAndCategoryAndDescription(category, make, description);
 	}
 	
-	@GetMapping("/getAllItemsByEmpId")
+	@GetMapping("/viewItems")
 	public List<Object> getAllItemsByEmpId(@RequestHeader Map<String, String> header) 
 	{
 		return itemService.getAllItemsByEmpId(header);
