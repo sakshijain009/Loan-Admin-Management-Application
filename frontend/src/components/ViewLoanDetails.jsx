@@ -14,7 +14,7 @@ async function getLoanDetails(e) {
             "user_name": uname
         }
     });
-    const json = await response.json();
+    const loans = await response.json();
     console.log(json);
 }
 
@@ -25,9 +25,18 @@ async function getLoanDetails(e) {
             <table width="80%">
                 <thead>
                     <tr>
-                        <th width>ID</th>
-                        <th>Type</th>
+                        <th width>Loan ID</th>
+                        <th>Loan Type</th>
                         <th>Duration</th>
+                        <th>Card ID</th>
+                    </tr>
+                    <tr>
+                        loans.map((loan,index) ={'>'} (
+                            <td>{loa[0]}</td>
+                            <td>{loan[1]}</td>
+                            <td>{loan[2]}</td>
+                            <td>{loan[2]}</td>
+                        ))
                     </tr>
                 </thead>
 
