@@ -18,6 +18,7 @@ import java.util.List;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="employee_master")
@@ -135,9 +136,11 @@ public class Employee {
 	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
+//	@JsonManagedReference
 	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Issue>issue;
 	
+//	@JsonManagedReference
 	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Card>card;
 
