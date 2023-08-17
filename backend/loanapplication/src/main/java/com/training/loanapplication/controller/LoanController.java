@@ -34,7 +34,7 @@ public class LoanController {
 	}
 	
 	@GetMapping("/getallLoans")
-	public List<Loan> getallLoans(@RequestHeader Map<String, String> header) 
+	public List<Object> getallLoans(@RequestHeader Map<String, String> header) 
 	{
 		return loanService.getallLoans(header);
 	}

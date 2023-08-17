@@ -2,7 +2,9 @@ package com.training.loanapplication.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,11 +59,15 @@ public class Card {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
+	
+	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "loan_id")
 	private Loan loan;
 	
+	@JsonIgnore
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "employee_id")
 	private Employee employee;

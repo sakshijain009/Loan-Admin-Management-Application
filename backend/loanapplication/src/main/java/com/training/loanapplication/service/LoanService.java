@@ -35,12 +35,12 @@ public class LoanService {
 		return loan_obj;
 	}
 	
-	public List<Loan> getallLoans(Map<String, String> header)
+	public List<Object> getallLoans(Map<String, String> header)
 	{
 		System.out.println(header.get("emp_id"));
 //		List<Card> allCards=cardRepo.findByEmployee_id(header.get("emp_id"));
 //		System.out.println(allCards);
-		List<Loan> allLoans=loanRepo.findAll();
+		List<Object> allLoans=loanRepo.getallLoans(header.get("emp_id"));
 		return allLoans;
 	}
 }

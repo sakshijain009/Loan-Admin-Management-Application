@@ -1,13 +1,18 @@
 package com.training.loanapplication.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.LoanModel;
 import com.training.loanapplication.model.LoginEmployee;
 //import com.training.loanapplication.model.LoginResult;
@@ -42,4 +47,16 @@ public class EmployeeController {
 	{
 		return empService.applyLoan(loanModel);
 	}
+	
+	@GetMapping("/getCards/{emp_id}")
+	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
+	{
+		return empService.findCardByEmployeeId(emp_id);
+	}
+	
+//	@PostMapping("/getLoans/{emp_id}")
+//	public List<Loan> findLoanByEmployeeId(@PathVariable String emp_id)
+//	{
+//		return empService.findLoanByEmployeeId(emp_id);
+//	}
 }
