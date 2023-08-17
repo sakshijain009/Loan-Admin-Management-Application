@@ -15,5 +15,5 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	int findIdByType(ItemCategory type);
 	
 	@Query("SELECT l FROM Loan l INNER JOIN l.card as c WHERE c.employee.id=?1")
-	public List<Loan> getallLoans(String emp_id);
+	public List<Object> getallLoans(String emp_id);
 }
