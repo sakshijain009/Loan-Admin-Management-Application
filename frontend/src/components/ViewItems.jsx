@@ -29,7 +29,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ViewItems = ({user}) => {
+const ViewItems = ({user, bt}) => {
 
     const [data, setData] = useState([])
   
@@ -68,7 +68,7 @@ const ViewItems = ({user}) => {
   
     return (
       <div>
-        <Appbar/>
+        <Appbar hbtn={"1"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing your Issued item details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>

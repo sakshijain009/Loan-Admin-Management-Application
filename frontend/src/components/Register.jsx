@@ -1,8 +1,6 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import React from 'react';
-import axios from 'axios'
-import Navbar from './Navbar/Navbar';
 import Appbar from './Appbar';
 import './Register.css'
 
@@ -17,7 +15,6 @@ import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import Alert from '@mui/material/Alert';
 import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
 
@@ -103,7 +100,7 @@ function AddUser({user, loginUser, bt}) {
 
     return (
         <>
-            <Appbar bt={bt}/>
+            <Appbar hbtn={"0"} bt={bt}/>
             <div className='register'>
                 <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
