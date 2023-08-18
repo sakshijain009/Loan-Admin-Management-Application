@@ -1,8 +1,11 @@
 package com.training.loanapplication.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,6 +42,12 @@ public class AdminController {
 	public Employee addNewEmployee(@RequestBody @Valid Employee e)
 	{
 		return adminService.addNewEmployee(e);	
+	}
+	
+	@GetMapping("/getAllUser")
+	public List<Employee> getAllEmployee()
+	{
+		return adminService.getAllEmployee();	
 	}
 	
 	@PostMapping("/addLoan")
