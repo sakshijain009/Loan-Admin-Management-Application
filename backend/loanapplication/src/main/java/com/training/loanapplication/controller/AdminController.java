@@ -40,13 +40,13 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addUser")
-	public Employee addNewEmployee(@RequestBody @Valid Employee e)
+	public Message addNewEmployee(@RequestBody @Valid Employee e)
 	{
 		return adminService.addNewEmployee(e);	
 	}
 	
 	@PutMapping("/updateUser")
-	public Employee updateEmployee(@RequestBody @Valid Employee e)
+	public Message updateEmployee(@RequestBody @Valid Employee e)
 	{
 		return adminService.updateEmployee(e);	
 	}
