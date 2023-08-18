@@ -29,6 +29,9 @@ const AdminLogin = () => {
         });
 
         const json = await response.json();
+        if(response.status === 200){
+            navigate('/adminhome');
+        }
 
         console.log(json);
     }

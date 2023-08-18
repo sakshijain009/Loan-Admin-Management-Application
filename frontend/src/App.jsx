@@ -8,6 +8,7 @@ import Dashboard from './components/Dashboard';
 import ApplyLoans from './components/ApplyLoans';
 import ViewLoanDetails from './components/ViewLoanDetails'
 import ViewItems from './components/ViewItems';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   
@@ -40,6 +41,7 @@ function App() {
           <Route path='/applyloan' element={<ApplyLoans user={user} loginUser={loginUser}/>} />
           <Route path='/viewloan' element={<ViewLoanDetails user={user} loginUser={loginUser}/>} />
           <Route path='/viewitems' element={<ViewItems user={user}/>} />
+          <Route path='/adminhome' element={<AdminDashboard />} />
         </Routes>
       </Router>
     </>
