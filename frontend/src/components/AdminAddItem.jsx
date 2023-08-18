@@ -9,7 +9,7 @@ import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
-function ApplyLoans({user, bt}) {
+function AdminAddItem() {
 
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
@@ -18,7 +18,8 @@ function ApplyLoans({user, bt}) {
     const [categories, setCategories] = useState([]);
     const [makeArr, setMakeArr] = useState([]);
     const [description, setDescription] = useState([]);
-    const tempCategories = [];
+    const [issue, setIssue] = useState("");
+    const [itemId, setItemId] =useState("");
     useEffect(() => {
         const data = async () => {
             const response = await fetch("http://localhost:8080/getAllCategory");
@@ -40,6 +41,8 @@ function ApplyLoans({user, bt}) {
             setItemMake("")
             setItem("")
             setValue(0)
+            setIssue("")
+            setItemId("")
         };
         data();
     }, [category]);
@@ -69,17 +72,18 @@ function ApplyLoans({user, bt}) {
 
     function submitHandler() {
         const data = async () => {
-            const response = await fetch(`http://localhost:8080/api/users/applyLoan`, {
+            const response = await fetch(`http://localhost:8080/api/admin/addItem`, {
                 method: 'POST',
                 headers: {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({
-                    "employee_id":user,
+                    "item_id":itemId,
                     "item_description":item,
                     "item_make":itemMake,
                     "item_category":category,
-                    "item_value":value
+                    "item_value":value,
+                    "issue" : issue
                 })
             });
             const json = await response.json();
@@ -90,24 +94,14 @@ function ApplyLoans({user, bt}) {
         data();
     }
 
-    // useEffect((category) => {
-    //     const data = async () => {
-    //         const response = await fetch(`http://localhost:8080/getallItems/${category}`);
-    //         const json = await response.json();
-    //         sessionStorage.setItem("itemsDB", JSON.stringify(json));
-    //     };
-    //     data();
-    // }, [category]);
-
     return (
         <>
-            <Appbar hbtn={"1"} bt={bt}/>
+            <Appbar/>
             <div className="loan__container">
-                <h3 className="text-center py-3 pt-5">Select Product and Apply for Loan</h3>
+                <h3 className="text-center py-3 pt-5">Add Item</h3>
                 <div className="loan-select">
                     <div className="loan-form">
-                        <Fixed lab={"Employee ID"}
-                            value={user}/>
+                        <TextField label={"Item ID"}/>
                         <DropdownItem flag={0}
                             val={category}
                             setVal={setCategory}
@@ -123,6 +117,11 @@ function ApplyLoans({user, bt}) {
                             setVal={setItem}
                             lab={"Select Description"}
                             arr={description}/>
+                        <DropdownItem flag={2}
+                            val={issue}
+                            setVal={setIssue}
+                            lab={"Select Issue Status"}
+                            arr={["Yes", "No"]}/>
                         <Fixed lab={"Price"}
                             value={value}/>
 
@@ -135,7 +134,7 @@ function ApplyLoans({user, bt}) {
                                 flexDirection: 'column',
                                 justifyContent: 'center'
                             }
-                    }><CreditScoreIcon/>Apply Loan</Button>
+                    }><CreditScoreIcon/>Add Item</Button>
                 </div>
             </div>
         </>
@@ -215,4 +214,4 @@ function DropdownItem({
     )
 }
 
-export default ApplyLoans
+export default AdminAddItem

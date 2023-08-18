@@ -19,7 +19,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
 import { useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 function AdminAddUser({bt}) {
     const navigate = useNavigate();
@@ -64,7 +64,7 @@ function AdminAddUser({bt}) {
     async function handleSubmit(e) {
         e.preventDefault()
         // console.log("Registration successful");
-        const response = await fetch("http://localhost:8080/api/users/addUser", {
+        const response = await fetch("http://localhost:8080/api/admin/addUser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -165,6 +165,7 @@ function AdminAddUser({bt}) {
 
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Add User</Button>
+                    <Link to="/adminviewuser">View</Link>
             </div>
         </>
     )

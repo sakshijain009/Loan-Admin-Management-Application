@@ -1,6 +1,35 @@
-import React, { useEffect, useState } from 'react'
+import Appbar from './Appbar'
+import React, {useState, useEffect} from 'react';
+import { styled } from '@mui/material/styles';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
-const ViewLoanDetails = ({user}) => {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+const ViewLoanDetails = ({user, bt}) => {
 
     const [data, setData] = useState([])
   
@@ -23,33 +52,34 @@ const ViewLoanDetails = ({user}) => {
       // setData(json)
     }, [])
   
-    const renderTable = () => {
-      return data.map(user1 => {
-        return (
-          <tr>
-            <td>{user1.loan_id}</td>
-            <td>{user1.duration}</td>
-            <td>{user1.type}</td>
-            <td>{user1.card_id}</td>
-          </tr>
-        )
-      })
-    }
-  
     return (
       <div>
-        <h1 id="title">Loans Applied</h1>
-        <table id="users">
-          <thead>
-            <tr>
-              <th>Loan_id</th>
-              <th>Duration</th>
-              <th>Loan type</th>
-              <th>Card_id</th>
-            </tr>
-          </thead>
-          <tbody>{renderTable()}</tbody>
-        </table>
+        <Appbar hbtn={"1"} bt={bt}/>
+        <h3 className='text-center pt-5' >Viewing your Loan details</h3>
+        <div className='mx-auto p-4'>
+        <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell align="center">Loan ID</StyledTableCell>
+            <StyledTableCell align="center">Duration</StyledTableCell>
+            <StyledTableCell align="center">Loan Type</StyledTableCell>
+            <StyledTableCell align="center">Card ID</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <StyledTableRow>
+              <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.duration}</StyledTableCell>
+              <StyledTableCell align="center">{row.type}</StyledTableCell>
+              <StyledTableCell align="center">{row.card_id}</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    </div>
       </div>
     )
 }

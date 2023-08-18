@@ -42,10 +42,14 @@ public class EmployeeService {
 	
 	public Employee saveEmployee(Employee emp)
 	{
-		Employee emp_obj=empRepo.save(emp);
-		return emp_obj;
+		if(empRepo.findById(emp.getId()).isPresent()) {
+			return null;
+		}
+		
+		return empRepo.save(emp);
 	}
 	
+	// Method to login an employee
 	public Message validateEmployee(LoginEmployee e)
 	{
 		String result="";
@@ -75,6 +79,7 @@ public class EmployeeService {
 		return loginresult;
 	}
 
+	// Method for Employee to apply for loan
 	public Message applyLoan(LoanModel loanModel) {
 		Card card = new Card();
 		Issue issue = new Issue();
@@ -111,6 +116,7 @@ public class EmployeeService {
 
 	}
 
+	// Find all cards issued for employee
 	public List<Employee> findCardByEmployeeId(String emp_id) {
 		return empRepo.findCardByEmployeeId(emp_id);
 	}

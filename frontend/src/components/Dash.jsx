@@ -1,9 +1,17 @@
-import React from "react";
 import Appbar from './Appbar';
 import './Dash.css';
 import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
-function Dash(){
+function Dash({user}){
+    const navigate = useNavigate();
+    useEffect(() => {
+        if(user === "" && user.length > 0)
+        {
+            navigate('/login');
+        }
+    },[user])
     return(
         <>
             <Appbar bt={"Logout"}/>

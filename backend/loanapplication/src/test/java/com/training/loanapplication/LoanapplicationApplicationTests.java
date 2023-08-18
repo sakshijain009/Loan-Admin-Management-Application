@@ -12,5 +12,8 @@ class LoanapplicationApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Test
+	void testSaveEmployee() {
+	}
 
 }

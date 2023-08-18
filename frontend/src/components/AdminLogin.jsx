@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import Appbar from './Appbar';
+import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 
@@ -9,13 +10,14 @@ const AdminLogin = () => {
 
     const [empid, setEmpid] = useState("");
     const [pwd, setPwd] = useState("");
+    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault()
         console.log("Login Submit")
         let resp = {empid, pwd};
         console.log(resp);
-        const response = await fetch("http://localhost:8080/admin", {
+        const response = await fetch("http://localhost:8080/api/admin/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
