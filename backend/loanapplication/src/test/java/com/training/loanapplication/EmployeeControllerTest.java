@@ -74,13 +74,13 @@ public class EmployeeControllerTest {
 		emp.setIssue(issueList);
 		emp.setCard(cardList);
 		
-		Mockito.when(EmployeeService.saveEmployee(ArgumentMatchers.any())).
+		Mockito.when(employeeService.saveEmployee(ArgumentMatchers.any())).
 		thenReturn(emp);
 		
 		String json = mapper.writeValueAsString(emp);
-		MvcResult requestResult = (MvcResult) ((ResultActions) ((MockHttpServletRequestBuilder) mvc.perform(post("/api/users/addUser")))
+		MvcResult requestResult = (MvcResult) mvc.perform(post("/api/users/addUser")
 				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
-				.content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andReturn();
+				.content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 		String Result = requestResult.getResponse().getContentAsString();
 		assertEquals(Result, "User Added");
 		
