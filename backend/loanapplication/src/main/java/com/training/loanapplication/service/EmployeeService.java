@@ -26,7 +26,6 @@ import com.training.loanapplication.model.Message;
 public class EmployeeService {
 	
 	@Autowired
-	static
 	EmployeeRepository empRepo;
 	
 	@Autowired
@@ -41,7 +40,7 @@ public class EmployeeService {
 	@Autowired
 	ItemRepository itemRepo;
 	
-	public static Employee saveEmployee(Employee emp)
+	public Employee saveEmployee(Employee emp)
 	{
 		Employee emp_obj=empRepo.save(emp);
 		return emp_obj;

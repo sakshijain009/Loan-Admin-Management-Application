@@ -6,17 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.training.loanapplication.dao.AdminRepository;
+import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.model.Admin;
-//import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
 
-//import jakarta.validation.Valid;
 
 @Service
 public class AdminService {
 	
 	@Autowired
 	AdminRepository adminRepository;
+	
+	@Autowired
+	EmployeeRepository empRepository;
 
 	public Message checkAdmin(Admin admin) {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
@@ -37,10 +39,19 @@ public class AdminService {
 			}
 			
 		}
-		Message loginresult = new Message();
-		loginresult.setMessage(result);
-		return loginresult;
+		
+		return new Message(result);
+	}
+	
+	public Message removeEmployee(String employee_id) {
+		
+		if(empRepository.findById(employee_id).isPresent()) {
+			empRepository.deleteById(employee_id);
+			
+			return new Message("Employee has been successfully deleted");
+		}else {
+			return new Message("Error: No such user found!");
+		}
 		
 	}
-
 }
