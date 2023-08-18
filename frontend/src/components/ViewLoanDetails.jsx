@@ -1,8 +1,5 @@
-
 import Appbar from './Appbar'
-
 import React, {useState, useEffect} from 'react';
-
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -26,7 +23,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
+
   '&:last-child td, &:last-child th': {
     border: 0,
   },
@@ -55,61 +52,34 @@ const ViewLoanDetails = ({user}) => {
       // setData(json)
     }, [])
   
-    const renderTable = () => {
-      return data.map(user1 => {
-        return (
-          <div style={{display:'flex', justifyContent:'center'}}>
-          <table>
-          <tr>
-            <td>{user1.loan_id}</td>
-            <td>{user1.duration}</td>
-            <td>{user1.type}</td>
-            <td>{user1.card_id}</td>
-          </tr>
-          </table>
-          </div>
-        )
-      })
-    }
-  
     return (
       <div>
         <Appbar/>
-        {/* <h2 id="title">Loans Applied</h2>
-        <table id="users">
-          <thead>
-            <tr>
-              <th>Loan_id</th>
-              <th>Duration</th>
-              <th>Loan type</th>
-              <th>Card_id</th>
-            </tr>
-          </thead>
-          <tbody>{renderTable()}</tbody>
-        </table> */}
+        <h3 className='text-center pt-5' >Viewing your Loan details</h3>
+        <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Loan ID</StyledTableCell>
-            <StyledTableCell align="right">Duration</StyledTableCell>
-            <StyledTableCell align="right">Loan Type</StyledTableCell>
-            <StyledTableCell align="right">Card ID</StyledTableCell>
+            <StyledTableCell align="center">Loan ID</StyledTableCell>
+            <StyledTableCell align="center">Duration</StyledTableCell>
+            <StyledTableCell align="center">Loan Type</StyledTableCell>
+            <StyledTableCell align="center">Card ID</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
             <StyledTableRow>
-              <StyledTableCell align="right">{row.loan_id}</StyledTableCell>
-              <StyledTableCell align="right">{row.duration}</StyledTableCell>
-              <StyledTableCell align="right">{row.type}</StyledTableCell>
-              <StyledTableCell align="right">{row.card_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.duration}</StyledTableCell>
+              <StyledTableCell align="center">{row.type}</StyledTableCell>
+              <StyledTableCell align="center">{row.card_id}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-
+    </div>
       </div>
     )
 }

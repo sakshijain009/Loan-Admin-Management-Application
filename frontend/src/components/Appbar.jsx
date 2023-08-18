@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 
 export default function Appbar({bt}) {
   const navigate = useNavigate();
@@ -21,9 +22,10 @@ export default function Appbar({bt}) {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+          <HomeRoundedIcon onClick={() => (navigate('/home'))}/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          {/* <HomeRoundedIcon onClick={() => (navigate('/home'))}/> */}
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, paddingLeft:5 }}>
             Loan Management Application
           </Typography>
           <Button color="inherit" onClick={()=>(navigate(`/${bt}`))}>{bt}</Button>
