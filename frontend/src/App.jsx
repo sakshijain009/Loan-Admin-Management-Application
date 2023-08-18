@@ -49,7 +49,7 @@ function App() {
           <Route path='/adminadduser' element={<AdminAddUser />} />
           <Route path='/adminadditem' element={<AdminAddItem />} />
           <Route path='/adminaddloan' element={<AdminAddLoan />} />
-          <Route path='adminviewuser' element={<AdminViewUser />} />
+          <Route path='/adminviewuser' element={<AdminViewUser />} />
         </Routes>
       </Router>
     </>
