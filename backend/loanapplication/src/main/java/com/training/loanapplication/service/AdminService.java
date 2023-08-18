@@ -72,4 +72,26 @@ public class AdminService {
 		
 		return empRepository.save(e);
 	}
+	
+	// Function for admin to add update employee
+	public Employee updateEmployee(Employee e) {
+		Optional<Employee> op = empRepository.findById(e.getId());
+			
+		if(op.isPresent()) {
+			Employee emp = op.get();
+			
+			emp.setPassword(e.getPassword());
+			emp.setName(e.getName());
+			emp.setGender(e.getGender());
+			emp.setDoj(e.getDoj());
+			emp.setDob(e.getDob());
+			emp.setDesignation(e.getDesignation());
+			emp.setDepartment(e.getDepartment());
+			
+			return empRepository.save(emp);
+			
+		} else {
+			return null;
+		}
+	}
 }

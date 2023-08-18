@@ -42,8 +42,11 @@ public class EmployeeService {
 	
 	public Employee saveEmployee(Employee emp)
 	{
-		Employee emp_obj=empRepo.save(emp);
-		return emp_obj;
+		if(empRepo.findById(emp.getId()).isPresent()) {
+			return null;
+		}
+		
+		return empRepo.save(emp);
 	}
 	
 	// Method to login an employee
