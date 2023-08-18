@@ -64,7 +64,7 @@ function AdminAddUser({bt}) {
     async function handleSubmit(e) {
         e.preventDefault()
         // console.log("Registration successful");
-        const response = await fetch("http://localhost:8080/api/users/addUser", {
+        const response = await fetch("http://localhost:8080/api/admin/addUser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
