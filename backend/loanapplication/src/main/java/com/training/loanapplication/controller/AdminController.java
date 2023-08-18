@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Admin;
+import com.training.loanapplication.model.Employee;
 //import com.training.loanapplication.model.Employee;
 //import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
@@ -31,6 +32,12 @@ public class AdminController {
 	public Message checkAdmin(@RequestBody @Valid Admin admin)
 	{
 		return adminService.checkAdmin(admin);	
+	}
+	
+	@PostMapping("/addUser")
+	public Employee addNewEmployee(@RequestBody @Valid Employee e)
+	{
+		return adminService.addNewEmployee(e);	
 	}
 	
 	@DeleteMapping("/removeEmployee/{employee_id}")
