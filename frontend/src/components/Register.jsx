@@ -30,6 +30,10 @@ function AddUser({user, loginUser, bt}) {
     const [gender, setGender] = React.useState("");
     const [dob, setDob] = React.useState(dayjs('2023-01-01'));
     const [doj, setDoj] = React.useState(dayjs('2023-01-01'));
+
+    const [dobSend, setDobSend] = React.useState("");
+    const [dojSend, setDojSend] = React.useState("");
+
     const [pwd, setPwd] = React.useState("");
 
     useEffect(() => {
@@ -39,9 +43,34 @@ function AddUser({user, loginUser, bt}) {
         }
     },[user])
 
+    const dateFormat = e => {
+        const year = e['$y'];
+        const month = e['$M']+1;
+        const day = e['$D'];
+        let date_in_format = year.toString() + "-";
+        date_in_format += (month < 10)?'0':'';
+        date_in_format += month.toString() + "-";
+        date_in_format += (day < 10)?'0':'';
+        date_in_format += day.toString();
+        return date_in_format;
+    }
+    const dateJoinHandler = e => {
+        const date_in_format = dateFormat(e);
+        console.log(date_in_format);
+        setDoj(e);
+        setDojSend(date_in_format);
+    }
+
+    const dateBirthHandler = e => {
+        const date_in_format = dateFormat(e);
+        console.log(date_in_format);
+        setDob(e);
+        setDobSend(date_in_format);
+    }
+
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log("Registration successful");
+        // console.log("Registration successful");
         const response = await fetch("http://localhost:8080/api/users/addUser", {
             method: "POST",
             headers: {
@@ -54,8 +83,8 @@ function AddUser({user, loginUser, bt}) {
                     "department": dept,
                     "designation": des,
                     "gender": gender,
-                    "dob": dob,
-                    "doj": doj,
+                    "dob": dobSend,
+                    "doj": dojSend,
                     "password": pwd
                 }
             )
@@ -127,9 +156,7 @@ function AddUser({user, loginUser, bt}) {
                         <DatePicker label="Date of Birth" className='text_register'
                             value={dob}
                             format="DD/MM/YYYY"
-                            onChange={
-                                e => setDob(e)
-                            }/>
+                            onChange={dateBirthHandler}/>
                     </DemoContainer>
                 </LocalizationProvider>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -139,9 +166,7 @@ function AddUser({user, loginUser, bt}) {
                         <DatePicker label="Date of Joining" className='text_register'
                             value={doj}
                             format="DD/MM/YYYY"
-                            onChange={
-                                e => setDoj(e)
-                            }/>
+                            onChange={dateJoinHandler}/>
                     </DemoContainer>
                 </LocalizationProvider>
 
