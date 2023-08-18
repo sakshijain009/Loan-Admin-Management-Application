@@ -46,6 +46,7 @@ public class EmployeeService {
 		return emp_obj;
 	}
 	
+	// Method to login an employee
 	public Message validateEmployee(LoginEmployee e)
 	{
 		String result="";
@@ -75,6 +76,7 @@ public class EmployeeService {
 		return loginresult;
 	}
 
+	// Method for Employee to apply for loan
 	public Message applyLoan(LoanModel loanModel) {
 		Card card = new Card();
 		Issue issue = new Issue();
@@ -111,6 +113,7 @@ public class EmployeeService {
 
 	}
 
+	// Find all cards issued for employee
 	public List<Employee> findCardByEmployeeId(String emp_id) {
 		return empRepo.findCardByEmployeeId(emp_id);
 	}

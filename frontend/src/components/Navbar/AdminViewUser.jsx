@@ -1,4 +1,4 @@
-import Appbar from './Appbar'
+import Appbar from '../Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -29,51 +29,53 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ViewLoanDetails = ({user}) => {
+const AdminViewUser = () => {
 
     const [data, setData] = useState([])
   
     useEffect(() => {
         const data = async () => {
-            user = sessionStorage.getItem('username');
-            const res = await fetch('http://localhost:8080/getallLoans', {
+            const res = await fetch('http://localhost:8080/admin/getAllUser', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "emp_id": user
             }})
             const dt = await res.json();
             console.log(dt);
-            
-            console.log(user)
             setData(dt);
         }
         data();
       // setData(json)
     }, [])
-  
+    
     return (
       <div>
         <Appbar/>
-        <h3 className='text-center pt-5' >Viewing your Loan details</h3>
+        <h3 className='text-center pt-5' >Customer Master Data Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Loan ID</StyledTableCell>
-            <StyledTableCell align="center">Duration</StyledTableCell>
-            <StyledTableCell align="center">Loan Type</StyledTableCell>
-            <StyledTableCell align="center">Card ID</StyledTableCell>
+            <StyledTableCell align="center">Employee Id</StyledTableCell>
+            <StyledTableCell align="center">Employee name</StyledTableCell>
+            <StyledTableCell align="center">Designation</StyledTableCell>
+            <StyledTableCell align="center">Department</StyledTableCell>
+            <StyledTableCell align="center">Gender</StyledTableCell>
+            <StyledTableCell align="center">Date Of Birth</StyledTableCell>
+            <StyledTableCell align="center">Date Of Joining</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <StyledTableRow>
-              <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
-              <StyledTableCell align="center">{row.duration}</StyledTableCell>
-              <StyledTableCell align="center">{row.type}</StyledTableCell>
-              <StyledTableCell align="center">{row.card_id}</StyledTableCell>
+            <StyledTableRow key={row.id}>
+              <StyledTableCell align="center">{row.id}</StyledTableCell>
+              <StyledTableCell align="center">{row.name}</StyledTableCell>
+              <StyledTableCell align="center">{row.designation}</StyledTableCell>
+              <StyledTableCell align="center">{row.department}</StyledTableCell>
+              <StyledTableCell align="center">{row.gender}</StyledTableCell>
+              <StyledTableCell align="center">{row.dob}</StyledTableCell>
+              <StyledTableCell align="center">{row.doj}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -81,7 +83,8 @@ const ViewLoanDetails = ({user}) => {
     </TableContainer>
     </div>
       </div>
+
     )
 }
 
-export default ViewLoanDetails
+export default AdminViewUser
