@@ -9,6 +9,7 @@ import ApplyLoans from './components/ApplyLoans';
 import ViewLoanDetails from './components/ViewLoanDetails'
 import ViewItems from './components/ViewItems';
 import AdminDashboard from './components/AdminDashboard';
+import AdminAddUser from './components/AdminAddUser';
 
 function App() {
   
@@ -42,6 +43,7 @@ function App() {
           <Route path='/viewloan' element={<ViewLoanDetails user={user} loginUser={loginUser}/>} />
           <Route path='/viewitems' element={<ViewItems user={user}/>} />
           <Route path='/adminhome' element={<AdminDashboard />} />
+          <Route path='/adminadduser' element={<AdminAddUser />} />
         </Routes>
       </Router>
     </>
