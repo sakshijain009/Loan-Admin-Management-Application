@@ -9,7 +9,7 @@ import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
-function ApplyLoans({user}) {
+function ApplyLoans({user, bt}) {
 
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
@@ -101,7 +101,7 @@ function ApplyLoans({user}) {
 
     return (
         <>
-            <Appbar/>
+            <Appbar hbtn={"1"} bt={bt}/>
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Select Product and Apply for Loan</h3>
                 <div className="loan-select">

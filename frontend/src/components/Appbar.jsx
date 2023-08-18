@@ -5,11 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { Link } from 'react-router-dom';
 
-export default function Appbar({bt}) {
+export default function Appbar({hbtn, bt}) {
   const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -22,11 +22,17 @@ export default function Appbar({bt}) {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-          <HomeRoundedIcon onClick={() => (navigate('/home'))}/>
+          <HomeRoundedIcon onClick={() => {
+            if({hbtn} == "0"){
+              <Link to='/'></Link>
+            }
+            else{
+              <Link to='/home'></Link>
+            }
+          }}/>
           </IconButton>
-          {/* <HomeRoundedIcon onClick={() => (navigate('/home'))}/> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, paddingLeft:5 }}>
-            Loan Management Application
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, paddingLeft:1 }}>
+            Loan Management 
           </Typography>
           <Button color="inherit" onClick={()=>(navigate(`/${bt}`))}>{bt}</Button>
         </Toolbar>

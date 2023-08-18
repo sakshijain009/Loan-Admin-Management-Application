@@ -13,6 +13,7 @@ import AdminAddUser from './components/AdminAddUser';
 import AdminAddItem from './components/AdminAddItem';
 import AdminAddLoan from './components/AdminAddLoan';
 import AdminViewUser from './components/Navbar/AdminViewUser';
+import Logout from './components/logout';
 
 function App() {
   
@@ -37,19 +38,19 @@ function App() {
     <>
       <Router>
         <Routes>
-        <Route path='/register' element={<Register user={user} loginUser={loginUser}/> } />
-          <Route path='/login' element={<Login  user={user} loginUser={loginUser} /> } />
+          <Route path='/register' element={<Register user={user} loginUser={loginUser} bt={"login"}/> } />
+          <Route path='/login' element={<Login  user={user} loginUser={loginUser} bt={"register"}/> } />
           <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/' element={<Dashboard/>} />
-          <Route path='/home' element={<Dash user={user} loginUser={loginUser}/>} />
-          <Route path='/applyloan' element={<ApplyLoans user={user} loginUser={loginUser}/>} />
-          <Route path='/viewloan' element={<ViewLoanDetails user={user} loginUser={loginUser}/>} />
-          <Route path='/viewitems' element={<ViewItems user={user}/>} />
+          <Route path='/home' element={<Dash user={user}/>} />
+          <Route path='/applyloan' element={<ApplyLoans user={user} loginUser={loginUser} bt={"logout"}/>} />
+          <Route path='/viewloan' element={<ViewLoanDetails user={user} loginUser={loginUser} bt={"logout"}/>} />
+          <Route path='/viewitems' element={<ViewItems user={user} bt={"logout"}/>} />
           <Route path='/adminhome' element={<AdminDashboard />} />
           <Route path='/adminadduser' element={<AdminAddUser />} />
           <Route path='/adminadditem' element={<AdminAddItem />} />
           <Route path='/adminaddloan' element={<AdminAddLoan />} />
-          <Route path='/adminviewuser' element={<AdminViewUser />} />
+          <Route path='adminviewuser' element={<AdminViewUser />} />
         </Routes>
       </Router>
     </>

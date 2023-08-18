@@ -29,7 +29,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ViewLoanDetails = ({user}) => {
+const ViewLoanDetails = ({user, bt}) => {
 
     const [data, setData] = useState([])
   
@@ -54,7 +54,7 @@ const ViewLoanDetails = ({user}) => {
   
     return (
       <div>
-        <Appbar/>
+        <Appbar hbtn={"1"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing your Loan details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
