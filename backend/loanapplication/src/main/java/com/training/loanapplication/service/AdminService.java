@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.model.Admin;
+import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Message;
 
 
@@ -53,5 +54,13 @@ public class AdminService {
 			return new Message("Error: No such user found!");
 		}
 		
+	}
+	
+	public Employee addNewEmployee(Employee e) {
+		if(empRepository.findById(e.getId()).isPresent()) {
+			return null;
+		}
+		
+		return empRepository.save(e);
 	}
 }
