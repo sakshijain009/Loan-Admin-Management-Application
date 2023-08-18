@@ -31,8 +31,11 @@ public class LoanService {
 	
 	public Loan saveLoan(Loan loan)
 	{
-		Loan loan_obj=loanRepo.save(loan);
-		return loan_obj;
+//		if(loanRepo.findByType(loan.getType()).) {
+//			return null;
+//		}
+		
+		return loanRepo.save(loan);
 	}
 	
 	public List<Map<String,Object>> getallLoans(Map<String, String> header)

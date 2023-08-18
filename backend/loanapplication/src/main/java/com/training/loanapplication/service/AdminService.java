@@ -1,5 +1,6 @@
 package com.training.loanapplication.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class AdminService {
 	@Autowired
 	EmployeeRepository empRepository;
 
+	// Check if admin details are correct
 	public Message checkAdmin(Admin admin) {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
 		Admin a = null;
@@ -44,6 +46,7 @@ public class AdminService {
 		return new Message(result);
 	}
 	
+	// Function for admin to remove employee
 	public Message removeEmployee(String employee_id) {
 		
 		if(empRepository.findById(employee_id).isPresent()) {
@@ -56,6 +59,12 @@ public class AdminService {
 		
 	}
 	
+	// Function for admin to get all employee
+	public List<Employee> getAllEmployee() {
+		return empRepository.findAll();
+	}
+	
+	// Function for admin to add new employee
 	public Employee addNewEmployee(Employee e) {
 		if(empRepository.findById(e.getId()).isPresent()) {
 			return null;
