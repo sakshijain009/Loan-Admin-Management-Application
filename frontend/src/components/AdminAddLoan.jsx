@@ -62,7 +62,6 @@ function AdminAddLoan() {
                             val={category}
                             setVal={setCategory}
                             label={"Select Categories"}
-                            variant="outlined"
                             arr={loanType}/>
                         <TextField label={"Duration"}
                         variant="outlined"

@@ -19,7 +19,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import Alert from '@mui/material/Alert';
 import { useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 function AdminAddUser({bt}) {
     const navigate = useNavigate();
@@ -165,6 +165,7 @@ function AdminAddUser({bt}) {
 
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Add User</Button>
+                    <Link to="/adminviewuser">View</Link>
             </div>
         </>
     )

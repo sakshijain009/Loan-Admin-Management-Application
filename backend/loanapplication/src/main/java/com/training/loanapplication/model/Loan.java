@@ -62,6 +62,6 @@ public class Loan {
 	@Column(name="duration")
 	private short duration;
 	
-	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true)
 	private List<Card> card;
 }

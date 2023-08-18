@@ -1,13 +1,11 @@
 package com.training.loanapplication.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-//import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.persistence.OneToMany;
@@ -15,11 +13,11 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="employee_master")
@@ -137,10 +135,12 @@ public class Employee {
 	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER)
     private List<Issue>issue;
 	
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER)
     private List<Card>card;
 
 }
