@@ -137,10 +137,10 @@ public class Employee {
 	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
     private List<Issue>issue;
 	
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
     private List<Card>card;
 
 }
