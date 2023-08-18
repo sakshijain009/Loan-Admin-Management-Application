@@ -140,11 +140,11 @@ public class Employee {
 	private String password;
 	
 	@OnDelete(action=OnDeleteAction.CASCADE)
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade= {CascadeType.REMOVE,CascadeType.PERSIST},orphanRemoval = true)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER)
     private List<Issue>issue;
 	
 	@OnDelete(action=OnDeleteAction.CASCADE)
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade={CascadeType.REMOVE,CascadeType.PERSIST},orphanRemoval = true)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER)
     private List<Card>card;
 
 }
