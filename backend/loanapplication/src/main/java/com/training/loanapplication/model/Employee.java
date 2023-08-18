@@ -15,6 +15,8 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -137,10 +139,12 @@ public class Employee {
 	@NotBlank(message="Password cannot be empty")
 	private String password;
 	
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade= {CascadeType.REMOVE,CascadeType.PERSIST},orphanRemoval = true)
     private List<Issue>issue;
 	
-	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade=CascadeType.ALL,orphanRemoval = true)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy="employee", fetch= FetchType.EAGER, cascade={CascadeType.REMOVE,CascadeType.PERSIST},orphanRemoval = true)
     private List<Card>card;
 
 }

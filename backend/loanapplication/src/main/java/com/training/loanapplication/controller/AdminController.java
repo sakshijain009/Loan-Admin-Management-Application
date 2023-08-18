@@ -1,7 +1,5 @@
 package com.training.loanapplication.controller;
 
-//import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
-//import com.training.loanapplication.model.Employee;
-//import com.training.loanapplication.model.LoginResult;
+import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
 import com.training.loanapplication.service.AdminService;
+import com.training.loanapplication.service.LoanService;
 
 import jakarta.validation.Valid;
 
@@ -28,6 +26,9 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
+	@Autowired
+	LoanService loanService;
+	
 	@PostMapping("/login")
 	public Message checkAdmin(@RequestBody @Valid Admin admin)
 	{
@@ -38,6 +39,12 @@ public class AdminController {
 	public Employee addNewEmployee(@RequestBody @Valid Employee e)
 	{
 		return adminService.addNewEmployee(e);	
+	}
+	
+	@PostMapping("/addLoan")
+	public Loan addNewLoan(@RequestBody @Valid Loan loan)
+	{
+		return loanService.saveLoan(loan);	
 	}
 	
 	@DeleteMapping("/removeEmployee/{employee_id}")
