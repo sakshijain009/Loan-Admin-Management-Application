@@ -74,7 +74,7 @@ public class EmployeeControllerTest {
 		emp.setIssue(issueList);
 		emp.setCard(cardList);
 		
-		Mockito.when(EmployeeService.saveEmployee(ArgumentMatchers.any())).
+		Mockito.when(employeeService.saveEmployee(ArgumentMatchers.any())).
 		thenReturn(emp);
 		
 		String json = mapper.writeValueAsString(emp);
