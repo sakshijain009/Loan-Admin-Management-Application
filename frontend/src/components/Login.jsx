@@ -6,11 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
 
-const Login = ({user, loginUser}) => {
+const Login = ({user, loginUser, bt}) => {
 
     const [empid, setEmpid] = useState("");
     const [pwd, setPwd] = useState("");
-
 
     const navigate = useNavigate();
 
@@ -49,7 +48,7 @@ const Login = ({user, loginUser}) => {
 
     return (
     <>
-        <Appbar bt={"register"}/>
+        <Appbar bt={bt} hbtn={"0"}/>
             <div className='login'>
                 <h2>Login User</h2>
 

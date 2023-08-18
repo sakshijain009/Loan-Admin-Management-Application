@@ -21,7 +21,7 @@ function Dashboard(){
 
     return (
         <>
-            <Appbar/>
+            <Appbar hbtn={"0"} bt={"Register"}/>
             <div className="dashboard-container">
                 <div className="dashboard-card">
                     <span>Admin Login</span>
