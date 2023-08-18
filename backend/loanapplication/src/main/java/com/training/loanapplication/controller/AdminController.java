@@ -34,11 +34,11 @@ public class AdminController {
 		return adminService.checkAdmin(admin);	
 	}
 	
-//	@PostMapping("/addUser")
-//	public Message addNewEmployee(@RequestBody @Valid Employee e)
-//	{
-//		return adminService.addNewEmployee(e);	
-//	}
+	@PostMapping("/addUser")
+	public Employee addNewEmployee(@RequestBody @Valid Employee e)
+	{
+		return adminService.addNewEmployee(e);	
+	}
 	
 	@DeleteMapping("/removeEmployee/{employee_id}")
 	public Message removeEmployee(@PathVariable String employee_id)
