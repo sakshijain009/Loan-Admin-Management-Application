@@ -65,33 +65,24 @@ public class AdminService {
 	}
 	
 	// Function for admin to add new employee
-	public Employee addNewEmployee(Employee e) {
+	public Message addNewEmployee(Employee e) {
 		if(empRepository.findById(e.getId()).isPresent()) {
-			return null;
+			return new Message("Employee already existss");
 		}
 		
-		return empRepository.save(e);
+		empRepository.save(e);
+		return new Message("Employee successfully added");
 	}
 	
 	// Function for admin to add update employee
-	public Employee updateEmployee(Employee e) {
+	public Message updateEmployee(Employee e) {
 		Optional<Employee> op = empRepository.findById(e.getId());
 			
 		if(op.isPresent()) {
-			Employee emp = op.get();
-			
-			emp.setPassword(e.getPassword());
-			emp.setName(e.getName());
-			emp.setGender(e.getGender());
-			emp.setDoj(e.getDoj());
-			emp.setDob(e.getDob());
-			emp.setDesignation(e.getDesignation());
-			emp.setDepartment(e.getDepartment());
-			
-			return empRepository.save(emp);
-			
+			empRepository.save(e);
+			return new Message("Employee details successfully updated");
 		} else {
-			return null;
+			return new Message("No such employee is present");
 		}
 	}
 }
