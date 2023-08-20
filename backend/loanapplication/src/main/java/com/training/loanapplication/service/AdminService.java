@@ -12,6 +12,7 @@ import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Message;
 
 
@@ -82,7 +83,7 @@ public class AdminService {
 		return new Message("Employee successfully added");
 	}
 	
-	// Function for admin to add update employee
+	// Function for admin to update employee details
 	public Message updateEmployee(Employee e) {
 		Optional<Employee> op = empRepository.findById(e.getId());
 			
@@ -93,6 +94,18 @@ public class AdminService {
 			return new Message("No such employee is present");
 		}
 	}
+	
+	// Function for admin to update item details
+		public Message updateItem(Item item) {
+			Optional<Item> op = itemRepository.findById(item.getItem_id());
+				
+			if(op.isPresent()) {
+				itemRepository.save(item);
+				return new Message("Item details successfully updated");
+			} else {
+				return new Message("No such item is present");
+			}
+		}
 	
 	// Function for admin to remove an item
 		public Message removeItem (int item_id) {

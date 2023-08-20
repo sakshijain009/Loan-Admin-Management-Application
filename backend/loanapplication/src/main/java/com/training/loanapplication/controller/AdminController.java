@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
 import com.training.loanapplication.service.AdminService;
+import com.training.loanapplication.service.ItemService;
 import com.training.loanapplication.service.LoanService;
 
 import jakarta.validation.Valid;
@@ -32,6 +34,9 @@ public class AdminController {
 	
 	@Autowired
 	LoanService loanService;
+	
+	@Autowired
+	ItemService itemService;
 	
 	@PostMapping("/login")
 	public Message checkAdmin(@RequestBody @Valid Admin admin)
@@ -79,5 +84,17 @@ public class AdminController {
 	public Message removeItem(@PathVariable int item_id)
 	{
 		return adminService.removeItem(item_id);	
+	}
+	
+	@PutMapping("/updateItem")
+	public Message updateItem(@RequestBody @Valid Item item)
+	{
+		return adminService.updateItem(item);	
+	}
+	
+	@PostMapping("/addItem")
+	public Item addItem(@RequestBody @Valid Item item)
+	{
+		return itemService.saveItem(item);	
 	}
 }

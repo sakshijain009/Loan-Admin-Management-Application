@@ -24,7 +24,7 @@ public class ItemService {
 	{
 		return itemRepo.save(item);
 	}
-	
+		
 	// Find all items
 	public List<Item> getallItems()
 	{
