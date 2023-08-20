@@ -12,6 +12,8 @@ import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Loan;
 
+import jakarta.validation.Valid;
+
 @Service
 public class LoanService {
 	
@@ -24,7 +26,8 @@ public class LoanService {
 	@Autowired
 	EmployeeRepository employeeRepo;
 	
-	public Loan saveLoan(Loan loan)
+	// Method to save loan in loan table
+	public Loan saveLoan(@Valid Loan loan)
 	{
 //		if(loanRepo.findByType(loan.getType()).) {
 //			return null;
@@ -33,7 +36,8 @@ public class LoanService {
 		return loanRepo.save(loan);
 	}
 	
-	public List<Map<String,Object>> getallLoans(Map<String, String> header)
+	// Method to get all loans for a particular Employee
+	public List<Map<String,Object>> getAllLoans(Map<String, String> header)
 	{
 		System.out.println(header.get("emp_id"));
 		List<Map<String,Object>> allLoans=loanRepo.getallLoans(header.get("emp_id"));

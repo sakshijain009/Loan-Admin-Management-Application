@@ -22,6 +22,8 @@ import com.training.loanapplication.model.LoginEmployee;
 //import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
 
+import jakarta.validation.Valid;
+
 @Service
 public class EmployeeService {
 	
@@ -40,7 +42,8 @@ public class EmployeeService {
 	@Autowired
 	ItemRepository itemRepo;
 	
-	public Employee saveEmployee(Employee emp)
+	// Method to save an employee
+	public Employee saveEmployee(@Valid Employee emp)
 	{
 		if(empRepo.findById(emp.getId()).isPresent()) {
 			return null;

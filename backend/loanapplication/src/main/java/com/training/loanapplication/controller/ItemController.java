@@ -25,12 +25,6 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 	
-	@PostMapping("/addItem")
-	public Item saveItem(@RequestBody @Valid Item item)
-	{
-		return itemService.saveItem(item);
-	}
-	
 	@GetMapping("/getAllItems")
 	public List<Item> getAllItems() 
 	{

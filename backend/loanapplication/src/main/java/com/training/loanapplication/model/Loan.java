@@ -2,7 +2,9 @@ package com.training.loanapplication.model;
 
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -62,6 +64,7 @@ public class Loan {
 	@Column(name="duration")
 	private short duration;
 	
-	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true)
+	@OnDelete(action=OnDeleteAction.CASCADE)
+	@OneToMany(mappedBy = "loan", fetch = FetchType.EAGER)
 	private List<Card> card;
 }
