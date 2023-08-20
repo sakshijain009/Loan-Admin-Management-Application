@@ -13,7 +13,10 @@ import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Item;
+import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
+
+import jakarta.validation.Valid;
 
 
 @Service
@@ -32,7 +35,7 @@ public class AdminService {
 	LoanRepository loanRepository;
 
 	// Check if admin details are correct
-	public Message checkAdmin(Admin admin) {
+	public Message checkAdmin(@Valid Admin admin) {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
 		Admin a = null;
 		String result = "";
@@ -74,7 +77,7 @@ public class AdminService {
 	}
 	
 	// Function for admin to add new employee
-	public Message addNewEmployee(Employee e) {
+	public Message addNewEmployee(@Valid Employee e) {
 		if(empRepository.findById(e.getId()).isPresent()) {
 			return new Message("Employee already existss");
 		}
@@ -84,7 +87,7 @@ public class AdminService {
 	}
 	
 	// Function for admin to update employee details
-	public Message updateEmployee(Employee e) {
+	public Message updateEmployee(@Valid Employee e) {
 		Optional<Employee> op = empRepository.findById(e.getId());
 			
 		if(op.isPresent()) {
@@ -96,7 +99,7 @@ public class AdminService {
 	}
 	
 	// Function for admin to update item details
-		public Message updateItem(Item item) {
+		public Message updateItem(@Valid Item item) {
 			Optional<Item> op = itemRepository.findById(item.getItem_id());
 				
 			if(op.isPresent()) {
@@ -131,5 +134,17 @@ public class AdminService {
 				return new Message("Error: No such loan found!");
 			}
 			
+		}
+	
+	// Function for admin to update a loan
+		public Message updateLoan(@Valid Loan loan) {
+			Optional<Loan> op = loanRepository.findById(loan.getLoan_id());
+			
+			if(op.isPresent()) {
+				loanRepository.save(loan);
+				return new Message("Loan details successfully updated");
+			} else {
+				return new Message("No such loan is present");
+			}
 		}
 }

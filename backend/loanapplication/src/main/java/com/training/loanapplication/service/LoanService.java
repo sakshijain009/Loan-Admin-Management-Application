@@ -12,6 +12,8 @@ import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Loan;
 
+import jakarta.validation.Valid;
+
 @Service
 public class LoanService {
 	
@@ -25,7 +27,7 @@ public class LoanService {
 	EmployeeRepository employeeRepo;
 	
 	// Method to save loan in loan table
-	public Loan saveLoan(Loan loan)
+	public Loan saveLoan(@Valid Loan loan)
 	{
 //		if(loanRepo.findByType(loan.getType()).) {
 //			return null;

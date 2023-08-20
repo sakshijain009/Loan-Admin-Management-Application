@@ -80,6 +80,12 @@ public class AdminController {
 		return adminService.removeLoan(loan_id);	
 	}
 	
+	@PutMapping("/updateLoan")
+	public Message updateLoan(@RequestBody @Valid Loan loan)
+	{
+		return adminService.updateLoan(loan);	
+	}
+	
 	@DeleteMapping("/removeItem/{item_id}")
 	public Message removeItem(@PathVariable int item_id)
 	{

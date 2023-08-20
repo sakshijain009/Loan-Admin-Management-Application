@@ -12,6 +12,8 @@ import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.ItemCategory;
 
+import jakarta.validation.Valid;
+
 
 @Service
 public class ItemService {
@@ -20,7 +22,7 @@ public class ItemService {
 	ItemRepository itemRepo;
 	
 	// Save an item
-	public Item saveItem(Item item)
+	public Item saveItem(@Valid Item item)
 	{
 		return itemRepo.save(item);
 	}
