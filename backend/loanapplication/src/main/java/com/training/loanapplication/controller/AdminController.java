@@ -68,4 +68,16 @@ public class AdminController {
 	{
 		return adminService.removeEmployee(employee_id);	
 	}
+	
+	@DeleteMapping("/removeLoan/{loan_id}")
+	public Message removeLoan(@PathVariable int loan_id)
+	{
+		return adminService.removeLoan(loan_id);	
+	}
+	
+	@DeleteMapping("/removeItem/{item_id}")
+	public Message removeItem(@PathVariable int item_id)
+	{
+		return adminService.removeItem(item_id);	
+	}
 }

@@ -40,6 +40,7 @@ public class EmployeeService {
 	@Autowired
 	ItemRepository itemRepo;
 	
+	// Method to save an employee
 	public Employee saveEmployee(Employee emp)
 	{
 		if(empRepo.findById(emp.getId()).isPresent()) {

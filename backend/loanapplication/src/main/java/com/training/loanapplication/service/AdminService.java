@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
+import com.training.loanapplication.dao.ItemRepository;
+import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Message;
@@ -21,6 +23,12 @@ public class AdminService {
 	
 	@Autowired
 	EmployeeRepository empRepository;
+	
+	@Autowired
+	ItemRepository itemRepository;
+	
+	@Autowired
+	LoanRepository loanRepository;
 
 	// Check if admin details are correct
 	public Message checkAdmin(Admin admin) {
@@ -85,4 +93,30 @@ public class AdminService {
 			return new Message("No such employee is present");
 		}
 	}
+	
+	// Function for admin to remove an item
+		public Message removeItem (int item_id) {
+			
+			if(itemRepository.findById(item_id).isPresent()) {
+				itemRepository.deleteById(item_id);
+				
+				return new Message("Item has been successfully deleted");
+			}else {
+				return new Message("Error: No such item found!");
+			}
+			
+		}
+		
+	// Function for admin to remove a loan
+		public Message removeLoan (int loan_id) {
+			
+			if(loanRepository.findById(loan_id).isPresent()) {
+				loanRepository.deleteById(loan_id);
+				
+				return new Message("Loan has been successfully deleted");
+			}else {
+				return new Message("Error: No such loan found!");
+			}
+			
+		}
 }
