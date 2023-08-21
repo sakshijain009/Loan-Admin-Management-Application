@@ -21,15 +21,18 @@ export default function Appbar({hbtn, bt}) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={() => {
+              if({hbtn} == "0"){
+                console.log("Redirecting to /");
+                return(navigate('/'));
+              }
+              else if({hbtn} == "1"){
+                console.log("Redirecting to /home");
+                return(navigate('/home'));
+              }
+            }}
           >
-          <HomeRoundedIcon onClick={() => {
-            if({hbtn} == "0"){
-              <Link to='/'></Link>
-            }
-            else if({hbtn} == "1"){
-              <Link to='/home'></Link>
-            }
-          }}/>
+          <HomeRoundedIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, paddingLeft:1 }}>
             Loan Management 
