@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button'
 import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
+import {Link, useNavigate} from 'react-router-dom';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
@@ -136,6 +137,7 @@ function AdminAddItem() {
                             }
                     }><CreditScoreIcon/>Add Item</Button>
                 </div>
+                <Link to="/adminviewitem">View</Link>
             </div>
         </>
     )

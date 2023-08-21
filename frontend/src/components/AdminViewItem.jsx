@@ -30,13 +30,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const AdminViewUser = () => {
+const AdminViewItem = () => {
 
     const [data, setData] = useState([])
   
     useEffect(() => {
-        const data1 = async () => {
-            const res = await fetch('http://localhost:8080/api/admin/getAllLoan', {
+        const data = async () => {
+            const res = await fetch('http://localhost:8080/getAllItems', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,9 +44,8 @@ const AdminViewUser = () => {
             const dt = await res.json();
             console.log(dt);
             setData(dt);
-            console.log(typeof(data))
         }
-        data1();
+        data();
       // setData(json)
     }, [])
 
@@ -55,7 +54,7 @@ const AdminViewUser = () => {
     const deleteHandler = () => {
         console.log(deleteRow);
         const data = async () => {
-            const res = await fetch(`http://localhost:8080/api/admin/removeLoan/${deleteRow}`, {
+            const res = await fetch(`http://localhost:8080/api/admin/removeEmployee/${deleteRow}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,21 +81,27 @@ const AdminViewUser = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Loan Id</StyledTableCell>
-            <StyledTableCell align="center">Loan Type</StyledTableCell>
-            <StyledTableCell align="center">Duration</StyledTableCell>
+            <StyledTableCell align="center">Item Id</StyledTableCell>
+            <StyledTableCell align="center">Item Category</StyledTableCell>
+            <StyledTableCell align="center">Item Description</StyledTableCell>
+            <StyledTableCell align="center">Item Make</StyledTableCell>
+            <StyledTableCell align="center">Item Status</StyledTableCell>
+            <StyledTableCell align="center">Item Value</StyledTableCell>
             <StyledTableCell align="center">Edit</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.from(data).map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell align="center">{row.id}</StyledTableCell>
-              <StyledTableCell align="center">{row.type || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.duration || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/admineditloan/${row.id}`}>Edit</Link></StyledTableCell>
-              <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
+          {data.map((row) => (
+            <StyledTableRow key={row.item_id}>
+              <StyledTableCell align="center">{row.item_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.category || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.description || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.make || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.status || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.value || "-"}</StyledTableCell>
+              <StyledTableCell align="center"><Link to={`/adminedituser/${row.item_id}`}>Edit</Link></StyledTableCell>
+              <StyledTableCell align="center"><button onClick={() => setDeleteRow(row.item_id)}>Delete</button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -108,4 +113,4 @@ const AdminViewUser = () => {
     )
 }
 
-export default AdminViewUser
+export default AdminViewItem
