@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
@@ -96,6 +97,7 @@ public class EmployeeService {
 	}
 
 	// Method for Employee to apply for loan
+	@Transactional
 	public Message applyLoan(LoanModel loanModel) {
 		Card card = new Card();
 		Issue issue = new Issue();
@@ -133,9 +135,9 @@ public class EmployeeService {
 	}
 
 	// Find all cards issued for employee
-	public List<Employee> findCardByEmployeeId(String emp_id) {
-		return empRepo.findCardByEmployeeId(emp_id);
-	}
+	// public List<Employee> findCardByEmployeeId(String emp_id) {
+	// 	return empRepo.findCardByEmployeeId(emp_id);
+	// }
 
 	// Change password 
 	public Message changePassword(Map<String, String> header) {
