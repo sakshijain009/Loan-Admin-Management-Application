@@ -1,4 +1,4 @@
-import Appbar from '../Appbar';
+import Appbar from './Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
