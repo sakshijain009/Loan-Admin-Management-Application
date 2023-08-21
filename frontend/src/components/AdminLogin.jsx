@@ -44,7 +44,7 @@ const AdminLogin = () => {
             <div className='login'>
                 <h2>Login Admin</h2>
 
-                <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_login'
+                <TextField id="outlined-basic" label="Admin ID" variant="outlined" className='text_login'
                     onChange={
                         e => setEmpid(e.target.value)
                     }/>

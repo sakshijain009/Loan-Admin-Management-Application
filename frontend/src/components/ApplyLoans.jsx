@@ -84,6 +84,10 @@ function ApplyLoans({user, bt}) {
             });
             const json = await response.json();
             alert(json.message);
+            setCategory("");
+            setItemMake("")
+            setItem("")
+            setValue(0)
             // sessionStorage.setItem("itemsDB", res);
             
         };
