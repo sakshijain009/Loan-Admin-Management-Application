@@ -96,7 +96,7 @@ public class EmployeeService {
 	}
 
 	// Method for Employee to apply for loan
-	public Message applyLoan(LoanModel loanModel) {
+	public Message applyLoan(@Valid LoanModel loanModel) {
 		Card card = new Card();
 		Issue issue = new Issue();
 		
