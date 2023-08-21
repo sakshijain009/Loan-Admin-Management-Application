@@ -54,7 +54,7 @@ const AdminViewItem = () => {
     const deleteHandler = () => {
         console.log(deleteRow);
         const data = async () => {
-            const res = await fetch(`http://localhost:8080/api/admin/removeEmployee/${deleteRow}`, {
+            const res = await fetch(`http://localhost:8080/api/admin/removeItem/${deleteRow}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const AdminViewItem = () => {
     }    
 
     useEffect(() => {
-        console.log("Emp id", deleteRow);
+        console.log("Item id", deleteRow);
         deleteHandler()
     }, [deleteRow]);
     

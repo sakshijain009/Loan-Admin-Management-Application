@@ -102,29 +102,32 @@ function AdminAddItem() {
                 <h3 className="text-center py-3 pt-5">Add Item</h3>
                 <div className="loan-select">
                     <div className="loan-form">
-                        <TextField label={"Item ID"}/>
-                        <DropdownItem flag={0}
+                        {/* <TextField label={"Item ID"}/> */}
+                        <TextField flag={0}
                             val={category}
                             setVal={setCategory}
-                            lab={"Select Categories"}
-                            arr={categories}/>
-                        <DropdownItem flag={1}
+                            label={"Select Categories"}
+                            arr={categories}/><br/><br/>
+                        <TextField flag={1}
                             val={itemMake}
                             setVal={setItemMake}
-                            lab={"Select Item Make"}
-                            arr={makeArr}/>
-                        <DropdownItem flag={2}
+                            label={"Select Item Make"}
+                            arr={makeArr}/><br/><br/>
+                        <TextField flag={2}
                             val={item}
                             setVal={setItem}
-                            lab={"Select Description"}
-                            arr={description}/>
-                        <DropdownItem flag={2}
+                            label={"Select Description"}
+                            arr={description}/><br/><br/>
+                        <TextField flag={2}
                             val={issue}
                             setVal={setIssue}
-                            lab={"Select Issue Status"}
-                            arr={["Yes", "No"]}/>
-                        <Fixed lab={"Price"}
-                            value={value}/>
+                            label={"Select Issue Status"}
+                            arr={["Yes", "No"]}/><br/><br/>
+                        <TextField
+                            val={value}
+                            setVal={setValue}
+                            label={"Price"}
+                            arr={value}/>
 
                     </div>
                     <Button variant="contained" className='apply_loan'
