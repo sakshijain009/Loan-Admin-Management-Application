@@ -25,7 +25,7 @@ function AdminEditUser() {
     useEffect(() => {
         const data = async () => {
             // console.log(id);
-            const response = await fetch(`http://localhost:8080/api/users/profile/${id}`);
+            const response = await fetch(`http://localhost:8080/api/admin/getLoan/${id}`);
             const res = await response.json();
             setLoan_id(res.loan_id);
             setType(res.type);
@@ -73,17 +73,17 @@ function AdminEditUser() {
         <>
             <Appbar/>
             <div className='register'>
-                <h2>Register User</h2>
+                <h2>Edit Loan</h2>
                 <TextField className='text_register' disabled placeholder='Loan ID' InputProps={{
         endAdornment: <InputAdornment position="end">{loan_id}</InputAdornment>,
                     }} />
                 <TextField id="outlined-basic" disabled placeholder='Loan Type' className='text_register' value={type}
                     onChange={
-                        e => setName(e.target.value)
+                        e => setType(e.target.value)
                     }/>
                 <TextField id="outlined-basic" placeholder="Duration" className='text_register' value={duration}
                     onChange={
-                        e => setDept(e.target.value)
+                        e => setDuration(e.target.value)
                     }/>
                 <Box sx={
                     {
