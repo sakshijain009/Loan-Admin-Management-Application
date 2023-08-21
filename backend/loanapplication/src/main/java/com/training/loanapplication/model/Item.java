@@ -42,8 +42,6 @@ public class Item {
 
 	@Column(name="item_category")
 	@Enumerated(EnumType.STRING)
-	@NotEmpty(message="Status cannot be empty or null")
-	@NotBlank(message="Status cannot be blank")
     private ItemCategory category;
     
     @Column(name="item_value")
