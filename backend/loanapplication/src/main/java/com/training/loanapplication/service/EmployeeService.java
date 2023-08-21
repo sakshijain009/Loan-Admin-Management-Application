@@ -120,7 +120,7 @@ public class EmployeeService {
 	}
 
 	// Find all cards issued for employee
-	public List<Employee> findCardByEmployeeId(String emp_id) {
-		return empRepo.findCardByEmployeeId(emp_id);
-	}
+//	public List<Employee> findCardByEmployeeId(String emp_id) {
+//		return empRepo.findCardByEmployeeId(emp_id);
+//	}
 }

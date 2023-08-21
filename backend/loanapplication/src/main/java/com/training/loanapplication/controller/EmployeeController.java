@@ -48,11 +48,11 @@ public class EmployeeController {
 		return empService.applyLoan(loanModel);
 	}
 	
-	@GetMapping("/getCards/{emp_id}")
-	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
-	{
-		return empService.findCardByEmployeeId(emp_id);
-	}
+//	@GetMapping("/getCards/{emp_id}")
+//	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
+//	{
+//		return empService.findCardByEmployeeId(emp_id);
+//	}
 	
 //	@PostMapping("/getLoans/{emp_id}")
 //	public List<Loan> findLoanByEmployeeId(@PathVariable String emp_id)
