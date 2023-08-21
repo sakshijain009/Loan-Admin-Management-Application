@@ -52,6 +52,18 @@ public class EmployeeService {
 		return empRepo.save(emp);
 	}
 	
+	// Method to get an employee detail
+	public Employee getEmployeeProfile(String emp_id)
+	{
+		Optional<Employee> emp = empRepo.findById(emp_id);
+		if(emp.isPresent()) {
+			return emp.get();
+		} else {
+			return null;
+		}
+		
+	}
+	
 	// Method to login an employee
 	public Message validateEmployee(LoginEmployee e)
 	{
