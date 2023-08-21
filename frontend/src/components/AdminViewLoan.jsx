@@ -35,8 +35,8 @@ const AdminViewUser = () => {
     const [data, setData] = useState([])
   
     useEffect(() => {
-        const data = async () => {
-            const res = await fetch('http://localhost:8080/api/admin/getAllUser', {
+        const data1 = async () => {
+            const res = await fetch('http://localhost:8080/api/admin/getAllLoan', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,8 +44,9 @@ const AdminViewUser = () => {
             const dt = await res.json();
             console.log(dt);
             setData(dt);
+            console.log(typeof(data))
         }
-        data();
+        data1();
       // setData(json)
     }, [])
 
@@ -54,7 +55,7 @@ const AdminViewUser = () => {
     const deleteHandler = () => {
         console.log(deleteRow);
         const data = async () => {
-            const res = await fetch(`http://localhost:8080/api/admin/removeEmployee/${deleteRow}`, {
+            const res = await fetch(`http://localhost:8080/api/admin/removeLoan/${deleteRow}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -81,28 +82,20 @@ const AdminViewUser = () => {
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Employee Id</StyledTableCell>
-            <StyledTableCell align="center">Employee name</StyledTableCell>
-            <StyledTableCell align="center">Designation</StyledTableCell>
-            <StyledTableCell align="center">Department</StyledTableCell>
-            <StyledTableCell align="center">Gender</StyledTableCell>
-            <StyledTableCell align="center">Date Of Birth</StyledTableCell>
-            <StyledTableCell align="center">Date Of Joining</StyledTableCell>
+            <StyledTableCell align="center">Loan Id</StyledTableCell>
+            <StyledTableCell align="center">Loan Type</StyledTableCell>
+            <StyledTableCell align="center">Duration</StyledTableCell>
             <StyledTableCell align="center">Edit</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {Array.from(data).map((row) => (
             <StyledTableRow key={row.id}>
               <StyledTableCell align="center">{row.id}</StyledTableCell>
-              <StyledTableCell align="center">{row.name || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.designation || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.department || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.gender || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.dob || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.doj || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/adminedituser/${row.id}`}>Edit</Link></StyledTableCell>
+              <StyledTableCell align="center">{row.type || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.duration || "-"}</StyledTableCell>
+              <StyledTableCell align="center"><Link to={`/admineditloan/${row.id}`}>Edit</Link></StyledTableCell>
               <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
             </StyledTableRow>
           ))}

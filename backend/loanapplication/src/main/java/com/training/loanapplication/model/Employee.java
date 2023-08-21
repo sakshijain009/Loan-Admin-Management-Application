@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.OneToMany;
 
 import java.time.LocalDate;
@@ -27,10 +28,12 @@ public class Employee {
 	@Id
 	@Column(name="employee_id", length=6)
 	@NotEmpty(message="Employee id cannot be empty or null")
+	@NotBlank(message="Employee id cannot be blank")
 	private String id;
 	
 	@Column(name="employee_name", length=20)
 	@NotBlank(message="Employee name cannot be blank")
+	@NotEmpty(message="Employee name cannot be empty or null")
 	private String name;
 	
 	public String getId() {
@@ -114,25 +117,34 @@ public class Employee {
 	}
 
 	@Column(name="department", length=25)
+	@NotBlank(message="Employee department cannot be blank")
+	@NotEmpty(message="Employee department cannot be empty or null")
 	private String department;
 	
 	@Column(name="gender", length=1)
+	@NotBlank(message="Employee gender cannot be blank")
+	@NotEmpty(message="Employee gender cannot be empty or null")
 	private String gender;
 	
 	@Column(name="designation", length=25)
+	@NotBlank(message="Employee designation cannot be blank")
+	@NotEmpty(message="Employee designation cannot be empty or null")
 	private String designation;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="dob")
+	@NotNull(message="DOB should not be null")
 	private LocalDate dob;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	@Column(name="doj")
+	@NotNull(message="DOJ should not be null")
 	private LocalDate doj;
 	
 	@Column(name="password", length=20)
 	@Length(min=8,max=20, message="Password length must be between 8 and 20")
-	@NotBlank(message="Password cannot be empty")
+	@NotBlank(message="Password cannot be blank")
+	@NotEmpty(message="Password cannot be empty")
 	private String password;
 	
 	@OnDelete(action=OnDeleteAction.CASCADE)

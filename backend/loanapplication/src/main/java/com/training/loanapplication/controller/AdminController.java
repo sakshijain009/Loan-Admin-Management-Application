@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Item;
@@ -57,9 +58,15 @@ public class AdminController {
 	}
 	
 	@GetMapping("/getAllUser")
-	public List<Employee> getAllEmployee()
+	public List<Employee> getAllEmployee() throws ResourceNotFoundException
 	{
 		return adminService.getAllEmployee();	
+	}
+	
+	@GetMapping("/getAllLoan")
+	public List<Loan> getAllLoan() throws ResourceNotFoundException
+	{
+		return adminService.getAllLoan();
 	}
 	
 	@PostMapping("/addLoan")

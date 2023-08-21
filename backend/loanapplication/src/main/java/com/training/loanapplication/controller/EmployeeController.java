@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.LoanModel;
@@ -39,7 +40,7 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/profile/{emp_id}")
-	public Employee getEmployeeProfile(@PathVariable String emp_id)
+	public Employee getEmployeeProfile(@PathVariable String emp_id) throws ResourceNotFoundException
 	{
 		return empService.getEmployeeProfile(emp_id);
 	}
@@ -56,11 +57,11 @@ public class EmployeeController {
 		return empService.applyLoan(loanModel);
 	}
 	
-	@GetMapping("/getCards/{emp_id}")
-	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
-	{
-		return empService.findCardByEmployeeId(emp_id);
-	}
+//	@GetMapping("/getCards/{emp_id}")
+//	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
+//	{
+//		return empService.findCardByEmployeeId(emp_id);
+//	}
 	
 	@PutMapping("/changePassword")
 	public Message changePassword(@RequestHeader Map<String, String> header)

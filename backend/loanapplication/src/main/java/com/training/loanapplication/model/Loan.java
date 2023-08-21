@@ -15,6 +15,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="loan_master")
@@ -57,11 +59,13 @@ public class Loan {
 		this.card = card;
 	}
 
-	@Column(name="loan_type")
+	@Column(name="loan_type", unique = true)
+	@NotEmpty(message="Type cannot be empty")
 	@Enumerated(EnumType.STRING)
 	private ItemCategory type;	
 	
 	@Column(name="duration")
+	@NotNull(message="Duration cannot be null")
 	private short duration;
 	
 	@OnDelete(action=OnDeleteAction.CASCADE)
