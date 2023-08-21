@@ -14,6 +14,7 @@ import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.IssueRepository;
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Card;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Issue;
@@ -55,14 +56,22 @@ public class EmployeeService {
 	}
 	
 	// Method to get an employee detail
-	public Employee getEmployeeProfile(String emp_id)
+	public Employee getEmployeeProfile(String emp_id) throws ResourceNotFoundException
 	{
-		Optional<Employee> emp = empRepo.findById(emp_id);
-		if(emp.isPresent()) {
-			return emp.get();
-		} else {
-			return null;
+		Employee emp = empRepo.findById(emp_id).orElse(null);
+		if(emp==null)
+		{
+			throw new ResourceNotFoundException("No user with this specific Id");
 		}
+		else
+		{
+			return emp;
+		}
+//		if(emp.isPresent()) {
+//			return emp.get();
+//		} else {
+//			return null;
+//		}
 		
 	}
 	
