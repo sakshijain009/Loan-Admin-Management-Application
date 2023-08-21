@@ -32,8 +32,13 @@ public class EmployeeController {
 	@PostMapping("/addUser")
 	public Employee saveEmployee(@RequestBody @Valid Employee emp)
 	{
-		Employee e=empService.saveEmployee(emp);
-		return e;
+		return empService.saveEmployee(emp);
+	}
+	
+	@GetMapping("/profile/{emp_id}")
+	public Employee getEmployeeProfile(@PathVariable String emp_id)
+	{
+		return empService.getEmployeeProfile(emp_id);
 	}
 	
 	@PostMapping("/checkLogin")
