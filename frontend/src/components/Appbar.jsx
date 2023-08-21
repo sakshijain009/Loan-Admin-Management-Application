@@ -26,7 +26,7 @@ export default function Appbar({hbtn, bt}) {
             if({hbtn} == "0"){
               <Link to='/'></Link>
             }
-            else{
+            else if({hbtn} == "1"){
               <Link to='/home'></Link>
             }
           }}/>
