@@ -1,6 +1,5 @@
 package com.training.loanapplication.controller;
 
-import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Loan;
@@ -36,6 +34,6 @@ public class LoanController {
 	@GetMapping("/getallLoans")
 	public List<Map<String,Object>> getallLoans(@RequestHeader Map<String, String> header) 
 	{
-		return loanService.getallLoans(header);
+		return loanService.getAllLoans(header);
 	}
 }

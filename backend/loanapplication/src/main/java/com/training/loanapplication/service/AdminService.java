@@ -8,9 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
+import com.training.loanapplication.dao.ItemRepository;
+import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.Item;
+import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
+
+import jakarta.validation.Valid;
 
 
 @Service
@@ -21,9 +27,15 @@ public class AdminService {
 	
 	@Autowired
 	EmployeeRepository empRepository;
+	
+	@Autowired
+	ItemRepository itemRepository;
+	
+	@Autowired
+	LoanRepository loanRepository;
 
 	// Check if admin details are correct
-	public Message checkAdmin(Admin admin) {
+	public Message checkAdmin(@Valid Admin admin) {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
 		Admin a = null;
 		String result = "";
@@ -65,33 +77,74 @@ public class AdminService {
 	}
 	
 	// Function for admin to add new employee
-	public Employee addNewEmployee(Employee e) {
+	public Message addNewEmployee(@Valid Employee e) {
 		if(empRepository.findById(e.getId()).isPresent()) {
-			return null;
+			return new Message("Employee already existss");
 		}
 		
-		return empRepository.save(e);
+		empRepository.save(e);
+		return new Message("Employee successfully added");
 	}
 	
-	// Function for admin to add update employee
-	public Employee updateEmployee(Employee e) {
+	// Function for admin to update employee details
+	public Message updateEmployee(@Valid Employee e) {
 		Optional<Employee> op = empRepository.findById(e.getId());
 			
 		if(op.isPresent()) {
-			Employee emp = op.get();
-			
-			emp.setPassword(e.getPassword());
-			emp.setName(e.getName());
-			emp.setGender(e.getGender());
-			emp.setDoj(e.getDoj());
-			emp.setDob(e.getDob());
-			emp.setDesignation(e.getDesignation());
-			emp.setDepartment(e.getDepartment());
-			
-			return empRepository.save(emp);
-			
+			empRepository.save(e);
+			return new Message("Employee details successfully updated");
 		} else {
-			return null;
+			return new Message("No such employee is present");
 		}
 	}
+	
+	// Function for admin to update item details
+		public Message updateItem(@Valid Item item) {
+			Optional<Item> op = itemRepository.findById(item.getItem_id());
+				
+			if(op.isPresent()) {
+				itemRepository.save(item);
+				return new Message("Item details successfully updated");
+			} else {
+				return new Message("No such item is present");
+			}
+		}
+	
+	// Function for admin to remove an item
+		public Message removeItem (int item_id) {
+			
+			if(itemRepository.findById(item_id).isPresent()) {
+				itemRepository.deleteById(item_id);
+				
+				return new Message("Item has been successfully deleted");
+			}else {
+				return new Message("Error: No such item found!");
+			}
+			
+		}
+		
+	// Function for admin to remove a loan
+		public Message removeLoan (int loan_id) {
+			
+			if(loanRepository.findById(loan_id).isPresent()) {
+				loanRepository.deleteById(loan_id);
+				
+				return new Message("Loan has been successfully deleted");
+			}else {
+				return new Message("Error: No such loan found!");
+			}
+			
+		}
+	
+	// Function for admin to update a loan
+		public Message updateLoan(@Valid Loan loan) {
+			Optional<Loan> op = loanRepository.findById(loan.getLoan_id());
+			
+			if(op.isPresent()) {
+				loanRepository.save(loan);
+				return new Message("Loan details successfully updated");
+			} else {
+				return new Message("No such loan is present");
+			}
+		}
 }

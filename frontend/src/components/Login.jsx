@@ -41,8 +41,12 @@ const Login = ({user, loginUser, bt}) => {
 
         const json = await response.json();
         console.log(json);
-        if(response.status === 200){
+        if(json.message === "Login success"){
             navigate('/home');
+        }
+        else
+        {
+            alert(json.message);
         }
     }
 

@@ -103,15 +103,11 @@ public class EmployeeControllerTest {
 		thenReturn(emp);
 		System.out.println("hi");
 		String json = mapper.writeValueAsString(emp);
-		MvcResult requestResult = (MvcResult) mvc.perform(post("/api/users/addUser")
-				.contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
-				.content(json).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
-//		boolean Result = requestResult.getResponse().equals(emp);
-		System.out.println("hello");
-		System.out.println(requestResult);
-		System.out.println("hi");
-		assertEquals(true, true);
 		
+		mvc.perform(post("/api/users/addUser").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+		.content(json).accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.name", Matchers.equalToIgnoringCase(emp.getName())));
 		
 	}
 	

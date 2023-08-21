@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
+import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
 import com.training.loanapplication.service.AdminService;
+import com.training.loanapplication.service.ItemService;
 import com.training.loanapplication.service.LoanService;
 
 import jakarta.validation.Valid;
@@ -33,6 +35,9 @@ public class AdminController {
 	@Autowired
 	LoanService loanService;
 	
+	@Autowired
+	ItemService itemService;
+	
 	@PostMapping("/login")
 	public Message checkAdmin(@RequestBody @Valid Admin admin)
 	{
@@ -40,13 +45,13 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addUser")
-	public Employee addNewEmployee(@RequestBody @Valid Employee e)
+	public Message addNewEmployee(@RequestBody @Valid Employee e)
 	{
 		return adminService.addNewEmployee(e);	
 	}
 	
 	@PutMapping("/updateUser")
-	public Employee updateEmployee(@RequestBody @Valid Employee e)
+	public Message updateEmployee(@RequestBody @Valid Employee e)
 	{
 		return adminService.updateEmployee(e);	
 	}
@@ -67,5 +72,35 @@ public class AdminController {
 	public Message removeEmployee(@PathVariable String employee_id)
 	{
 		return adminService.removeEmployee(employee_id);	
+	}
+	
+	@DeleteMapping("/removeLoan/{loan_id}")
+	public Message removeLoan(@PathVariable int loan_id)
+	{
+		return adminService.removeLoan(loan_id);	
+	}
+	
+	@PutMapping("/updateLoan")
+	public Message updateLoan(@RequestBody @Valid Loan loan)
+	{
+		return adminService.updateLoan(loan);	
+	}
+	
+	@DeleteMapping("/removeItem/{item_id}")
+	public Message removeItem(@PathVariable int item_id)
+	{
+		return adminService.removeItem(item_id);	
+	}
+	
+	@PutMapping("/updateItem")
+	public Message updateItem(@RequestBody @Valid Item item)
+	{
+		return adminService.updateItem(item);	
+	}
+	
+	@PostMapping("/addItem")
+	public Item addItem(@RequestBody @Valid Item item)
+	{
+		return itemService.saveItem(item);	
 	}
 }
