@@ -29,8 +29,10 @@ function AdminAddLoan() {
                 })
             });
             const json = await response.json();
-            console.log(json);
+            console.log(json.message);
             alert(json.message);
+            setCategory("");
+            setDuration("");
             // sessionStorage.setItem("itemsDB", res);
             
         };
@@ -52,7 +54,14 @@ function AdminAddLoan() {
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Add Loan Master Data</h3>
                 <div className="loan-select">
-                    <div className="loan-form">
+                    <div className="loan-form" 
+                    style=
+                        {{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'center',
+                        }}
+                        >
 
                         <DropdownItems
                             val={category}
@@ -65,6 +74,7 @@ function AdminAddLoan() {
                             variant="outlined"
                             value={duration}
                             onChange={e => setDuration(e.target.value)}/>
+                        
 
                     </div>
                     <Button variant="contained" className='apply_loan'
@@ -76,7 +86,11 @@ function AdminAddLoan() {
                                 justifyContent: 'center'
                             }
                     }><CreditScoreIcon/>Add Loan</Button>
+                    
                 </div>
+            </div>
+            <div style={{display:'flex', justifyContent:'center'}} className="container m-auto">
+            <button className="btn btn-success">View Loans</button>
             </div>
         </>
     )
