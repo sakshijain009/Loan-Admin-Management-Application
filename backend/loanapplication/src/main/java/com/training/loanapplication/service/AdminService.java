@@ -73,8 +73,14 @@ public class AdminService {
 	}
 	
 	// Function for admin to get all employee
-	public List<Employee> getAllEmployee() {
-		return empRepository.findAll();
+	public List<Employee> getAllEmployee() throws ResourceNotFoundException{
+		List<Employee> all_emps= empRepository.findAll();
+		if(all_emps.size()==0)
+		{
+			throw new ResourceNotFoundException("No employees to show");
+		}
+		else
+		return all_emps;
 	}
 	
 	// Function for admin to get all loan

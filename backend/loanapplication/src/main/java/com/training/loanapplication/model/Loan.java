@@ -65,7 +65,6 @@ public class Loan {
 	private ItemCategory type;	
 	
 	@Column(name="duration")
-	@NotEmpty(message="Duration cannot be empty")
 	@NotNull(message="Duration cannot be null")
 	private short duration;
 	
