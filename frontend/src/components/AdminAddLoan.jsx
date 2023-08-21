@@ -9,14 +9,17 @@ import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import {useNavigate} from 'react-router-dom'
 
 function AdminAddLoan() {
 
+    const navigate = useNavigate();
     const [loanType, setLoanType] = useState(["FURNITURE", "MEDICAL", "VEHICLE", "HOME_REMODELLING", "CAR_FINANCE", "HOME_EQUITY" ]);
     const [duration, setDuration] = useState("");
     const [category, setCategory] = useState("");
 
     function submitHandler() {
+        console.log(category);
         const data = async () => {
             const response = await fetch(`http://localhost:8080/api/admin/addLoan`, {
                 method: 'POST',
@@ -24,7 +27,7 @@ function AdminAddLoan() {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({
-                    "loan_type":category,
+                    "type":category,
                     "duration":duration
                 })
             });
@@ -90,7 +93,7 @@ function AdminAddLoan() {
                 </div>
             </div>
             <div style={{display:'flex', justifyContent:'center'}} className="container m-auto">
-            <button className="btn btn-success">View Loans</button>
+            <button className="btn btn-success" onClick={()=>(navigate('/adminviewloan'))}>View Loans</button>
             </div>
         </>
     )
@@ -121,21 +124,21 @@ function DropdownItems({
                     onChange={
                         e => {
                             setVal(e.target.value);
-                            if (flag == 0) {
-                                const data = async () => {
-                                    const response = await fetch(`http://localhost:8080/${val}/getAllMake`, {
-                                        method: 'GET',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        }
-                                    });
-                                    const json = await response.json();
-                                    sessionStorage.setItem("allMake", JSON.stringify(json));
-                                    console.log("Yoyoyo")
-                                    console.log(json);
-                                };
-                                data();
-                            }
+                            // if (flag == 0) {
+                            //     const data = async () => {
+                            //         const response = await fetch(`http://localhost:8080/${val}/getAllMake`, {
+                            //             method: 'GET',
+                            //             headers: {
+                            //                 'Content-Type': 'application/json'
+                            //             }
+                            //         });
+                            //         const json = await response.json();
+                            //         sessionStorage.setItem("allMake", JSON.stringify(json));
+                            //         console.log("Yoyoyo")
+                            //         console.log(json);
+                            //     };
+                            //     data();
+                            // }
                         }
                     }
                     autoWidth

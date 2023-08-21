@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.service.LoanService;
 
@@ -25,7 +26,7 @@ public class LoanController {
 	LoanService loanService;
 	
 	@GetMapping("/getallLoans")
-	public List<Map<String,Object>> getallLoans(@RequestHeader Map<String, String> header) 
+	public List<Map<String,Object>> getallLoans(@RequestHeader Map<String, String> header) throws ResourceNotFoundException
 	{
 		return loanService.getAllLoans(header);
 	}

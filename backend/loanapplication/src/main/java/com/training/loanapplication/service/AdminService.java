@@ -10,6 +10,7 @@ import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Item;
@@ -72,9 +73,26 @@ public class AdminService {
 	}
 	
 	// Function for admin to get all employee
-	public List<Employee> getAllEmployee() {
-		return empRepository.findAll();
+	public List<Employee> getAllEmployee() throws ResourceNotFoundException{
+		List<Employee> all_emps= empRepository.findAll();
+		if(all_emps.size()==0)
+		{
+			throw new ResourceNotFoundException("No employees to show");
+		}
+		else
+		return all_emps;
 	}
+	
+	// Function for admin to get all loan
+		public List<Loan> getAllLoan() throws ResourceNotFoundException{
+			List<Loan> all_loans= loanRepository.findAll();
+			if(all_loans.size()==0)
+			{
+				throw new ResourceNotFoundException("No loans to show");
+			}
+			else
+			return all_loans;
+		}
 	
 	// Function for admin to add new employee
 	public Message addNewEmployee(@Valid Employee e) {
