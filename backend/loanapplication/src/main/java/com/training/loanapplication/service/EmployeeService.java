@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
@@ -96,6 +97,7 @@ public class EmployeeService {
 	}
 
 	// Method for Employee to apply for loan
+	@Transactional
 	public Message applyLoan(LoanModel loanModel) {
 		Card card = new Card();
 		Issue issue = new Issue();
