@@ -12,7 +12,7 @@ import AdminDashboard from './components/AdminDashboard';
 import AdminAddUser from './components/AdminAddUser';
 import AdminAddItem from './components/AdminAddItem';
 import AdminAddLoan from './components/AdminAddLoan';
-import AdminViewUser from './components/Navbar/AdminViewUser';
+import AdminViewUser from './components/AdminViewUser';
 import Logout from './components/logout';
 import AdminEditUser from './components/AdminEditUser';
 

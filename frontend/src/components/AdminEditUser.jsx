@@ -53,7 +53,7 @@ function AdminEditUser() {
             setDojSend(res.doj);
         }
         data();
-    }, [])
+    }, [id])
 
     function dateIsValid(date) {
         return date instanceof Date && !isNaN(date);
@@ -108,18 +108,18 @@ function AdminEditUser() {
             <Appbar/>
             <div className='register'>
                 <h2>Register User</h2>
-                <TextField className='text_register' InputProps={{
+                <TextField className='text_register' disabled placeholder='Employee ID' InputProps={{
         endAdornment: <InputAdornment position="end">{empid}</InputAdornment>,
-    }} />
-                <TextField id="outlined-basic" label="Employee Name" variant="outlined" className='text_register' placeholder={name}
+                    }} />
+                <TextField id="outlined-basic" placeholder='Employee Name' className='text_register' value={name}
                     onChange={
                         e => setName(e.target.value)
                     }/>
-                <TextField id="outlined-basic" label="Employee Department" variant="outlined" className='text_register' placeholder={dept}
+                <TextField id="outlined-basic" placeholder="Employee Department" className='text_register' value={dept}
                     onChange={
                         e => setDept(e.target.value)
                     }/>
-                <TextField id="outlined-basic" label="Employee Designation" variant="outlined" className='text_register' placeholder={des}
+                <TextField id="outlined-basic" placeholder="Employee Designation"  className='text_register' value={des}
                     onChange={
                         e => setDes(e.target.value)
                     }/> {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
@@ -151,12 +151,12 @@ function AdminEditUser() {
                         e => setPwd(e.target.value)
                     }/>  */}
 
-                <TextField id="outlined-basic" label="Date of Birth" variant="outlined" className='text_register' placeholder={dobSend}
+                <TextField id="outlined-basic" placeholder="Date of Birth" className='text_register' value={dobSend}
                     onChange={
                         e => setDobSend(e.target.value)
                     }/>
 
-                <TextField id="outlined-basic" label="Date of Joining" variant="outlined" className='text_register' placeholder={dojSend}
+                <TextField id="outlined-basic" placeholder="Date of Joining"  className='text_register' value={dojSend}
                     onChange={
                         e => setDojSend(e.target.value)
                     }/>
