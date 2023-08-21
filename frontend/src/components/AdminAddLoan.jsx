@@ -9,9 +9,11 @@ import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
+import {useNavigate} from 'react-router-dom'
 
 function AdminAddLoan() {
 
+    const navigate = useNavigate();
     const [loanType, setLoanType] = useState(["FURNITURE", "MEDICAL", "VEHICLE", "HOME_REMODELLING", "CAR_FINANCE", "HOME_EQUITY" ]);
     const [duration, setDuration] = useState("");
     const [category, setCategory] = useState("");
@@ -90,7 +92,7 @@ function AdminAddLoan() {
                 </div>
             </div>
             <div style={{display:'flex', justifyContent:'center'}} className="container m-auto">
-            <button className="btn btn-success">View Loans</button>
+            <button className="btn btn-success" onClick={()=>(navigate('/adminviewloan'))}>View Loans</button>
             </div>
         </>
     )
