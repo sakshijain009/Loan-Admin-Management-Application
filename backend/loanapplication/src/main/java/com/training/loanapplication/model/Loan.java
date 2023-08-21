@@ -60,12 +60,10 @@ public class Loan {
 	}
 
 	@Column(name="loan_type", unique = true)
-	@NotEmpty(message="Type cannot be empty")
 	@Enumerated(EnumType.STRING)
 	private ItemCategory type;	
 	
 	@Column(name="duration")
-	@NotEmpty(message="Duration cannot be empty")
 	@NotNull(message="Duration cannot be null")
 	private short duration;
 	

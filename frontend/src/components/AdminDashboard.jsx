@@ -14,7 +14,7 @@ function AdminDashboard(){
                 <div className="user-dashboard__buttons">
                     <Link to="/adminadduser" className="user-dashboard__button">Customer Data Management</Link>
                     <Link to="/adminaddloan" className="user-dashboard__button">Loan Card Management</Link>
-                    <Link to="" className="user-dashboard__button">Items Master Data</Link>
+                    <Link to="/adminadditem" className="user-dashboard__button">Items Master Data</Link>
                 </div>
             </div>
         </>
