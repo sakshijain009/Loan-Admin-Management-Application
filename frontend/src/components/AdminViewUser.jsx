@@ -103,7 +103,7 @@ const AdminViewUser = () => {
               <StyledTableCell align="center">{row.dob || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.doj || "-"}</StyledTableCell>
               <StyledTableCell align="center"><Link to={`/adminedituser/${row.id}`}>Edit</Link></StyledTableCell>
-              <StyledTableCell align="center"><button onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
+              <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
