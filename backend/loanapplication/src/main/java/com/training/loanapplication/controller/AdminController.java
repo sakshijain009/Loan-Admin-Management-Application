@@ -69,6 +69,12 @@ public class AdminController {
 		return adminService.getAllLoan();
 	}
 	
+	@GetMapping("/getLoan/{loan_id}")
+	public Loan getLoanById(@PathVariable int loan_id)
+	{
+		return loanService.getLoanById(loan_id);
+	}
+	
 	@PostMapping("/addLoan")
 	public Message addNewLoan(@RequestBody @Valid Loan loan)
 	{

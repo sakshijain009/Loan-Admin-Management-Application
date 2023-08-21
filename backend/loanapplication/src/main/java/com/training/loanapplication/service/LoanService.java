@@ -35,6 +35,10 @@ public class LoanService {
 		return new Message("Loan has been added successfully");
 	}
 	
+	public Loan getLoanById(int loan_id)
+	{
+		return loanRepo.findById(loan_id).orElse(null);
+	}
 	// Method to get all loans for a particular Employee
 	public List<Map<String,Object>> getAllLoans(Map<String, String> header) throws ResourceNotFoundException
 	{
