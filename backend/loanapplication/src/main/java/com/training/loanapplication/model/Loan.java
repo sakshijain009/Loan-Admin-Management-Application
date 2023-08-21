@@ -60,7 +60,7 @@ public class Loan {
 	}
 
 	@Column(name="loan_type", unique = true)
-	@NotEmpty(message="Type cannot be empty")
+//	@NotEmpty(message="Type cannot be empty")
 	@Enumerated(EnumType.STRING)
 	private ItemCategory type;	
 	
