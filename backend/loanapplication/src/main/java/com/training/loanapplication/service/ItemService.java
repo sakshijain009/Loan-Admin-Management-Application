@@ -46,6 +46,18 @@ public class ItemService {
 		return all_categories; 
 	}
 	
+	// Get item by id
+	public Item getItemById(int item_id) throws ResourceNotFoundException
+	{
+		Item item = itemRepo.findById(item_id).orElse(null);
+		if(item == null)
+		{
+			throw new ResourceNotFoundException("No item available for this id");
+		}
+		else
+			return item; 
+	}
+	
 	// Get all makes for an item category
 	public List<String> getDistinctMakesByCategory(ItemCategory category) 
 	{

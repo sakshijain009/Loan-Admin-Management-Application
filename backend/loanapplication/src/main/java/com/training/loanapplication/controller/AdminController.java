@@ -110,4 +110,10 @@ public class AdminController {
 	{
 		return itemService.saveItem(item);	
 	}
+	
+	@GetMapping("/getItemById/{item_id}")
+	public Item getItemById(@PathVariable int item_id) throws ResourceNotFoundException
+	{
+		return itemService.getItemById(item_id);	
+	}
 }
