@@ -44,31 +44,16 @@ const ViewItems = ({user, bt}) => {
             }})
             const dt = await res.json();
             console.log(dt);
-            
-            console.log(user)
             setData(dt);
         }
         data();
     }, [])
   
-    // const renderTable = () => {
-    //   return data.map(user1 => {
-    //     return (
-    //       <tr>
-    //         <td>{user1.issue_id}</td>
-    //         <td>{user1.item_description}</td>
-    //         <td>{user1.item_make}</td>
-    //         <td>{user1.item_category}</td>
-    //         <td>{user1.item_value}</td>
-    //       </tr>
-    //     )
-    //   })
-    // }
   
     return (
       <div>
         <Appbar hbtn={"1"} bt={bt}/>
-        <h3 className='text-center pt-5' >Viewing your Issued item details</h3>
+        <h3 className='text-center pt-5' >Viewing Issued Item Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -84,11 +69,11 @@ const ViewItems = ({user, bt}) => {
         <TableBody>
           {data.map((row) => (
             <StyledTableRow>
-              <StyledTableCell align="center">{row.issue_id}</StyledTableCell>
-              <StyledTableCell align="center">{row.item_description}</StyledTableCell>
-              <StyledTableCell align="center">{row.item_make}</StyledTableCell>
-              <StyledTableCell align="center">{row.item_category}</StyledTableCell>
-              <StyledTableCell align="center">{row.item_value}</StyledTableCell>
+              <StyledTableCell key={row.item_id} align="center">{row.issue_id}</StyledTableCell>
+              <StyledTableCell key={row.item_id} align="center">{row.item_description}</StyledTableCell>
+              <StyledTableCell key={row.item_id} align="center">{row.item_make}</StyledTableCell>
+              <StyledTableCell key={row.item_id} align="center">{row.item_category}</StyledTableCell>
+              <StyledTableCell key={row.item_id} align="center">{row.item_value}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -96,19 +81,6 @@ const ViewItems = ({user, bt}) => {
     </TableContainer>
     </div>
       </div>
-        /* <h1 id="title">Items Purchased</h1>
-        <table id="users">
-          <thead>
-            <tr>
-              <th>Issue_id</th>
-              <th>Item Description</th>
-              <th>Item Make</th>
-              <th>Item Category</th>
-              <th>Item Valuation</th>
-            </tr>
-          </thead>
-          <tbody>{renderTable()}</tbody>
-        </table> */
 
     )
 }

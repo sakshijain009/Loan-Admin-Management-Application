@@ -1,4 +1,4 @@
-import Appbar from '../Appbar';
+import Appbar from './Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -102,7 +102,7 @@ const AdminViewUser = () => {
               <StyledTableCell align="center">{row.gender || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.dob || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.doj || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to="/adminedituser">Edit</Link></StyledTableCell>
+              <StyledTableCell align="center"><Link to={`/adminedituser/${row.id}`}>Edit</Link></StyledTableCell>
               <StyledTableCell align="center"><button onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
             </StyledTableRow>
           ))}
