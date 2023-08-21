@@ -13,6 +13,7 @@ import AdminAddUser from './components/AdminAddUser';
 import AdminAddItem from './components/AdminAddItem';
 import AdminAddLoan from './components/AdminAddLoan';
 import AdminViewUser from './components/AdminViewUser';
+import AdminViewItem from './components/AdminViewItem';
 import Logout from './components/logout';
 import AdminEditUser from './components/AdminEditUser';
 
@@ -52,6 +53,7 @@ function App() {
           <Route path='/adminadditem' element={<AdminAddItem />} />
           <Route path='/adminaddloan' element={<AdminAddLoan />} />
           <Route path='/adminviewuser' element={<AdminViewUser />} />
+          <Route path='/adminviewitem' element={<AdminViewItem />} />
           <Route path='adminedituser/:id' element={<AdminEditUser />} exact />
           <Route path='/logout' element={<Logout />} />
         </Routes>
