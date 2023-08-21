@@ -1,13 +1,16 @@
 package com.training.loanapplication.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,8 +35,13 @@ public class EmployeeController {
 	@PostMapping("/addUser")
 	public Employee saveEmployee(@RequestBody @Valid Employee emp)
 	{
-		Employee e=empService.saveEmployee(emp);
-		return e;
+		return empService.saveEmployee(emp);
+	}
+	
+	@GetMapping("/profile/{emp_id}")
+	public Employee getEmployeeProfile(@PathVariable String emp_id)
+	{
+		return empService.getEmployeeProfile(emp_id);
 	}
 	
 	@PostMapping("/checkLogin")
@@ -54,9 +62,9 @@ public class EmployeeController {
 //		return empService.findCardByEmployeeId(emp_id);
 //	}
 	
-//	@PostMapping("/getLoans/{emp_id}")
-//	public List<Loan> findLoanByEmployeeId(@PathVariable String emp_id)
-//	{
-//		return empService.findLoanByEmployeeId(emp_id);
-//	}
+	@PutMapping("/changePassword")
+	public Message changePassword(@RequestHeader Map<String, String> header)
+	{
+		return empService.changePassword(header);
+	}
 }

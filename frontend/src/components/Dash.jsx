@@ -7,14 +7,13 @@ import { useNavigate } from 'react-router-dom';
 function Dash({user}){
     const navigate = useNavigate();
     useEffect(() => {
-        if(user === "" && user.length > 0)
-        {
+        if(user === "" && user.length > 0){
             navigate('/login');
         }
     },[user])
     return(
         <>
-            <Appbar bt={"Logout"}/>
+            <Appbar hbtn={"1"} bt={"Logout"}/>
             <div className="user-dashboard__container">
                 <h1>Loan Management Application</h1>
                 <hr />
