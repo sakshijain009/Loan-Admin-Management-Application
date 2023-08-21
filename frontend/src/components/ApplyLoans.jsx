@@ -8,8 +8,9 @@ import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
+import { useNavigate } from 'react-router-dom';
 
-function ApplyLoans({user, bt}) {
+function ApplyLoans({user, setUser, bt}) {
 
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
@@ -18,8 +19,14 @@ function ApplyLoans({user, bt}) {
     const [categories, setCategories] = useState([]);
     const [makeArr, setMakeArr] = useState([]);
     const [description, setDescription] = useState([]);
-    const tempCategories = [];
+    const navigate= useNavigate();
+
     useEffect(() => {
+        const username = sessionStorage.getItem("username");
+        setUser(username);
+        if(username===""){
+            navigate('/login')
+        }
         const data = async () => {
             const response = await fetch("http://localhost:8080/getAllCategory");
             const json = await response.json();
@@ -28,7 +35,7 @@ function ApplyLoans({user, bt}) {
             setCategories(json);
         };
         data();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         const data = async () => {

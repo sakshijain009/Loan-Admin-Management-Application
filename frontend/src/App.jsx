@@ -44,9 +44,9 @@ function App() {
           <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/' element={<Dashboard/>} />
           <Route path='/home' element={<Dash user={user}/>} />
-          <Route path='/applyloan' element={<ApplyLoans user={user} loginUser={loginUser} bt={"logout"}/>} />
+          <Route path='/applyloan' element={<ApplyLoans user={user} setUser={setUser} loginUser={loginUser}  bt={"logout"}/>} />
           <Route path='/viewloan' element={<ViewLoanDetails user={user} loginUser={loginUser} bt={"logout"}/>} />
-          <Route path='/viewitems' element={<ViewItems user={user} bt={"logout"}/>} />
+          <Route path='/viewitems' element={<ViewItems user={user} loginUser={loginUser} bt={"logout"}/>} />
           <Route path='/adminhome' element={<AdminDashboard />} />
           <Route path='/adminadduser' element={<AdminAddUser />} />
           <Route path='/adminadditem' element={<AdminAddItem />} />

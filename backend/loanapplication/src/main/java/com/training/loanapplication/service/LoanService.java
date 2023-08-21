@@ -11,6 +11,7 @@ import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.model.Loan;
+import com.training.loanapplication.model.Message;
 
 import jakarta.validation.Valid;
 
@@ -27,13 +28,10 @@ public class LoanService {
 	EmployeeRepository employeeRepo;
 	
 	// Method to save loan in loan table
-	public Loan saveLoan(@Valid Loan loan)
+	public Message saveLoan(@Valid Loan loan)
 	{
-//		if(loanRepo.findByType(loan.getType()).) {
-//			return null;
-//		}
-		
-		return loanRepo.save(loan);
+		loanRepo.save(loan);
+		return new Message("Loan has been added successfully");
 	}
 	
 	// Method to get all loans for a particular Employee

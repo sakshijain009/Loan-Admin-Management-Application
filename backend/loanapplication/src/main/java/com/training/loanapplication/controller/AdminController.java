@@ -63,7 +63,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addLoan")
-	public Loan addNewLoan(@RequestBody @Valid Loan loan)
+	public Message addNewLoan(@RequestBody @Valid Loan loan)
 	{
 		return loanService.saveLoan(loan);	
 	}

@@ -2,10 +2,12 @@ package com.training.loanapplication.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
@@ -95,6 +97,7 @@ public class EmployeeService {
 	}
 
 	// Method for Employee to apply for loan
+	@Transactional
 	public Message applyLoan(LoanModel loanModel) {
 		Card card = new Card();
 		Issue issue = new Issue();
@@ -132,7 +135,22 @@ public class EmployeeService {
 	}
 
 	// Find all cards issued for employee
-	public List<Employee> findCardByEmployeeId(String emp_id) {
-		return empRepo.findCardByEmployeeId(emp_id);
+	// public List<Employee> findCardByEmployeeId(String emp_id) {
+	// 	return empRepo.findCardByEmployeeId(emp_id);
+	// }
+
+	// Change password 
+	public Message changePassword(Map<String, String> header) {
+		Optional<Employee> op = empRepo.findById(header.get("emp_id"));
+		
+		if(op.isPresent()) {
+			Employee emp = op.get();
+			
+			emp.setPassword(header.get("pwd"));
+			empRepo.save(emp);
+			return new Message("Password has been updated sucessfully!");
+		} else {
+			return new Message("No such user found");
+		}
 	}
 }

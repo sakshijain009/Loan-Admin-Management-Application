@@ -12,25 +12,24 @@ import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 function AdminAddLoan() {
 
-    const [loanId, setLoanId] = useState("");
-    const [loanType, setLoanType] = useState([]);
+    const [loanType, setLoanType] = useState(["FURNITURE", "MEDICAL", "VEHICLE", "HOME_REMODELLING", "CAR_FINANCE", "HOME_EQUITY" ]);
     const [duration, setDuration] = useState("");
     const [category, setCategory] = useState("");
 
     function submitHandler() {
         const data = async () => {
-            const response = await fetch(`http://localhost:8080/api/users/applyLoan`, {
+            const response = await fetch(`http://localhost:8080/api/admin/addLoan`, {
                 method: 'POST',
                 headers: {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({
-                    "loan_id":loanId,
                     "loan_type":category,
                     "duration":duration
                 })
             });
             const json = await response.json();
+            console.log(json);
             alert(json.message);
             // sessionStorage.setItem("itemsDB", res);
             
@@ -38,35 +37,34 @@ function AdminAddLoan() {
         data();
     }
 
-    useEffect(() => {
-        const data = async () => {
-            const response = await fetch(`http://localhost:8080/getallItems`);
-            const json = await response.json();
-            setLoanType(json);
-        };
-        data();
-    }, []);
+    // useEffect(() => {
+    //     const data = async () => {
+    //         const response = await fetch(`http://localhost:8080/getallItems`);
+    //         const json = await response.json();
+    //         setLoanType(json);
+    //     };
+    //     data();
+    // }, []);
 
     return (
         <>
             <Appbar/>
             <div className="loan__container">
-                <h3 className="text-center py-3 pt-5">Loan Cards Master Data Details</h3>
+                <h3 className="text-center py-3 pt-5">Add Loan Master Data</h3>
                 <div className="loan-select">
                     <div className="loan-form">
-                        <TextField label={"Loan ID"}
-                        variant="outlined"
-                            value={loanId}
-                            onChange={e => setLoanId(e)}/>
-                        <DropdownItem
+
+                        <DropdownItems
                             val={category}
                             setVal={setCategory}
                             label={"Select Categories"}
                             arr={loanType}/>
-                        <TextField label={"Duration"}
-                        variant="outlined"
+                        <TextField sx={{m: 1,minWidth: 450}} 
+                            label={"Duration"}
+                            type="number"
+                            variant="outlined"
                             value={duration}
-                            onChange={e => setDuration(e)}/>
+                            onChange={e => setDuration(e.target.value)}/>
 
                     </div>
                     <Button variant="contained" className='apply_loan'
@@ -83,5 +81,62 @@ function AdminAddLoan() {
         </>
     )
 }
+
+
+function DropdownItems({
+    flag,
+    val,
+    setVal,
+    lab,
+    arr
+}) {
+
+    return (
+        <div>
+            <FormControl autoWidth
+                sx={
+                    {
+                        m: 1,
+                        minWidth: 450
+                    }
+            }>
+                <InputLabel id="demo-simple-select-autowidth-label">
+                    {lab}</InputLabel>
+                <Select labelId="demo-simple-select-autowidth-label" id="demo-simple-select-autowidth"
+                    value={val}
+                    onChange={
+                        e => {
+                            setVal(e.target.value);
+                            if (flag == 0) {
+                                const data = async () => {
+                                    const response = await fetch(`http://localhost:8080/${val}/getAllMake`, {
+                                        method: 'GET',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        }
+                                    });
+                                    const json = await response.json();
+                                    sessionStorage.setItem("allMake", JSON.stringify(json));
+                                    console.log("Yoyoyo")
+                                    console.log(json);
+                                };
+                                data();
+                            }
+                        }
+                    }
+                    autoWidth
+                    label={lab}>
+                    {
+                    arr.map((ele) => (
+                        <MenuItem key={ele}
+                            value={ele}>
+                            {ele}</MenuItem>
+                    ))
+                } </Select>
+            </FormControl>
+        </div>
+    )
+}
+
 
 export default AdminAddLoan
