@@ -85,6 +85,8 @@ const AdminViewUser = () => {
             <StyledTableCell align="center">Loan Id</StyledTableCell>
             <StyledTableCell align="center">Loan Type</StyledTableCell>
             <StyledTableCell align="center">Duration</StyledTableCell>
+            <StyledTableCell align="center">Edit</StyledTableCell>
+            <StyledTableCell align="center">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
