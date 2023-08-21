@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
 
@@ -35,10 +36,15 @@ public class LoanService {
 	}
 	
 	// Method to get all loans for a particular Employee
-	public List<Map<String,Object>> getAllLoans(Map<String, String> header)
+	public List<Map<String,Object>> getAllLoans(Map<String, String> header) throws ResourceNotFoundException
 	{
-		System.out.println(header.get("emp_id"));
+//		System.out.println(header.get("emp_id"));
 		List<Map<String,Object>> allLoans=loanRepo.getallLoans(header.get("emp_id"));
+		if(allLoans.size()==0)
+		{
+			throw new ResourceNotFoundException("No Loans to display for this employee");
+		}
+		else
 		return allLoans;
 	}
 }

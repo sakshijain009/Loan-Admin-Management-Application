@@ -16,6 +16,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name="item_master")
@@ -28,19 +31,28 @@ public class Item {
     private int item_id;
 	
     @Column(name="item_description")
+    @NotEmpty(message="Description cannot be empty or null")
+	@NotBlank(message="Description cannot be blank")
     private String description;
     
     @Column(name="item_status", length=1)
+    @NotEmpty(message="Status cannot be empty or null")
+	@NotBlank(message="Status cannot be blank")
     private String status;
 
 	@Column(name="item_category")
 	@Enumerated(EnumType.STRING)
+	@NotEmpty(message="Status cannot be empty or null")
+	@NotBlank(message="Status cannot be blank")
     private ItemCategory category;
     
     @Column(name="item_value")
+    @NotNull(message="Value cannot be null")
     private int value;
     
     @Column(name="item_make", length=25)
+    @NotEmpty(message="Make cannot be empty or null")
+	@NotBlank(message="Make cannot be blank")
     private String make;
     
     @OnDelete(action=OnDeleteAction.CASCADE)
