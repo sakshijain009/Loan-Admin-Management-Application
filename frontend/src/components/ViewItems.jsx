@@ -49,7 +49,6 @@ const ViewItems = ({user, bt}) => {
             setData(dt);
         }
         data();
-      // setData(json)
     }, [])
   
     // const renderTable = () => {
@@ -86,10 +85,10 @@ const ViewItems = ({user, bt}) => {
           {data.map((row) => (
             <StyledTableRow>
               <StyledTableCell align="center">{row.issue_id}</StyledTableCell>
-              <StyledTableCell align="center">{row.description}</StyledTableCell>
-              <StyledTableCell align="center">{row.make}</StyledTableCell>
-              <StyledTableCell align="center">{row.category}</StyledTableCell>
-              <StyledTableCell align="center">{row.valuation}</StyledTableCell>
+              <StyledTableCell align="center">{row.item_description}</StyledTableCell>
+              <StyledTableCell align="center">{row.item_make}</StyledTableCell>
+              <StyledTableCell align="center">{row.item_category}</StyledTableCell>
+              <StyledTableCell align="center">{row.item_value}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
