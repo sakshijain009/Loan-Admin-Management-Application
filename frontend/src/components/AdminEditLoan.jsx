@@ -11,16 +11,17 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import { useState, useEffect } from 'react';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+// import {Link, useNavigate, useParams} from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
+import { Modal } from 'react-bootstrap';
 
-function AdminEditUser() {
-    const navigate = useNavigate();
+function AdminEditUser({id, show, handleClose, setEditDone}) {
+    // const navigate = useNavigate();
     const [loan_id, setLoan_id] = React.useState("");
     const [type, setType] = React.useState("");
     const [duration, setDuration] = React.useState("");
  
-    const {id} = useParams();
+    // const {id} = useParams();
 
     useEffect(() => {
         const data = async () => {
@@ -58,22 +59,31 @@ function AdminEditUser() {
         console.log(json);
         console.log(response.status);
         if(response.status === 200){
-            navigate('/adminviewloan');
+            // navigate('/adminviewuser');
+            handleClose();
+            setEditDone(prev => !prev);
+            // alert(json.message);
+            // window.location.reload();
         }
         else{
-            alert("Please fill the details correctly!");
+            alert(json.message);
         }
             
     } catch (error) {
-        console.log(error)
+        alert(json.message);
     }
     }
 
     return (
-        <>
-            <Appbar/>
-            <div className='register'>
-                <h2>Edit Loan</h2>
+        // <>
+        //     <Appbar/>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <div className='modal_register'>
+                {/* <h2>Edit Loan</h2> */}
                 <TextField className='text_register' disabled placeholder='Loan ID' InputProps={{
         endAdornment: <InputAdornment position="end">{loan_id}</InputAdornment>,
                     }} />
@@ -96,10 +106,20 @@ function AdminEditUser() {
 
       
 
-                <Button variant="contained" className='register_button'
-                    onClick={handleSubmit}>Update Loan</Button>
+                {/* <Button variant="contained" className='register_button'
+                    onClick={handleSubmit}>Update Loan</Button> */}
             </div>
-        </>
+            </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Update Loan
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        // </>
     )
 }
 export default AdminEditUser;
