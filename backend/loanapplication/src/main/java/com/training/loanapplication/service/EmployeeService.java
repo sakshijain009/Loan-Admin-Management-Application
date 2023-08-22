@@ -67,12 +67,6 @@ public class EmployeeService {
 		{
 			return emp;
 		}
-//		if(emp.isPresent()) {
-//			return emp.get();
-//		} else {
-//			return null;
-//		}
-		
 	}
 	
 	// Method to login an employee

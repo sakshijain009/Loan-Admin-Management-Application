@@ -52,7 +52,7 @@ const AdminViewUser = () => {
     const [deleteRow, setDeleteRow] = useState("");
 
     const deleteHandler = () => {
-        console.log(deleteRow);
+        // console.log(deleteRow);
         const data = async () => {
             const res = await fetch(`http://localhost:8080/api/admin/removeEmployee/${deleteRow}`, {
                 method: "DELETE",
@@ -68,7 +68,7 @@ const AdminViewUser = () => {
     }    
 
     useEffect(() => {
-        console.log("Emp id", deleteRow);
+        // console.log("Emp id", deleteRow);
         deleteHandler()
     }, [deleteRow]);
     

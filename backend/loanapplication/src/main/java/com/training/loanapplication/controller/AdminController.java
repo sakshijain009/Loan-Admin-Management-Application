@@ -69,6 +69,12 @@ public class AdminController {
 		return adminService.getAllLoan();
 	}
 	
+	@GetMapping("/getLoan/{loan_id}")
+	public Loan getLoanById(@PathVariable int loan_id)
+	{
+		return loanService.getLoanById(loan_id);
+	}
+	
 	@PostMapping("/addLoan")
 	public Message addNewLoan(@RequestBody @Valid Loan loan)
 	{
@@ -109,5 +115,11 @@ public class AdminController {
 	public Item addItem(@RequestBody @Valid Item item)
 	{
 		return itemService.saveItem(item);	
+	}
+	
+	@GetMapping("/getItemById/{item_id}")
+	public Item getItemById(@PathVariable int item_id) throws ResourceNotFoundException
+	{
+		return itemService.getItemById(item_id);	
 	}
 }

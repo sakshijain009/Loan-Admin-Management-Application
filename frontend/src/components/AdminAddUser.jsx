@@ -87,7 +87,7 @@ function AdminAddUser({bt}) {
         console.log(response.status);
         if(response.status === 200){
             // loginUser(empid);
-            navigate('/adminhome');
+            navigate('/adminviewuser');
         }
         else{
             alert("Please fill the details correctly!");

@@ -107,7 +107,7 @@ function AdminEditUser() {
         <>
             <Appbar/>
             <div className='register'>
-                <h2>Register User</h2>
+                <h2>Edit User</h2>
                 <TextField className='text_register' disabled placeholder='Employee ID' InputProps={{
         endAdornment: <InputAdornment position="end">{empid}</InputAdornment>,
                     }} />

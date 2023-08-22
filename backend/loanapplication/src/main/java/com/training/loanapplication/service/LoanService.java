@@ -35,6 +35,16 @@ public class LoanService {
 		return new Message("Loan has been added successfully");
 	}
 	
+	public Loan getLoanById(int loan_id) throws ResourceNotFoundException
+	{
+		Loan l =  loanRepo.findById(loan_id).orElse(null);
+		if(l==null)
+		{
+			throw new ResourceNotFoundException("No Loan for this particular loan id");
+		}
+		else
+		return l;
+	}
 	// Method to get all loans for a particular Employee
 	public List<Map<String,Object>> getAllLoans(Map<String, String> header) throws ResourceNotFoundException
 	{

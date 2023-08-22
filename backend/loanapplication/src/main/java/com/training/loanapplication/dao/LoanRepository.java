@@ -18,4 +18,5 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	public List<Map<String,Object>> getallLoans(String emp_id);
 	
 	Loan findByType(ItemCategory itemCategory);
+	
 }

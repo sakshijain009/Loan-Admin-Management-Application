@@ -91,12 +91,12 @@ const AdminViewUser = () => {
         </TableHead>
         <TableBody>
           {Array.from(data).map((row) => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell align="center">{row.id}</StyledTableCell>
+            <StyledTableRow key={row.loan_id}>
+              <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
               <StyledTableCell align="center">{row.type || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.duration || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/admineditloan/${row.id}`}>Edit</Link></StyledTableCell>
-              <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
+              <StyledTableCell align="center"><Link to={`/admineditloan/${row.loan_id}`}>Edit</Link></StyledTableCell>
+              <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.loan_id)}>Delete</button></StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

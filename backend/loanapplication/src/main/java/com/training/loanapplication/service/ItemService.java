@@ -31,7 +31,13 @@ public class ItemService {
 	// Find all items
 	public List<Item> getallItems() throws ResourceNotFoundException
 	{
-		return itemRepo.findAll();
+		List<Item> all_items = itemRepo.findAll();
+		if(all_items.size()==0)
+		{
+			throw new ResourceNotFoundException("No items available");
+		}
+		else
+		return all_items;
 	}
 	
 	// Get all item categories
@@ -44,6 +50,18 @@ public class ItemService {
 		}
 		else
 		return all_categories; 
+	}
+	
+	// Get item by id
+	public Item getItemById(int item_id) throws ResourceNotFoundException
+	{
+		Item item = itemRepo.findById(item_id).orElse(null);
+		if(item == null)
+		{
+			throw new ResourceNotFoundException("No item available for this id");
+		}
+		else
+			return item; 
 	}
 	
 	// Get all makes for an item category
