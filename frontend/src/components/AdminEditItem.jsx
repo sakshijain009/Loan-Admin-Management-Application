@@ -92,11 +92,11 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
                 <TextField className='text_register' disabled placeholder='Item ID' InputProps={{
         endAdornment: <InputAdornment position="end">{itemId}</InputAdornment>,
                     }} />
-                <TextField id="outlined-basic" placeholder="Category" className='text_register' value={category}
+                <TextField id="outlined-basic" placeholder="Category" disabled className='text_register' value={category}
                     onChange={
                         e => setCategory(e.target.value)
                     }/>
-                <TextField id="outlined-basic" placeholder="Item Make"  className='text_register' value={make}
+                <TextField id="outlined-basic" placeholder="Item Make" disabled  className='text_register' value={make}
                     onChange={
                         e => setMake(e.target.value)
                     }/>
@@ -108,7 +108,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
                     onChange={
                         e => setValue(e.target.value)
                     }/>
-                    <TextField id="outlined-basic" placeholder="Status"  className='text_register' value={status}
+                    <TextField id="outlined-basic" placeholder="Status" disabled className='text_register' value={status}
                     onChange={
                         e => setStatus(e.target.value)
                     }/>

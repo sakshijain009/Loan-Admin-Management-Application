@@ -32,6 +32,8 @@ const AdminLogin = () => {
 
         const json = await response.json();
         if(response.status === 200){
+            console.log(JSON.stringify(json))
+            sessionStorage.setItem("admin", JSON.stringify(json));
             navigate('/adminhome');
         }
 
