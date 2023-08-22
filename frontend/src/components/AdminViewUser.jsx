@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
+import {Button, Modal} from 'react-bootstrap';
+import AdminEditUser from './AdminEditUser';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,7 +34,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AdminViewUser = () => {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [deleteRow, setDeleteRow] = useState("");
+    const [editRow, setEditRow] = useState("");
+    const [deleteDone, setDeleteDone] = useState(false);
+    const [editDone, setEditDone] = useState(false);
   
     useEffect(() => {
         const data = async () => {
@@ -47,9 +59,9 @@ const AdminViewUser = () => {
         }
         data();
       // setData(json)
-    }, [])
+    }, [editDone, deleteDone])
 
-    const [deleteRow, setDeleteRow] = useState("");
+
 
     const deleteHandler = () => {
         // console.log(deleteRow);
@@ -62,7 +74,8 @@ const AdminViewUser = () => {
             const dt = await res.json();
             console.log(dt.message);
             // setData(dt);
-            window.location.reload();
+            setDeleteDone(prev => !prev);
+            // window.location.reload();
         }
         data();
     }    
@@ -102,15 +115,42 @@ const AdminViewUser = () => {
               <StyledTableCell align="center">{row.gender || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.dob || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.doj || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/adminedituser/${row.id}`}>Edit</Link></StyledTableCell>
-              <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.id)}>Delete</button></StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant='warning' onClick={() => {handleShow(), setEditRow(row.id)}}>Edit</Button>
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant='danger' onClick={() => setDeleteRow(row.id)}>Delete</Button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     </div>
-      </div>
+
+
+    {editRow && <AdminEditUser show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
+    {/* <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
+
+
+
+    
+  </div>
 
     )
 }
