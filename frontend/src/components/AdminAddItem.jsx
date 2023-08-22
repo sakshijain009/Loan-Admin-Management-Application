@@ -39,7 +39,7 @@ function AdminAddItem() {
             // sessionStorage.setItem("itemsDB", res);
             if(response.status===200)
             {
-                navigate("/adminhome");
+                navigate("/adminviewitem");
             }
         };
         data();
@@ -85,7 +85,9 @@ function AdminAddItem() {
                             }
                     }><CreditScoreIcon/>Add Item</Button>
                 </div>
-                <Link to="/adminviewitem">View</Link>
+                <div style={{display:'flex', justifyContent:'center'}} className="container m-auto">
+                    <button className="btn btn-success" onClick={()=>(navigate('/adminviewitem'))}>View Items</button>
+                </div>
             </div>
         </>
     )

@@ -32,24 +32,16 @@ function AdminAddLoan() {
                 })
             });
             const json = await response.json();
-            console.log(json.message);
-            alert(json.message);
+            console.log(json);
+            // console.log()
+            // alert(json.message);
             setCategory("");
             setDuration("");
             // sessionStorage.setItem("itemsDB", res);
-            
         };
         data();
     }
 
-    // useEffect(() => {
-    //     const data = async () => {
-    //         const response = await fetch(`http://localhost:8080/getallItems`);
-    //         const json = await response.json();
-    //         setLoanType(json);
-    //     };
-    //     data();
-    // }, []);
 
     return (
         <>
@@ -122,8 +114,7 @@ function DropdownItems({
                 <Select labelId="demo-simple-select-autowidth-label" id="demo-simple-select-autowidth"
                     value={val}
                     onChange={
-                        e => {
-                            setVal(e.target.value);
+                        e => {setVal(e.target.value);
                             // if (flag == 0) {
                             //     const data = async () => {
                             //         const response = await fetch(`http://localhost:8080/${val}/getAllMake`, {

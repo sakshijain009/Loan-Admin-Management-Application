@@ -19,4 +19,7 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	
 	Loan findByType(ItemCategory itemCategory);
 	
+	@Query("SELECT DISTINCT l.type FROM Loan as l")
+	List<String> getAllTypes();
+	
 }
