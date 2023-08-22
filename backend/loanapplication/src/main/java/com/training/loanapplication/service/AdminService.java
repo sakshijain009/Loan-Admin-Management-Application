@@ -15,6 +15,7 @@ import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.IssueRepository;
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.exception.AuthenticationFailedException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
@@ -46,7 +47,7 @@ public class AdminService implements AdminServiceInterface{
 	LoanRepository loanRepository;
 
 	// Check if admin details are correct
-	public Message checkAdmin(@Valid Admin admin) {
+	public Message checkAdmin(@Valid Admin admin) throws AuthenticationFailedException {
 		Optional<Admin> obj = adminRepository.findById(admin.getUsername());
 		Admin a = null;
 		String result = "";
@@ -56,17 +57,18 @@ public class AdminService implements AdminServiceInterface{
 		
 		if(a==null) {
 			result="Invalid Employee Id";
-		}else {
-			
+			throw new AuthenticationFailedException(result);
+		}
+		else {
 			if(admin.getPassword().equals(a.getPassword())) {
 				result = "Admin can Log in";
-			}else {
-				result  = "Password is incorrect";
+				return new Message(result);
 			}
-			
-		}
-		
-		return new Message(result);
+			else {
+				result  = "Password is incorrect";
+				throw new AuthenticationFailedException(result);
+			}
+		}	
 	}
 	
 	// Function for admin to remove employee
