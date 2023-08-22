@@ -21,9 +21,10 @@ import Select from '@mui/material/Select';
 import { useState, useEffect } from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
+import { Modal } from 'react-bootstrap';
 
-function AdminEditUser() {
-    const navigate = useNavigate();
+function AdminEditUser({id, show, handleClose, setEditDone}) {
+    // const navigate = useNavigate();
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
     const [dept, setDept] = React.useState("");
@@ -36,11 +37,11 @@ function AdminEditUser() {
     const [dobSend, setDobSend] = React.useState("2023-01-01");
     const [dojSend, setDojSend] = React.useState("2023-01-01");
 
-    const {id} = useParams();
+    // const {id} = useParams();
 
     useEffect(() => {
         const data = async () => {
-            // console.log(id);
+            console.log(id);
             const response = await fetch(`http://localhost:8080/api/users/profile/${id}`);
             const res = await response.json();
             setEmpid(res.id);
@@ -62,7 +63,7 @@ function AdminEditUser() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-        
+
         if(!dateIsValid(new Date(dobSend))) {
             throw new Error("Enter correct DOB in the format YYYY-MM-DD");
         }
@@ -89,25 +90,32 @@ function AdminEditUser() {
             )
         });
         const json = await response.json();
-        console.log(json);
         console.log(response.status);
         if(response.status === 200){
-            navigate('/adminviewuser');
+            // navigate('/adminviewuser');
+            handleClose();
+            setEditDone(prev => !prev);
+            // alert(json.message);
+            // window.location.reload();
         }
         else{
-            alert("Please fill the details correctly!");
+            alert(json.message);
         }
-            
+
     } catch (error) {
         console.log(error)
     }
     }
 
     return (
-        <>
-            <Appbar/>
-            <div className='register'>
-                <h2>Edit User</h2>
+        // <>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit User</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <div className='modal_register'>
+                {/* <h2>Edit User</h2> */}
                 <TextField className='text_register' disabled placeholder='Employee ID' InputProps={{
         endAdornment: <InputAdornment position="end">{empid}</InputAdornment>,
                     }} />
@@ -181,10 +189,20 @@ function AdminEditUser() {
                     </DemoContainer>
                 </LocalizationProvider> */}
 
-                <Button variant="contained" className='register_button'
-                    onClick={handleSubmit}>Update User</Button>
+                {/* <Button variant="contained" className='register_button'
+                    onClick={handleSubmit}>Update User</Button> */}
             </div>
-        </>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSubmit}>
+            Update User
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        // </>
     )
 }
 export default AdminEditUser;

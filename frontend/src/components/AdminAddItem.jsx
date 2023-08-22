@@ -6,70 +6,18 @@ import FormControl from '@mui/material/FormControl';
 import Button from '@mui/material/Button'
 import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
 function AdminAddItem() {
-
+    const navigate=useNavigate();
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
-    const [item, setItem] = useState("");
     const [value, setValue] = useState(0);
-    const [categories, setCategories] = useState([]);
-    const [makeArr, setMakeArr] = useState([]);
     const [description, setDescription] = useState([]);
     const [issue, setIssue] = useState("");
-    const [itemId, setItemId] =useState("");
-    useEffect(() => {
-        const data = async () => {
-            const response = await fetch("http://localhost:8080/getAllCategory");
-            const json = await response.json();
-            const res = JSON.stringify(json);
-            // sessionStorage.setItem("itemsDB", res);
-            setCategories(json);
-        };
-        data();
-    }, []);
 
-    useEffect(() => {
-        const data = async () => {
-            const response = await fetch(`http://localhost:8080/${category}/getAllMake`);
-            const json = await response.json();
-            const res = JSON.stringify(json);
-            // sessionStorage.setItem("itemsDB", res);
-            setMakeArr(json);
-            setItemMake("")
-            setItem("")
-            setValue(0)
-            setIssue("")
-            setItemId("")
-        };
-        data();
-    }, [category]);
-
-    useEffect(() => {
-        const data = async () => {
-            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/getAllDescriptions`);
-            const json = await response.json();
-            const res = JSON.stringify(json);
-            // sessionStorage.setItem("itemsDB", res);
-            setDescription(json);
-        };
-        data();
-    }, [itemMake]);
-
-    useEffect(() => {
-        const data = async () => {
-            const response = await fetch(`http://localhost:8080/${category}/${itemMake}/${item}/getItem`);
-            const json = await response.json();
-            const res = JSON.stringify(json.value);
-            console.log(json);
-            // sessionStorage.setItem("itemsDB", res);
-            setValue(json.value);
-        };
-        data();
-    }, [item]);
 
     function submitHandler() {
         const data = async () => {
@@ -79,18 +27,20 @@ function AdminAddItem() {
                     "Content-Type":"application/json"
                 },
                 body: JSON.stringify({
-                    "item_id":itemId,
-                    "item_description":item,
-                    "item_make":itemMake,
-                    "item_category":category,
-                    "item_value":value,
-                    "issue" : issue
+                    "description":description,
+                    "make":itemMake,
+                    "category":category,
+                    "value":value,
+                    "status" : issue
                 })
             });
-            const json = await response.json();
-            alert(json.message);
+            // const json = await response.json();
+            // alert(json.message);
             // sessionStorage.setItem("itemsDB", res);
-            
+            if(response.status===200)
+            {
+                navigate("/adminhome");
+            }
         };
         data();
     }
@@ -103,31 +53,26 @@ function AdminAddItem() {
                 <div className="loan-select">
                     <div className="loan-form">
                         {/* <TextField label={"Item ID"}/> */}
-                        <TextField flag={0}
-                            val={category}
-                            setVal={setCategory}
-                            label={"Select Categories"}
-                            arr={categories}/><br/><br/>
-                        <TextField flag={1}
-                            val={itemMake}
-                            setVal={setItemMake}
-                            label={"Select Item Make"}
-                            arr={makeArr}/><br/><br/>
-                        <TextField flag={2}
-                            val={item}
-                            setVal={setItem}
-                            label={"Select Description"}
-                            arr={description}/><br/><br/>
-                        <TextField flag={2}
-                            val={issue}
-                            setVal={setIssue}
-                            label={"Select Issue Status"}
-                            arr={["Yes", "No"]}/><br/><br/>
-                        <TextField
-                            val={value}
-                            setVal={setValue}
-                            label={"Price"}
-                            arr={value}/>
+                        <TextField id="outlined-basic" label="Category" variant="outlined" className='text_register'
+                    onChange={
+                        e => setCategory(e.target.value)
+                    }/>
+                        <TextField id="outlined-basic" label="Item Make" variant="outlined" className='text_register'
+                    onChange={
+                        e => setItemMake(e.target.value)
+                    }/>
+                        <TextField id="outlined-basic" label="Item Description" variant="outlined" className='text_register'
+                    onChange={
+                        e => setDescription(e.target.value)
+                    }/>
+                        <TextField id="outlined-basic" label="Issue Status" variant="outlined" className='text_register'
+                    onChange={
+                        e => setIssue(e.target.value)
+                    }/>
+                        <TextField id="outlined-basic" label="Item Value" variant="outlined" className='text_register'
+                    onChange={
+                        e => setValue(e.target.value)
+                    }/>
 
                     </div>
                     <Button variant="contained" className='apply_loan'
@@ -143,79 +88,6 @@ function AdminAddItem() {
                 <Link to="/adminviewitem">View</Link>
             </div>
         </>
-    )
-}
-
-function Fixed({lab, value}) {
-    return (
-        <FormControl sx={
-                {
-                    m: 1,
-                    minWidth: 450
-                }
-            }
-            disabled>
-            <InputLabel id="demo-simple-select-disabled-label">
-                {value}</InputLabel>
-            <TextField labelId="demo-simple-select-disabled-label" id="demo-simple-select-disabled"
-                value={value}
-                label={lab}></TextField>
-        </FormControl>
-    )
-}
-
-function DropdownItem({
-    flag,
-    val,
-    setVal,
-    lab,
-    arr
-}) {
-
-    return (
-        <div>
-            <FormControl autoWidth
-                sx={
-                    {
-                        m: 1,
-                        minWidth: 450
-                    }
-            }>
-                <InputLabel id="demo-simple-select-autowidth-label">
-                    {lab}</InputLabel>
-                <Select labelId="demo-simple-select-autowidth-label" id="demo-simple-select-autowidth"
-                    value={val}
-                    onChange={
-                        e => {
-                            setVal(e.target.value);
-                            if (flag == 0) {
-                                const data = async () => {
-                                    const response = await fetch(`http://localhost:8080/${val}/getAllMake`, {
-                                        method: 'GET',
-                                        headers: {
-                                            'Content-Type': 'application/json'
-                                        }
-                                    });
-                                    const json = await response.json();
-                                    sessionStorage.setItem("allMake", JSON.stringify(json));
-                                    console.log("Yoyoyo")
-                                    console.log(json);
-                                };
-                                data();
-                            }
-                        }
-                    }
-                    autoWidth
-                    label={lab}>
-                    {
-                    arr.map((ele) => (
-                        <MenuItem key={ele}
-                            value={ele}>
-                            {ele}</MenuItem>
-                    ))
-                } </Select>
-            </FormControl>
-        </div>
     )
 }
 
