@@ -58,4 +58,16 @@ public class LoanService implements LoanServiceInterface {
 		else
 		return allLoans;
 	}
+	
+	// Get all loan types
+		public List<String> getAllTypes() throws ResourceNotFoundException
+		{
+			List<String> all_types= loanRepo.getAllTypes();
+			if(all_types.size()==0)
+			{
+				throw new ResourceNotFoundException("No loan type available");
+			}
+			else
+			return all_types; 
+		}
 }
