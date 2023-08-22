@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.ItemCategory;
-import com.training.loanapplication.service.ItemService;
+import com.training.loanapplication.serviceInterface.ItemServiceInterface;
 
 import jakarta.validation.Valid;
 
@@ -24,41 +24,41 @@ import jakarta.validation.Valid;
 public class ItemController {
 	
 	@Autowired
-	ItemService itemService;
+	ItemServiceInterface itemServiceInterface;
 	
 	@GetMapping("/getAllItems")
 	public List<Item> getAllItems() throws ResourceNotFoundException
 	{
-		return itemService.getallItems();
+		return itemServiceInterface.getallItems();
 	}
 	
 	@GetMapping("/getAllCategory")
 	public List<String> getAllCategory() throws ResourceNotFoundException
 	{
-		return itemService.getAllCategory();
+		return itemServiceInterface.getAllCategory();
 	}
 	
 	@GetMapping("/{category}/getAllMake") 
 	public List<String> getDistinctMakesByCategory(@PathVariable ItemCategory category) throws ResourceNotFoundException
 	{
-		return itemService.getDistinctMakesByCategory(category);
+		return itemServiceInterface.getDistinctMakesByCategory(category);
 	}
 	
 	@GetMapping("/{category}/{make}/getAllDescriptions")
 	public List<String> getDistinctDescriptionByMakeAndCategory(@PathVariable ItemCategory category, @PathVariable String make) throws ResourceNotFoundException
 	{
-		return itemService.getDistinctDescriptionByMakeAndCategory(category, make);
+		return itemServiceInterface.getDistinctDescriptionByMakeAndCategory(category, make);
 	}
 	
 	@GetMapping("/{category}/{make}/{description}/getItem")
 	public Item getItemByMakeAndCategoryAndDescription(@PathVariable ItemCategory category, @PathVariable String make, @PathVariable String description) throws ResourceNotFoundException
 	{
-		return itemService.getItemByMakeAndCategoryAndDescription(category, make, description);
+		return itemServiceInterface.getItemByMakeAndCategoryAndDescription(category, make, description);
 	}
 	
 	@GetMapping("/viewItems")
 	public List<Map<String,Object>> getAllItemsByEmpId(@RequestHeader Map<String, String> header) throws ResourceNotFoundException
 	{
-		return itemService.getAllItemsByEmpId(header);
+		return itemServiceInterface.getAllItemsByEmpId(header);
 	}
 }

@@ -1,6 +1,8 @@
 package com.training.loanapplication.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,12 +22,13 @@ import com.training.loanapplication.model.Issue;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
+import com.training.loanapplication.serviceInterface.AdminServiceInterface;
 
 import jakarta.validation.Valid;
 
 
 @Service
-public class AdminService {
+public class AdminService implements AdminServiceInterface{
 	
 	@Autowired
 	AdminRepository adminRepository;
@@ -167,27 +170,26 @@ public class AdminService {
 			
 			if(op.isPresent()) {
 				Loan oldLoanData = op.get();
-				loanRepository.save(loan);
 				
 				if(oldLoanData.getDuration() != loan.getDuration()) {
-					List<Item> items = itemRepository.findAllByType(loan.getType());
-					List<Integer> item_ids = items.stream().map(item -> item.getItem_id()).collect(Collectors.toList());
-					List<Issue> issue_data = issueRepository.findAllWithIdInItemId(item_ids);
-					
-					for(Issue issue : issue_data) {
+					List<Integer> issue_ids = itemRepository.findIssueIdsByItemType(loan.getType().toString());
+					for(int i : issue_ids) {
+						Issue issue = issueRepository.findById(i).get();
 						LocalDate newReturnDate = issue.getIssueDate().plusYears(loan.getDuration());
-						if(newReturnDate.isAfter(issue.getReturnDate())){
+						LocalDate currReturnDate = issue.getReturnDate();
+						
+						if(currReturnDate.isAfter(LocalDate.now()) && newReturnDate.isAfter(currReturnDate)){
 							issue.setReturnDate(newReturnDate);
 							issueRepository.save(issue);
-						} else if(newReturnDate.isBefore(issue.getReturnDate()) && newReturnDate.isAfter(LocalDate.now())) {
+						} else if(currReturnDate.isAfter(LocalDate.now()) && newReturnDate.isBefore(currReturnDate) && newReturnDate.isAfter(LocalDate.now())) {
 							issue.setReturnDate(newReturnDate);
 							issueRepository.save(issue);
 						}
-					}								  
-				}
-				
+					}				
+				}	
+				loanRepository.save(loan);
 				return new Message("Loan details successfully updated");
-			} else {
+			}else {
 				return new Message("No such loan is present");
 			}
 		}

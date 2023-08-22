@@ -19,9 +19,9 @@ import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
-import com.training.loanapplication.service.AdminService;
-import com.training.loanapplication.service.ItemService;
-import com.training.loanapplication.service.LoanService;
+import com.training.loanapplication.serviceInterface.AdminServiceInterface;
+import com.training.loanapplication.serviceInterface.ItemServiceInterface;
+import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 
 import jakarta.validation.Valid;
 
@@ -31,95 +31,95 @@ import jakarta.validation.Valid;
 public class AdminController {
 	
 	@Autowired
-	AdminService adminService;
+	AdminServiceInterface adminServiceInterface;
 	
 	@Autowired
-	LoanService loanService;
+	LoanServiceInterface loanServiceInterface;
 	
 	@Autowired
-	ItemService itemService;
+	ItemServiceInterface itemServiceInterface;
 	
 	@PostMapping("/login")
 	public Message checkAdmin(@RequestBody @Valid Admin admin)
 	{
-		return adminService.checkAdmin(admin);	
+		return adminServiceInterface.checkAdmin(admin);	
 	}
 	
 	@PostMapping("/addUser")
 	public Message addNewEmployee(@RequestBody @Valid Employee e)
 	{
-		return adminService.addNewEmployee(e);	
+		return adminServiceInterface.addNewEmployee(e);	
 	}
 	
 	@PutMapping("/updateUser")
 	public Message updateEmployee(@RequestBody @Valid Employee e)
 	{
-		return adminService.updateEmployee(e);	
+		return adminServiceInterface.updateEmployee(e);	
 	}
 	
 	@GetMapping("/getAllUser")
 	public List<Employee> getAllEmployee() throws ResourceNotFoundException
 	{
-		return adminService.getAllEmployee();	
+		return adminServiceInterface.getAllEmployee();	
 	}
 	
 	@GetMapping("/getAllLoan")
 	public List<Loan> getAllLoan() throws ResourceNotFoundException
 	{
-		return adminService.getAllLoan();
+		return adminServiceInterface.getAllLoan();
 	}
 	
 	@GetMapping("/getLoan/{loan_id}")
-	public Loan getLoanById(@PathVariable int loan_id)
+	public Loan getLoanById(@PathVariable int loan_id) throws ResourceNotFoundException
 	{
-		return loanService.getLoanById(loan_id);
+		return loanServiceInterface.getLoanById(loan_id);
 	}
 	
 	@PostMapping("/addLoan")
 	public Message addNewLoan(@RequestBody @Valid Loan loan)
 	{
-		return loanService.saveLoan(loan);	
+		return loanServiceInterface.saveLoan(loan);	
 	}
 	
 	@DeleteMapping("/removeEmployee/{employee_id}")
 	public Message removeEmployee(@PathVariable String employee_id)
 	{
-		return adminService.removeEmployee(employee_id);	
+		return adminServiceInterface.removeEmployee(employee_id);	
 	}
 	
 	@DeleteMapping("/removeLoan/{loan_id}")
 	public Message removeLoan(@PathVariable int loan_id)
 	{
-		return adminService.removeLoan(loan_id);	
+		return adminServiceInterface.removeLoan(loan_id);	
 	}
 	
 	@PutMapping("/updateLoan")
 	public Message updateLoan(@RequestBody @Valid Loan loan)
 	{
-		return adminService.updateLoan(loan);	
+		return adminServiceInterface.updateLoan(loan);	
 	}
 	
 	@DeleteMapping("/removeItem/{item_id}")
 	public Message removeItem(@PathVariable int item_id)
 	{
-		return adminService.removeItem(item_id);	
+		return adminServiceInterface.removeItem(item_id);	
 	}
 	
 	@PutMapping("/updateItem")
 	public Message updateItem(@RequestBody @Valid Item item)
 	{
-		return adminService.updateItem(item);	
+		return adminServiceInterface.updateItem(item);	
 	}
 	
 	@PostMapping("/addItem")
 	public Item addItem(@RequestBody @Valid Item item)
 	{
-		return itemService.saveItem(item);	
+		return itemServiceInterface.saveItem(item);	
 	}
 	
 	@GetMapping("/getItemById/{item_id}")
 	public Item getItemById(@PathVariable int item_id) throws ResourceNotFoundException
 	{
-		return itemService.getItemById(item_id);	
+		return itemServiceInterface.getItemById(item_id);	
 	}
 }

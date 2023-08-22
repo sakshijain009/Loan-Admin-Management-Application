@@ -12,12 +12,13 @@ import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.ItemCategory;
+import com.training.loanapplication.serviceInterface.ItemServiceInterface;
 
 import jakarta.validation.Valid;
 
 
 @Service
-public class ItemService {
+public class ItemService implements ItemServiceInterface {
 	
 	@Autowired
 	ItemRepository itemRepo;
@@ -31,7 +32,13 @@ public class ItemService {
 	// Find all items
 	public List<Item> getallItems() throws ResourceNotFoundException
 	{
-		return itemRepo.findAll();
+		List<Item> all_items = itemRepo.findAll();
+		if(all_items.size()==0)
+		{
+			throw new ResourceNotFoundException("No items available");
+		}
+		else
+		return all_items;
 	}
 	
 	// Get all item categories
@@ -87,6 +94,6 @@ public class ItemService {
 			throw new ResourceNotFoundException("No items purchased by employee");
 		}
 		else
-		return allItems;
+			return allItems;
 	}
 }
