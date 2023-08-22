@@ -19,6 +19,7 @@ import AdminEditUser from './components/AdminEditUser';
 import AdminEditItem from './components/AdminEditItem';
 import AdminViewLoan from './components/AdminViewLoan';
 import AdminEditLoan from './components/AdminEditLoan'
+import ErrorPage from './components/ErrorPage';
 
 function App() {
   
@@ -56,12 +57,13 @@ function App() {
           <Route path='/adminadditem' element={<AdminAddItem />} />
           <Route path='/adminaddloan' element={<AdminAddLoan />} />
           <Route path='/adminviewloan' element={<AdminViewLoan />} />
-          <Route path='/admineditloan/:id' element={<AdminEditLoan />} exact />
+          {/* <Route path='/admineditloan/:id' element={<AdminEditLoan />} exact /> */}
           <Route path='/adminviewuser' element={<AdminViewUser />} />
           <Route path='/adminviewitem' element={<AdminViewItem />} />
-          <Route path='adminedituser/:id' element={<AdminEditUser />} exact />
-          <Route path='adminedititem/:id' element={<AdminEditItem />} exact />
+          {/* <Route path='adminedituser/:id' element={<AdminEditUser />} exact />
+          <Route path='adminedititem/:id' element={<AdminEditItem />} exact /> */}
           <Route path='/logout' element={<Logout />} />
+          <Route path="*" element={<ErrorPage />}/>
         </Routes>
       </Router>
     </>

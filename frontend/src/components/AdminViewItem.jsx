@@ -8,7 +8,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom';
+import {Button} from 'react-bootstrap';
+import AdminEditItem from './AdminEditItem';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,7 +34,22 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AdminViewItem = () => {
 
-    const [data, setData] = useState([])
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("admin") === null) {
+        navigate("/loginadmin");
+    }
+
+    const [data, setData] = useState([]);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [deleteRow, setDeleteRow] = useState("");
+    const [editRow, setEditRow] = useState("");
+    const [deleteDone, setDeleteDone] = useState(false);
+    const [editDone, setEditDone] = useState(false);
   
     useEffect(() => {
         const data = async () => {
@@ -47,9 +64,7 @@ const AdminViewItem = () => {
         }
         data();
       // setData(json)
-    }, [])
-
-    const [deleteRow, setDeleteRow] = useState("");
+    }, [editDone, deleteDone])
 
     const deleteHandler = () => {
         console.log(deleteRow);
@@ -62,7 +77,8 @@ const AdminViewItem = () => {
             const dt = await res.json();
             console.log(dt.message);
             // setData(dt);
-            window.location.reload();
+            setDeleteDone(prev => !prev);
+            // window.location.reload();
         }
         data();
     }    
@@ -92,7 +108,7 @@ const AdminViewItem = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {Array.from(data).map((row) => (
             <StyledTableRow key={row.item_id}>
               <StyledTableCell align="center">{row.item_id}</StyledTableCell>
               <StyledTableCell align="center">{row.category || "-"}</StyledTableCell>
@@ -100,14 +116,19 @@ const AdminViewItem = () => {
               <StyledTableCell align="center">{row.make || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.status || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.value || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/adminedititem/${row.item_id}`}>Edit</Link></StyledTableCell>
-              <StyledTableCell align="center"><button onClick={() => setDeleteRow(row.item_id)}>Delete</button></StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant='warning' onClick={() => {handleShow(), setEditRow(row.item_id)}}>Edit</Button>
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant='danger' onClick={() => setDeleteRow(row.item_id)}>Delete</Button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     </div>
+    {editRow && <AdminEditItem show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
       </div>
 
     )

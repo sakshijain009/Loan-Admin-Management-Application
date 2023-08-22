@@ -11,13 +11,26 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
 function AdminAddItem() {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("admin") === null) {
+        navigate("/loginadmin");
+    }
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
     const [value, setValue] = useState(0);
     const [description, setDescription] = useState([]);
     const [issue, setIssue] = useState("");
+    const [types, setTypes] = useState([]);
 
+    useEffect(() =>{
+        const data = async () => {
+            const response = await fetch("http://localhost:8080/getAllTypes");
+            const json = await response.json();
+            const res = JSON.stringify(json);
+            setTypes(json);
+        };
+        data();
+    });
 
     function submitHandler() {
         const data = async () => {
@@ -39,7 +52,7 @@ function AdminAddItem() {
             // sessionStorage.setItem("itemsDB", res);
             if(response.status===200)
             {
-                navigate("/adminhome");
+                navigate("/adminviewitem");
             }
         };
         data();
@@ -53,10 +66,15 @@ function AdminAddItem() {
                 <div className="loan-select">
                     <div className="loan-form">
                         {/* <TextField label={"Item ID"}/> */}
-                        <TextField id="outlined-basic" label="Category" variant="outlined" className='text_register'
+                        {/* <TextField id="outlined-basic" label="Category" variant="outlined" className='text_register'
                     onChange={
                         e => setCategory(e.target.value)
-                    }/>
+                    }/> */}
+                    <DropdownItem flag={0}
+                        val={category}
+                        setVal={setCategory}
+                        lab={"Select Categories"}
+                        arr={types}/>
                         <TextField id="outlined-basic" label="Item Make" variant="outlined" className='text_register'
                     onChange={
                         e => setItemMake(e.target.value)
@@ -85,10 +103,52 @@ function AdminAddItem() {
                             }
                     }><CreditScoreIcon/>Add Item</Button>
                 </div>
-                <Link to="/adminviewitem">View</Link>
+                <div style={{display:'flex', justifyContent:'center'}} className="container m-auto">
+                    <button className="btn btn-success" onClick={()=>(navigate('/adminviewitem'))}>View Items</button>
+                </div>
             </div>
         </>
     )
 }
+
+function DropdownItem({
+    flag,
+    val,
+    setVal,
+    lab,
+    arr
+}) {
+
+    return (
+        <div>
+            <FormControl autoWidth
+                sx={
+                    {
+                        m: 1,
+                        minWidth: 450
+                    }
+            }>
+                <InputLabel id="demo-simple-select-autowidth-label">
+                    {lab}</InputLabel>
+                <Select labelId="demo-simple-select-autowidth-label" id="demo-simple-select-autowidth"
+                    value={val}
+                    onChange={
+                        e => {setVal(e.target.value);}
+                    }
+                    autoWidth
+                    label={lab}>
+                    {
+                    arr.map((ele) => (
+                        <MenuItem key={ele}
+                            value={ele}>
+                            {ele}</MenuItem>
+                    ))
+                } </Select>
+            </FormControl>
+        </div>
+    )
+}
+
+
 
 export default AdminAddItem
