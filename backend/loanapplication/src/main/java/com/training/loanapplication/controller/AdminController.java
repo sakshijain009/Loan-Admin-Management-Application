@@ -1,7 +1,9 @@
 package com.training.loanapplication.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.loanapplication.dto.EmployeeDTO;
+import com.training.loanapplication.dto.LoanDTO;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
@@ -29,6 +33,9 @@ import jakarta.validation.Valid;
 @CrossOrigin("http://localhost:5173")
 @RequestMapping("/api/admin")
 public class AdminController {
+	
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	@Autowired
 	AdminServiceInterface adminServiceInterface;
@@ -58,15 +65,23 @@ public class AdminController {
 	}
 	
 	@GetMapping("/getAllUser")
-	public List<Employee> getAllEmployee() throws ResourceNotFoundException
-	{
-		return adminServiceInterface.getAllEmployee();	
+	public List<EmployeeDTO> getAllEmployee() throws ResourceNotFoundException
+	{	
+		return adminServiceInterface
+				.getAllEmployee()
+				.stream()
+				.map(e -> modelMapper.map(e, EmployeeDTO.class))
+				.collect(Collectors.toList());
 	}
 	
 	@GetMapping("/getAllLoan")
-	public List<Loan> getAllLoan() throws ResourceNotFoundException
+	public List<LoanDTO> getAllLoan() throws ResourceNotFoundException
 	{
-		return adminServiceInterface.getAllLoan();
+		return adminServiceInterface
+				.getAllLoan()
+				.stream()
+				.map(l -> modelMapper.map(l, LoanDTO.class))
+				.collect(Collectors.toList());
 	}
 	
 	@GetMapping("/getLoan/{loan_id}")
