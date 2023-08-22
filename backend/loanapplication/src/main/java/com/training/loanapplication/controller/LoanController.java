@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Loan;
-import com.training.loanapplication.service.LoanService;
+import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 
 import jakarta.validation.Valid;
 
 
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin("http://localhost:5173") 
 public class LoanController {
 	
 	@Autowired
-	LoanService loanService;
+	LoanServiceInterface loanServiceInterface;
 	
 	@GetMapping("/getallLoans")
 	public List<Map<String,Object>> getallLoans(@RequestHeader Map<String, String> header) throws ResourceNotFoundException
 	{
-		return loanService.getAllLoans(header);
+		return loanServiceInterface.getAllLoans(header);
 	}
 }

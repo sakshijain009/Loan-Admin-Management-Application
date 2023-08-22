@@ -13,11 +13,12 @@ import com.training.loanapplication.dao.LoanRepository;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
+import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 
 import jakarta.validation.Valid;
 
 @Service
-public class LoanService {
+public class LoanService implements LoanServiceInterface {
 	
 	@Autowired
 	LoanRepository loanRepo;

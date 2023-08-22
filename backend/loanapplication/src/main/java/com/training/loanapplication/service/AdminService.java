@@ -20,12 +20,13 @@ import com.training.loanapplication.model.Issue;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
+import com.training.loanapplication.serviceInterface.AdminServiceInterface;
 
 import jakarta.validation.Valid;
 
 
 @Service
-public class AdminService {
+public class AdminService implements AdminServiceInterface{
 	
 	@Autowired
 	AdminRepository adminRepository;
