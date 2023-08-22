@@ -1,8 +1,8 @@
 package com.training.loanapplication.controller;
 
-import java.util.List;
 import java.util.Map;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.loanapplication.dto.EmployeeDTO;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.LoanModel;
 import com.training.loanapplication.model.LoginEmployee;
-//import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
 import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
 
@@ -30,6 +30,9 @@ import jakarta.validation.Valid;
 public class EmployeeController {
 	
 	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Autowired
 	EmployeeServiceInterface empServiceInterface;
 	
 	@PostMapping("/addUser")
@@ -39,9 +42,12 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/profile/{emp_id}")
-	public Employee getEmployeeProfile(@PathVariable String emp_id) throws ResourceNotFoundException
+	public EmployeeDTO getEmployeeProfile(@PathVariable String emp_id) throws ResourceNotFoundException
 	{
-		return empServiceInterface.getEmployeeProfile(emp_id);
+		Employee emp =  empServiceInterface.getEmployeeProfile(emp_id);
+		EmployeeDTO empDTO = modelMapper.map(emp, EmployeeDTO.class);
+		
+		return empDTO;
 	}
 	
 	@PostMapping("/checkLogin")

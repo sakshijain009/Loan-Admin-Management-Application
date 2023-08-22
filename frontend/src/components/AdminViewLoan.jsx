@@ -8,7 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import AdminEditLoan from './AdminEditLoan';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,25 +33,29 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AdminViewUser = () => {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [deleteRow, setDeleteRow] = useState("");
+    const [editRow, setEditRow] = useState("");
+    const [deleteDone, setDeleteDone] = useState(false);
+    const [editDone, setEditDone] = useState(false);
   
     useEffect(() => {
         const data1 = async () => {
-            const res = await fetch('http://localhost:8080/api/admin/getAllLoan', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-            }})
-            const dt = await res.json();
-            console.log(dt);
-            setData(dt);
+            const response = await fetch('http://localhost:8080/api/admin/getAllLoan');
+            const res = await response.json();
+            console.log(res);
+            setData(res);
             console.log(typeof(data))
         }
         data1();
       // setData(json)
-    }, [])
-
-    const [deleteRow, setDeleteRow] = useState("");
+    }, [editDone, deleteDone])
 
     const deleteHandler = () => {
         console.log(deleteRow);
@@ -63,7 +68,7 @@ const AdminViewUser = () => {
             const dt = await res.json();
             console.log(dt.message);
             // setData(dt);
-            window.location.reload();
+            setDeleteDone(prev => !prev);
         }
         data();
     }    
@@ -95,14 +100,19 @@ const AdminViewUser = () => {
               <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
               <StyledTableCell align="center">{row.type || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.duration || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/admineditloan/${row.loan_id}`}>Edit</Link></StyledTableCell>
-              <StyledTableCell align="center"><button className='btn btn-danger' onClick={() => setDeleteRow(row.loan_id)}>Delete</button></StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant='warning' onClick={() => {handleShow(), setEditRow(row.loan_id)}}>Edit</Button>
+              </StyledTableCell>
+              <StyledTableCell align="center">
+                <Button variant='danger' onClick={() => setDeleteRow(row.loan_id)}>Delete</Button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     </div>
+    {editRow && <AdminEditLoan show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
       </div>
 
     )

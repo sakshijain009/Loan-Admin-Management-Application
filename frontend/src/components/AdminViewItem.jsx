@@ -100,7 +100,7 @@ const AdminViewItem = () => {
               <StyledTableCell align="center">{row.make || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.status || "-"}</StyledTableCell>
               <StyledTableCell align="center">{row.value || "-"}</StyledTableCell>
-              <StyledTableCell align="center"><Link to={`/adminedituser/${row.item_id}`}>Edit</Link></StyledTableCell>
+              <StyledTableCell align="center"><Link to={`/adminedititem/${row.item_id}`}>Edit</Link></StyledTableCell>
               <StyledTableCell align="center"><button onClick={() => setDeleteRow(row.item_id)}>Delete</button></StyledTableCell>
             </StyledTableRow>
           ))}
