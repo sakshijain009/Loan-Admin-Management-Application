@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Employee;
-import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.LoanModel;
 import com.training.loanapplication.model.LoginEmployee;
 //import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
-import com.training.loanapplication.service.EmployeeService;
+import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
 
 import jakarta.validation.Valid;
 
@@ -31,30 +30,30 @@ import jakarta.validation.Valid;
 public class EmployeeController {
 	
 	@Autowired
-	EmployeeService empService;
+	EmployeeServiceInterface empServiceInterface;
 	
 	@PostMapping("/addUser")
 	public Employee saveEmployee(@RequestBody @Valid Employee emp)
 	{
-		return empService.saveEmployee(emp);
+		return empServiceInterface.saveEmployee(emp);
 	}
 	
 	@GetMapping("/profile/{emp_id}")
 	public Employee getEmployeeProfile(@PathVariable String emp_id) throws ResourceNotFoundException
 	{
-		return empService.getEmployeeProfile(emp_id);
+		return empServiceInterface.getEmployeeProfile(emp_id);
 	}
 	
 	@PostMapping("/checkLogin")
 	public Message validateEmployee(@RequestBody LoginEmployee e)
 	{
-		return empService.validateEmployee(e);
+		return empServiceInterface.validateEmployee(e);
 	}
 	
 	@PostMapping("/applyLoan")
 	public Message applyLoan(@RequestBody LoanModel loanModel)
 	{
-		return empService.applyLoan(loanModel);
+		return empServiceInterface.applyLoan(loanModel);
 	}
 	
 //	@GetMapping("/getCards/{emp_id}")
@@ -66,6 +65,6 @@ public class EmployeeController {
 	@PutMapping("/changePassword")
 	public Message changePassword(@RequestHeader Map<String, String> header)
 	{
-		return empService.changePassword(header);
+		return empServiceInterface.changePassword(header);
 	}
 }

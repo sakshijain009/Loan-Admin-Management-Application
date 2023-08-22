@@ -165,7 +165,7 @@ function AdminAddUser({bt}) {
 
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Add User</Button>
-                    <Link to="/adminviewuser">View</Link>
+                <Button variant='contained' className='register_button'><Link style={{textDecoration:'none', color:'white'}} to="/adminviewuser">View All Users</Link></Button>
             </div>
         </>
     )

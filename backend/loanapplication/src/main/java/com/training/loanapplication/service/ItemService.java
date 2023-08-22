@@ -12,12 +12,13 @@ import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.ItemCategory;
+import com.training.loanapplication.serviceInterface.ItemServiceInterface;
 
 import jakarta.validation.Valid;
 
 
 @Service
-public class ItemService {
+public class ItemService implements ItemServiceInterface {
 	
 	@Autowired
 	ItemRepository itemRepo;
@@ -93,6 +94,6 @@ public class ItemService {
 			throw new ResourceNotFoundException("No items purchased by employee");
 		}
 		else
-		return allItems;
+			return allItems;
 	}
 }

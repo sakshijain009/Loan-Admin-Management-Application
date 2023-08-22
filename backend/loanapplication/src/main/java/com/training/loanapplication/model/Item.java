@@ -28,9 +28,9 @@ public class Item {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="item_id")
-    private int item_id;
-	
-    @Column(name="item_description")
+    private Integer item_id;
+
+	@Column(name="item_description")
     @NotEmpty(message="Description cannot be empty or null")
 	@NotBlank(message="Description cannot be blank")
     private String description;
@@ -57,11 +57,11 @@ public class Item {
     @OneToMany(mappedBy = "item", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Issue> issue;
 
-	public int getItem_id() {
+	public Integer getItem_id() {
 		return item_id;
 	}
 
-	public void setItem_id(int item_id) {
+	public void setItem_id(Integer item_id) {
 		this.item_id = item_id;
 	}
 

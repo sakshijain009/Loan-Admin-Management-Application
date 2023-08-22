@@ -24,11 +24,12 @@ import com.training.loanapplication.model.LoanModel;
 import com.training.loanapplication.model.LoginEmployee;
 //import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
+import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
 
 import jakarta.validation.Valid;
 
 @Service
-public class EmployeeService {
+public class EmployeeService implements EmployeeServiceInterface {
 	
 	@Autowired
 	EmployeeRepository empRepo;
