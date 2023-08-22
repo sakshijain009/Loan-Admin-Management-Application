@@ -87,6 +87,6 @@ public class ItemService {
 			throw new ResourceNotFoundException("No items purchased by employee");
 		}
 		else
-		return allItems;
+			return allItems;
 	}
 }
