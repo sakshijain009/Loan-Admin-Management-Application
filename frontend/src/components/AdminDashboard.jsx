@@ -1,10 +1,14 @@
 import React from "react";
 import Appbar from './Appbar';
 import './Dash.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function AdminDashboard(){
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("admin") === null) {
+        navigate("/loginadmin");
+    }
     return(
         <>
             <Appbar bt={"Logout"}/>

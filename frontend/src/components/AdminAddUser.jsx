@@ -22,7 +22,11 @@ import { useEffect } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 
 function AdminAddUser({bt}) {
+    
     const navigate = useNavigate();
+    if(sessionStorage.getItem("admin") === null) {
+        navigate("/loginadmin");
+    }
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
     const [dept, setDept] = React.useState("");

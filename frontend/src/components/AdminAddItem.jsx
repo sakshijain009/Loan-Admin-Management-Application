@@ -11,7 +11,10 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
 function AdminAddItem() {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("admin") === null) {
+        navigate("/loginadmin");
+    }
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
     const [value, setValue] = useState(0);
