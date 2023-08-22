@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.dto.EmployeeDTO;
+import com.training.loanapplication.dto.ItemDTO;
 import com.training.loanapplication.dto.LoanDTO;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
@@ -84,10 +85,13 @@ public class AdminController {
 				.collect(Collectors.toList());
 	}
 	
-	@GetMapping("/getLoan/{loan_id}")
-	public Loan getLoanById(@PathVariable int loan_id) throws ResourceNotFoundException
+	@GetMapping("/getLoanById/{loan_id}")
+	public LoanDTO getLoanById(@PathVariable int loan_id) throws ResourceNotFoundException
 	{
-		return loanServiceInterface.getLoanById(loan_id);
+		Loan loan = loanServiceInterface.getLoanById(loan_id);
+		LoanDTO loanDTO = modelMapper.map(loan, LoanDTO.class);
+		
+		return loanDTO;
 	}
 	
 	@PostMapping("/addLoan")
@@ -133,8 +137,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("/getItemById/{item_id}")
-	public Item getItemById(@PathVariable int item_id) throws ResourceNotFoundException
+	public ItemDTO getItemById(@PathVariable int item_id) throws ResourceNotFoundException
 	{
-		return itemServiceInterface.getItemById(item_id);	
+		Item item = itemServiceInterface.getItemById(item_id);	
+		ItemDTO itemDTO = modelMapper.map(item, ItemDTO.class);
+		
+		return itemDTO;
 	}
 }
