@@ -2,7 +2,9 @@ package com.training.loanapplication.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.training.loanapplication.dto.EmployeeDTO;
+import com.training.loanapplication.dto.ItemDTO;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.ItemCategory;
@@ -24,12 +28,19 @@ import jakarta.validation.Valid;
 public class ItemController {
 	
 	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Autowired
 	ItemServiceInterface itemServiceInterface;
 	
 	@GetMapping("/getAllItems")
-	public List<Item> getAllItems() throws ResourceNotFoundException
+	public List<ItemDTO> getAllItems() throws ResourceNotFoundException
 	{
-		return itemServiceInterface.getallItems();
+		return itemServiceInterface
+				.getallItems()
+				.stream()
+				.map(i -> modelMapper.map(i, ItemDTO.class))
+				.collect(Collectors.toList());
 	}
 	
 	@GetMapping("/getAllCategory")
@@ -51,9 +62,12 @@ public class ItemController {
 	}
 	
 	@GetMapping("/{category}/{make}/{description}/getItem")
-	public Item getItemByMakeAndCategoryAndDescription(@PathVariable ItemCategory category, @PathVariable String make, @PathVariable String description) throws ResourceNotFoundException
+	public ItemDTO getItemByMakeAndCategoryAndDescription(@PathVariable ItemCategory category, @PathVariable String make, @PathVariable String description) throws ResourceNotFoundException
 	{
-		return itemServiceInterface.getItemByMakeAndCategoryAndDescription(category, make, description);
+		Item item = itemServiceInterface.getItemByMakeAndCategoryAndDescription(category, make, description);
+		ItemDTO itemDTO = modelMapper.map(item, ItemDTO.class);
+		
+		return itemDTO;
 	}
 	
 	@GetMapping("/viewItems")
