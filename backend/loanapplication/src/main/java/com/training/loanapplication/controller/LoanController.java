@@ -30,6 +30,7 @@ public class LoanController {
 	{
 		return loanServiceInterface.getAllLoans(header);
 	}
+	
 	@GetMapping("/getAllTypes")
 	public List<String> getAllTypes() throws ResourceNotFoundException
 	{
