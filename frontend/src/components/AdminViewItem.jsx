@@ -10,6 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Button} from 'react-bootstrap';
 import AdminEditItem from './AdminEditItem';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,6 +33,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const AdminViewItem = () => {
+
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("admin") === null) {
+        navigate("/loginadmin");
+    }
 
     const [data, setData] = useState([]);
 

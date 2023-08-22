@@ -14,7 +14,7 @@ const AdminLogin = () => {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        console.log("Login Submit")
+        // console.log("Login Submit")
         let resp = {empid, pwd};
         console.log(resp);
         const response = await fetch("http://localhost:8080/api/admin/login", {
@@ -33,7 +33,7 @@ const AdminLogin = () => {
         const json = await response.json();
         if(response.status === 200){
             console.log(JSON.stringify(json))
-            sessionStorage.setItem("admin", JSON.stringify(json));
+            sessionStorage.setItem("admin", JSON.stringify({"username": empid, "password": pwd}));
             navigate('/adminhome');
         }
 
