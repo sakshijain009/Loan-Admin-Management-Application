@@ -111,7 +111,7 @@ const AdminViewUser = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {Array.from(data).map((row) => (
             <StyledTableRow key={row.id}>
               <StyledTableCell align="center">{row.id}</StyledTableCell>
               <StyledTableCell align="center">{row.name || "-"}</StyledTableCell>

@@ -18,9 +18,16 @@ function AdminAddItem() {
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
     const [value, setValue] = useState(0);
-    const [description, setDescription] = useState([]);
+    const [description, setDescription] = useState("");
     const [issue, setIssue] = useState("");
     const [types, setTypes] = useState([]);
+    const [error, setError] = React.useState({
+        "description":'',
+        "make":'',
+        "category":'',
+        "value":'',
+        "status" : ''
+    });
 
     useEffect(() =>{
         const data = async () => {
@@ -32,30 +39,46 @@ function AdminAddItem() {
         data();
     });
 
-    function submitHandler() {
-        const data = async () => {
-            const response = await fetch(`http://localhost:8080/api/admin/addItem`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify({
-                    "description":description,
-                    "make":itemMake,
-                    "category":category,
-                    "value":value,
-                    "status" : issue
-                })
-            });
-            // const json = await response.json();
-            // alert(json.message);
-            // sessionStorage.setItem("itemsDB", res);
-            if(response.status===200)
-            {
-                navigate("/adminviewitem");
-            }
-        };
-        data();
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        setError({
+            "description": description ? "" : "Description is required",
+            "make": itemMake ? "" : "Item Make is required",
+            "category": category ? "" : "Category is required",
+            "value": value !== 0 ? "" : "Value is required",
+            "status" : issue ? "" : "Issue Status is required"
+        })
+        try {
+            // if(error.description || error.make || error.category || error.value || error.status) {
+            //     throw new Error("Invalid Form");
+            // }
+            // const data = async () => {
+                const response = await fetch(`http://localhost:8080/api/admin/addItem`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type":"application/json"
+                    },
+                    body: JSON.stringify({
+                        "description":description,
+                        "make":itemMake,
+                        "category":category,
+                        "value":value,
+                        "status" : issue
+                    })
+                });
+                // const json = await response.json();
+                // alert(json.message);
+                // sessionStorage.setItem("itemsDB", res);
+                if(response.status===200)
+                {
+                    navigate("/adminviewitem");
+                }
+            // };
+            // data();
+        } catch (err) {
+            console.log(err);
+        }
+        
     }
 
     return (
@@ -70,27 +93,32 @@ function AdminAddItem() {
                     onChange={
                         e => setCategory(e.target.value)
                     }/> */}
-                    <DropdownItem flag={0}
+                    <DropdownItems flag={0}
                         val={category}
                         setVal={setCategory}
                         lab={"Select Categories"}
                         arr={types}/>
+                    {error.category && <p style={{color:'red'}}>{error.category}</p>}
                         <TextField id="outlined-basic" label="Item Make" variant="outlined" className='text_register'
                     onChange={
                         e => setItemMake(e.target.value)
                     }/>
+                    {error.make && <p style={{color:'red'}}>{error.make}</p>}
                         <TextField id="outlined-basic" label="Item Description" variant="outlined" className='text_register'
                     onChange={
                         e => setDescription(e.target.value)
                     }/>
+                    {error.description && <p style={{color:'red'}}>{error.description}</p>}
                         <TextField id="outlined-basic" label="Issue Status" variant="outlined" className='text_register'
                     onChange={
                         e => setIssue(e.target.value)
                     }/>
-                        <TextField id="outlined-basic" label="Item Value" variant="outlined" className='text_register'
+                    {error.status && <p style={{color:'red'}}>{error.status}</p>}
+                        <TextField id="outlined-basic" label="Item Value" type='number' variant="outlined" className='text_register'
                     onChange={
-                        e => setValue(e.target.value)
+                        e => setValue(parseInt(e.target.value))
                     }/>
+                    {error.value && <p style={{color:'red'}}>{error.value}</p>}
 
                     </div>
                     <Button variant="contained" className='apply_loan'
@@ -111,7 +139,7 @@ function AdminAddItem() {
     )
 }
 
-function DropdownItem({
+function DropdownItems({
     flag,
     val,
     setVal,
