@@ -17,31 +17,45 @@ function AdminAddLoan() {
         navigate("/loginadmin");
     }
     const [loanType, setLoanType] = useState(["FURNITURE", "MEDICAL", "VEHICLE", "HOME_REMODELLING", "CAR_FINANCE", "HOME_EQUITY" ]);
-    const [duration, setDuration] = useState("");
+    const [duration, setDuration] = useState(0);
     const [category, setCategory] = useState("");
+    const [error, setError] = React.useState({
+        "type": '',
+        "duration": ''
+    });
 
-    function submitHandler() {
-        console.log(category);
-        const data = async () => {
-            const response = await fetch(`http://localhost:8080/api/admin/addLoan`, {
-                method: 'POST',
-                headers: {
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify({
-                    "type":category,
-                    "duration":duration
-                })
-            });
-            const json = await response.json();
-            console.log(json);
-            // console.log()
-            // alert(json.message);
-            setCategory("");
-            setDuration("");
-            // sessionStorage.setItem("itemsDB", res);
-        };
-        data();
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        setError({
+            "type": category ? "" : "Please select a category",
+            "duration": duration !== 0 ? "" : "Please enter a valid duration"
+        })
+        try {
+            if(error.type || duration === 0) {
+                throw new Error("Invalid data");
+                // console.log("Invalid data");
+            }
+            // const data = async () => {
+                const response = await fetch(`http://localhost:8080/api/admin/addLoan`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type":"application/json"
+                    },
+                    body: JSON.stringify({
+                        "type":category,
+                        "duration":duration
+                    })
+                });
+                const json = await response.json();
+                console.log(json);
+                setCategory("");
+                setDuration();
+                navigate("/adminviewloan");
+            // };
+            // data();
+        } catch (err) {
+            console.log(err);
+        }
     }
 
 
@@ -65,12 +79,14 @@ function AdminAddLoan() {
                             setVal={setCategory}
                             label={"Select Categories"}
                             arr={loanType}/>
-                        <TextField sx={{m: 1,minWidth: 450}} 
+                        {error.type && <p style={{color:'red'}}>{error.type}</p>}
+                        <TextField sx={{m: 1,minWidth: 450}}
                             label={"Duration"}
                             type="number"
                             variant="outlined"
                             value={duration}
-                            onChange={e => setDuration(e.target.value)}/>
+                            onChange={e => setDuration(parseInt(e.target.value))}/>
+                        {error.duration && <p style={{color:'red'}}>{error.duration}</p>}
                         
 
                     </div>
