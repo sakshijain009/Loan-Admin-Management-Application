@@ -30,6 +30,10 @@ import com.training.loanapplication.service.AdminService;
 import com.training.loanapplication.service.EmployeeService;
 import com.training.loanapplication.service.ItemService;
 import com.training.loanapplication.service.LoanService;
+import com.training.loanapplication.serviceInterface.AdminServiceInterface;
+import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
+import com.training.loanapplication.serviceInterface.ItemServiceInterface;
+import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -52,25 +56,25 @@ public class ItemControllerTest {
 	private MockMvc mvc;
 	
 	@MockBean
-	private EmployeeService employeeService;
+	private EmployeeServiceInterface employeeService;
 	
 	@MockBean
 	private EmployeeRepository employeeRepository;
 	
 	@MockBean
-	private AdminService adminService;
+	private AdminServiceInterface adminService;
 	
 	@MockBean
 	private AdminRepository adminRepository;
 	
 	@MockBean
-	private ItemService itemService;
+	private ItemServiceInterface itemService;
 	
 	@MockBean
 	private ItemRepository itemRepository;
 	
 	@MockBean
-	private LoanService loanService;
+	private LoanServiceInterface loanService;
 	
 	@MockBean
 	private LoanRepository loanRepository;
@@ -102,5 +106,61 @@ public class ItemControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$", Matchers.hasSize(1)))
 				.andExpect(jsonPath("$[0].value", Matchers.equalTo(item.getValue())));
+	}
+	
+	@Test
+	public void testGetAllCategory() throws Exception{
+		List<String> all_category = new ArrayList<>();
+		all_category.add("FURNITURE");
+		Mockito.when(itemService.getAllCategory()).thenReturn(all_category);
+		mvc.perform(get("/getAllCategory").contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", Matchers.hasSize(all_category.size())))
+		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_category.get(0))));
+		
+	}
+	
+	@Test
+	public void testgetDistinctMakesByCategory() throws Exception{
+		List<String> all_make = new ArrayList<>();
+		all_make.add("wood");
+		ItemCategory itemcat = ItemCategory.CAR_FINANCE ;
+		Mockito.when(itemService.getDistinctMakesByCategory(itemcat)).thenReturn(all_make);
+		mvc.perform(get("/{type}/getAllMake",itemcat).contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", Matchers.hasSize(all_make.size())))
+		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_make.get(0))));
+	}
+//	
+	@Test
+	public void testgetDistinctDescriptionByMakeAndCategory() throws Exception{
+		List<String> all_desc = new ArrayList<>();
+		all_desc.add("new");
+		ItemCategory itemcat = ItemCategory.CAR_FINANCE;
+		Mockito.when(itemService.getDistinctDescriptionByMakeAndCategory(itemcat, "steel")).thenReturn(all_desc);
+		mvc.perform(get("/{category}/{make}/getAllDescriptions",itemcat,"steel").contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", Matchers.hasSize(all_desc.size())))
+		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_desc.get(0))));
+	}
+	
+	@Test
+	public void testGetItemByMakeAndCategoryAndDescription() throws Exception{
+		Item item = new Item();
+		item.setCategory(ItemCategory.FURNITURE);
+		item.setDescription("new");
+		item.setMake("wood");
+		item.setStatus("A");
+		item.setValue(1500);
+		item.setItem_id(1);
+		List<Issue> issues = new ArrayList<>();
+		Issue issue = new Issue();
+		issues.add(issue);
+		item.setIssue(issues);
+		ItemCategory itemcat = ItemCategory.FURNITURE;
+		Mockito.when(itemService.getItemByMakeAndCategoryAndDescription(itemcat, "wood", "new")).thenReturn(item);
+		mvc.perform(get("/{category}/{make}/{description}/getItem",itemcat,"wood", "new").contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.item_id", Matchers.equalTo(item.getItem_id())));
 	}
 }
