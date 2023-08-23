@@ -11,9 +11,12 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
 function AdminAddItem() {
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
@@ -39,7 +42,7 @@ function AdminAddItem() {
         data();
     });
 
-    function submitHandler(e) {
+    const submitHandler = async (e) => {
         e.preventDefault();
         setError({
             "description": description ? "" : "Description is required",
@@ -52,7 +55,7 @@ function AdminAddItem() {
             // if(error.description || error.make || error.category || error.value || error.status) {
             //     throw new Error("Invalid Form");
             // }
-            const data = async () => {
+            // const data = async () => {
                 const response = await fetch(`http://localhost:8080/api/admin/addItem`, {
                     method: 'POST',
                     headers: {
@@ -73,8 +76,8 @@ function AdminAddItem() {
                 {
                     navigate("/adminviewitem");
                 }
-            };
-            data();
+            // };
+            // data();
         } catch (err) {
             console.log(err);
         }
@@ -83,7 +86,7 @@ function AdminAddItem() {
 
     return (
         <>
-            <Appbar/>
+            <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Add Item</h3>
                 <div className="loan-select">

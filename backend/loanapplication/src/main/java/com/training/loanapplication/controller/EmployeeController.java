@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.dto.EmployeeDTO;
+import com.training.loanapplication.exception.AuthenticationFailedException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.LoanModel;
@@ -51,7 +52,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/checkLogin")
-	public Message validateEmployee(@RequestBody LoginEmployee e)
+	public Message validateEmployee(@RequestBody LoginEmployee e) throws AuthenticationFailedException
 	{
 		return empServiceInterface.validateEmployee(e);
 	}

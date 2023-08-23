@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.training.loanapplication.dto.EmployeeDTO;
 import com.training.loanapplication.dto.ItemDTO;
 import com.training.loanapplication.dto.LoanDTO;
+import com.training.loanapplication.exception.AuthenticationFailedException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
@@ -48,7 +49,7 @@ public class AdminController {
 	ItemServiceInterface itemServiceInterface;
 	
 	@PostMapping("/login")
-	public Message checkAdmin(@RequestBody @Valid Admin admin)
+	public Message checkAdmin(@RequestBody @Valid Admin admin) throws AuthenticationFailedException
 	{
 		return adminServiceInterface.checkAdmin(admin);	
 	}

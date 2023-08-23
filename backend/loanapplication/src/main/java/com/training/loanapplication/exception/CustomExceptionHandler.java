@@ -18,25 +18,32 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 //
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-////	@ExceptionHandler(MethodArgumentNotValidException.class)
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+//	@ResponseStatus(HttpStatus.BAD_REQUEST)
+//////	@ExceptionHandler(MethodArgumentNotValidException.class)
+//	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+////		
+//		Map<String, Object> responseBody = new LinkedHashMap<>();
+//		responseBody.put("timestamp", new Date());
+//		responseBody.put("status", status.value());	
+//		List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(x->x.getDefaultMessage())
+//			.collect(Collectors.toList());
 //		
-		Map<String, Object> responseBody = new LinkedHashMap<>();
-		responseBody.put("timestamp", new Date());
-		responseBody.put("status", status.value());	
-		List<String> errors = ex.getBindingResult().getFieldErrors().stream().map(x->x.getDefaultMessage())
-			.collect(Collectors.toList());
-		
-		responseBody.put("errors", errors);
-		
-		return new ResponseEntity<>(responseBody, headers, status);
-	}	
+//		responseBody.put("errors", errors);
+//		
+//		return new ResponseEntity<>(responseBody, headers, status);
+//	}	
 	
 	@ExceptionHandler(value=ResourceNotFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public @ResponseBody ErrorResponse handleResourceNotFoundException(ResourceNotFoundException ex)
 	{
 		return new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
+	}
+	
+	@ExceptionHandler(value=AuthenticationFailedException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public @ResponseBody ErrorResponse handleAuthenticationFailedException(AuthenticationFailedException ex)
+	{
+		return new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
 	}
 }
