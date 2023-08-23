@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 export default function Appbar({hbtn, bt}) {
   const navigate = useNavigate();
-  console.log({hbtn})
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
