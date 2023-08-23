@@ -21,16 +21,17 @@ export default function Appbar({hbtn, bt}) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() => {
-              if({hbtn} == "0"){
-                console.log("Redirecting to /");
-                return(navigate('/'));
-              }
-              else if({hbtn} == "1"){
-                console.log("Redirecting to /home");
-                return(navigate('/home'));
-              }
-            }}
+            // onClick={() => {
+            //   if({hbtn} == "0"){
+            //     console.log("Redirecting to /");
+            //     return(navigate('/'));
+            //   }
+            //   else if({hbtn} == "1"){
+            //     console.log("Redirecting to /home");
+            //     return(navigate('/home'));
+            //   }
+            // }}
+            onClick={() => (navigate(hbtn))}
           >
           <HomeRoundedIcon />
           </IconButton>

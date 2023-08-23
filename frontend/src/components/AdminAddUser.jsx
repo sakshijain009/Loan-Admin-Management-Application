@@ -21,11 +21,13 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 // import { useEffect } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 
-function AdminAddUser({bt}) {
-    
+function AdminAddUser() {
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
@@ -118,7 +120,7 @@ function AdminAddUser({bt}) {
 
     return (
         <>
-            <Appbar bt={"Logout"}/>
+            <Appbar bt={"Logout"} hbtn={goToUrl} />
             <div className='register'>
                 <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'

@@ -11,9 +11,12 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 
 function AdminAddItem() {
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
@@ -83,7 +86,7 @@ function AdminAddItem() {
 
     return (
         <>
-            <Appbar bt={"Logout"}/>
+            <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Add Item</h3>
                 <div className="loan-select">

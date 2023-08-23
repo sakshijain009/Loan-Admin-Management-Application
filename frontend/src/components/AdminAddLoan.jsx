@@ -12,9 +12,12 @@ import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import {useNavigate} from 'react-router-dom'
 
 function AdminAddLoan() {
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     const [loanType, setLoanType] = useState(["FURNITURE", "MEDICAL", "VEHICLE", "HOME_REMODELLING", "CAR_FINANCE", "HOME_EQUITY" ]);
     const [duration, setDuration] = useState(0);
@@ -62,7 +65,7 @@ function AdminAddLoan() {
 
     return (
         <>
-            <Appbar bt={"Logout"}/>
+            <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Add Loan Master Data</h3>
                 <div className="loan-select">
