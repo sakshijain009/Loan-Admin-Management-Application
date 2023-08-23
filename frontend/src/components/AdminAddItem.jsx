@@ -88,7 +88,7 @@ function AdminAddItem() {
         <>
             <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
-                <h3 className="text-center py-3 pt-5">Add Item</h3>
+                <h3 className="text-center py-3 pt-5">Add a New Item</h3>
                 <div className="loan-select">
                     <div className="loan-form">
                         {/* <TextField label={"Item ID"}/> */}
@@ -169,7 +169,7 @@ function DropdownItems({
                     autoWidth
                     label={lab}>
                     {
-                    arr.map((ele) => (
+                    Array.from(arr).map((ele) => (
                         <MenuItem key={ele}
                             value={ele}>
                             {ele}</MenuItem>

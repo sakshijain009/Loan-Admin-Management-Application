@@ -122,7 +122,7 @@ function AdminAddUser() {
         <>
             <Appbar bt={"Logout"} hbtn={goToUrl} />
             <div className='register'>
-                <h2>Register User</h2>
+                <h2>Register a New User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
                     onChange={
                         e => setEmpid(e.target.value)

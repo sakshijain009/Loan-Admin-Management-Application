@@ -14,7 +14,7 @@ function AdminDashboard(){
     }
     return(
         <>
-            <Appbar bt={"Logout"} hbtn={goToUrl}/>
+            <Appbar bt={"Logout"} hbtn={"/adminhome"}/>
             <div className="user-dashboard__container">
                 <h1>Loan Management Application</h1>
                 <hr />
