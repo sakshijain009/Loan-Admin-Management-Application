@@ -10,11 +10,19 @@ const AdminLogin = () => {
 
     const [empid, setEmpid] = useState("");
     const [pwd, setPwd] = useState("");
+    const [error, setError] = useState({
+        "username": '',
+        "password": ''
+    });
     const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault()
         // console.log("Login Submit")
+        setError({
+            "username": empid ? "" : "Username is required",
+            "password": pwd ? "" : "Password is required"
+        })
         let resp = {empid, pwd};
         console.log(resp);
         const response = await fetch("http://localhost:8080/api/admin/login", {
@@ -50,10 +58,12 @@ const AdminLogin = () => {
                     onChange={
                         e => setEmpid(e.target.value)
                     }/>
+                {error.username && <p className="error">{error.username}</p>}
                 <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
                         e => setPwd(e.target.value)
                     }/>
+                {error.password && <p className="error">{error.password}</p>}
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Login</Button>
             </div>
