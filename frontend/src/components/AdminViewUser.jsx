@@ -34,9 +34,12 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const AdminViewUser = () => {
 
-  const navigate = useNavigate();
+  let goToUrl;
+    const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
 
     const [data, setData] = useState([]);
@@ -99,7 +102,7 @@ const AdminViewUser = () => {
     
     return (
       <div>
-        <Appbar/>
+        <Appbar bt={"Logout"} hbtn={goToUrl}/>
         <h3 className='text-center pt-5' >Customer Master Data Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
@@ -118,7 +121,7 @@ const AdminViewUser = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {Array.from(data).map((row) => (
             <StyledTableRow key={row.id}>
               <StyledTableCell align="center">{row.id}</StyledTableCell>
               <StyledTableCell align="center">{row.name || "-"}</StyledTableCell>

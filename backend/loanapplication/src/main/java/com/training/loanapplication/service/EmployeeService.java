@@ -14,6 +14,7 @@ import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.IssueRepository;
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.exception.AuthenticationFailedException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Card;
 import com.training.loanapplication.model.Employee;
@@ -71,7 +72,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 	}
 	
 	// Method to login an employee
-	public Message validateEmployee(LoginEmployee e)
+	public Message validateEmployee(LoginEmployee e) throws AuthenticationFailedException
 	{
 		String result="";
 		Employee employee=null;
@@ -82,7 +83,8 @@ public class EmployeeService implements EmployeeServiceInterface {
 		}
 		if(employee==null)
 		{
-			result="Invalid Employee Id";
+			throw new AuthenticationFailedException("Invalid Employee Id");
+//			result="Invalid Employee Id";
 		}
 		else
 		{
@@ -92,7 +94,8 @@ public class EmployeeService implements EmployeeServiceInterface {
 			}
 			else
 			{
-				result="Login Failed";
+				throw new AuthenticationFailedException("Password is incorrect");
+//				result="Login Failed";
 			}
 		}
 		Message loginresult = new Message();

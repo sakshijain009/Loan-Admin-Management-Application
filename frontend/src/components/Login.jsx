@@ -3,13 +3,43 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import Appbar from './Appbar';
 import { useNavigate } from 'react-router-dom';
-
+import {Button as Btn} from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 import './Login.css';
 
 const Login = ({user, loginUser, bt}) => {
 
     const [empid, setEmpid] = useState("");
     const [pwd, setPwd] = useState("");
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleClose2 = async () => {
+        console.log({empid, pwd})
+        const response = await fetch("http://localhost:8080/api/users/changePassword", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "emp_id": empid,
+                "pwd": pwd
+            },
+            body: JSON.stringify(
+                { }
+            )
+        });
+        const json = await response.json();
+        console.log(json);
+        if(json.status === 200){
+            alert(json.message);
+            setShow(false);
+        }
+        else{
+            alert(json.message);
+        }
+        
+    }
+    const handleShow = () => setShow(true);
 
     const navigate = useNavigate();
 
@@ -66,6 +96,34 @@ const Login = ({user, loginUser, bt}) => {
                     }/>
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Login</Button>
+
+                <Btn variant="warning" className='login_button' style={{minWidth: 420}} onClick={handleShow}>
+                        Change Password
+                    </Btn>
+
+                <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Change your Password</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_login'
+                    onChange={
+                        e => setEmpid(e.target.value)
+                    }/>
+                <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
+                    onChange={
+                        e => setPwd(e.target.value)
+                    }/>
+                </Modal.Body>
+                <Modal.Footer>
+                <Btn variant="danger" onClick={handleClose}>
+                    Cancel
+                </Btn>
+                <Btn variant="success" onClick={handleClose2}>
+                    Change My Password
+                </Btn>
+                </Modal.Footer>
+            </Modal>
             </div>
 
             
