@@ -5,7 +5,6 @@ import Appbar from './Appbar';
 import { useNavigate } from 'react-router-dom';
 import {Button as Btn} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-
 import './Login.css';
 
 const Login = ({user, loginUser, bt}) => {
@@ -26,9 +25,7 @@ const Login = ({user, loginUser, bt}) => {
                 "pwd": pwd
             },
             body: JSON.stringify(
-                {
-                    
-                }
+                { }
             )
         });
         const json = await response.json();
@@ -100,7 +97,7 @@ const Login = ({user, loginUser, bt}) => {
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Login</Button>
 
-                <Btn variant="warning" className='mx-auto m-3' style={{minWidth: 420}} onClick={handleShow}>
+                <Btn variant="warning" className='login_button' style={{minWidth: 420}} onClick={handleShow}>
                         Change Password
                     </Btn>
 
