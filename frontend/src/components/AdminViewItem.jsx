@@ -62,8 +62,15 @@ const AdminViewItem = () => {
                     "Content-Type": "application/json",
             }})
             const dt = await res.json();
-            console.log(dt);
-            setData(dt);
+            if(res.status===404)
+            {
+                alert("No Items Available");
+                navigate('/adminadditem');
+            }
+            else
+            {
+                setData(dt);
+            }
         }
         data();
       // setData(json)

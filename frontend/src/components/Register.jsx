@@ -94,7 +94,7 @@ function AddUser({user, loginUser, bt}) {
             navigate('/home');
         }
         else{
-            alert("Please fill the details correctly!");
+            console.log(response.message);
         }
     }
 

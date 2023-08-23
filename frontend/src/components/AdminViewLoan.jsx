@@ -58,9 +58,15 @@ const AdminViewUser = () => {
         const data1 = async () => {
             const response = await fetch('http://localhost:8080/api/admin/getAllLoan');
             const res = await response.json();
-            console.log(res);
-            setData(res);
-            console.log(typeof(data))
+            if(response.status===404)
+            {
+                alert("Nothing to display");
+                navigate('/adminaddloan');
+            }
+            else
+            {
+              setData(res);
+            }
         }
         data1();
       // setData(json)
