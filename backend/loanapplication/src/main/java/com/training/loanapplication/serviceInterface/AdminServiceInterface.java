@@ -2,6 +2,7 @@ package com.training.loanapplication.serviceInterface;
 
 import java.util.List;
 
+import com.training.loanapplication.exception.AuthenticationFailedException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
@@ -12,7 +13,7 @@ import com.training.loanapplication.model.Message;
 import jakarta.validation.Valid;
 
 public interface AdminServiceInterface {
-	public Message checkAdmin(@Valid Admin admin);
+	public Message checkAdmin(@Valid Admin admin) throws AuthenticationFailedException;
 	public Message removeEmployee(String employee_id);
 	public List<Employee> getAllEmployee() throws ResourceNotFoundException;
 	public List<Loan> getAllLoan() throws ResourceNotFoundException;
