@@ -21,7 +21,7 @@ const AdminLogin = () => {
         // console.log("Login Submit")
         setError({
             "username": empid ? "" : "Username is required",
-            "password": pwd && pwd.length === 8 ? "" : "A 8-digit Password is required"
+            "password": pwd ? pwd.length === 8 ? "" : "Password should contain 8 digits" : "Password is required"
         })
         let resp = {empid, pwd};
         console.log(resp);

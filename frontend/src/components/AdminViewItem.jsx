@@ -90,7 +90,7 @@ const AdminViewItem = () => {
     
     return (
       <div>
-        <Appbar/>
+        <Appbar bt={"Logout"}/>
         <h3 className='text-center pt-5' >Customer Master Data Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>

@@ -83,7 +83,7 @@ function AdminAddItem() {
 
     return (
         <>
-            <Appbar/>
+            <Appbar bt={"Logout"}/>
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Add Item</h3>
                 <div className="loan-select">

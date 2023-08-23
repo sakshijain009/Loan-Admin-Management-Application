@@ -118,7 +118,7 @@ function AdminAddUser({bt}) {
 
     return (
         <>
-            <Appbar bt={bt}/>
+            <Appbar bt={"Logout"}/>
             <div className='register'>
                 <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
