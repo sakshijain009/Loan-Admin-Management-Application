@@ -39,7 +39,7 @@ function AdminAddItem() {
         data();
     });
 
-    function submitHandler(e) {
+    const submitHandler = async (e) => {
         e.preventDefault();
         setError({
             "description": description ? "" : "Description is required",
@@ -52,7 +52,7 @@ function AdminAddItem() {
             // if(error.description || error.make || error.category || error.value || error.status) {
             //     throw new Error("Invalid Form");
             // }
-            const data = async () => {
+            // const data = async () => {
                 const response = await fetch(`http://localhost:8080/api/admin/addItem`, {
                     method: 'POST',
                     headers: {
@@ -73,8 +73,8 @@ function AdminAddItem() {
                 {
                     navigate("/adminviewitem");
                 }
-            };
-            data();
+            // };
+            // data();
         } catch (err) {
             console.log(err);
         }

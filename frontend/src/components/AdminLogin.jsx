@@ -21,7 +21,7 @@ const AdminLogin = () => {
         // console.log("Login Submit")
         setError({
             "username": empid ? "" : "Username is required",
-            "password": pwd ? "" : "Password is required"
+            "password": pwd && pwd.length === 8 ? "" : "A 8-digit Password is required"
         })
         let resp = {empid, pwd};
         console.log(resp);
@@ -58,12 +58,12 @@ const AdminLogin = () => {
                     onChange={
                         e => setEmpid(e.target.value)
                     }/>
-                {error.username && <p className="error">{error.username}</p>}
+                {error.username && <p style={{color:'red'}}>{error.username}</p>}
                 <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
                         e => setPwd(e.target.value)
                     }/>
-                {error.password && <p className="error">{error.password}</p>}
+                {error.password && <p style={{color:'red'}}>{error.password}</p>}
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Login</Button>
             </div>
