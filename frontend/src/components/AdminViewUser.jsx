@@ -59,8 +59,15 @@ const AdminViewUser = () => {
                     "Content-Type": "application/json",
             }})
             const dt = await res.json();
-            console.log(dt);
-            setData(dt);
+            if(res.status===404)
+            {
+              alert("No users to display");
+              navigate('/adminadduser');
+            }
+            else
+            {
+              setData(dt);
+            }
         }
         data();
       // setData(json)
