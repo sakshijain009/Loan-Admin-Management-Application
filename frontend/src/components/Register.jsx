@@ -33,12 +33,12 @@ function AddUser({user, loginUser, bt}) {
 
     const [pwd, setPwd] = React.useState("");
 
-    useEffect(() => {
-        if(user!=null && user.length > 0)
-        {
-            navigate('/login');
-        }
-    },[user])
+    // useEffect(() => {
+    //     if(user!=null && user.length > 0)
+    //     {
+    //         navigate('/login');
+    //     }
+    // },[user])
 
     const dateFormat = e => {
         const year = e['$y'];
@@ -100,7 +100,7 @@ function AddUser({user, loginUser, bt}) {
 
     return (
         <>
-            <Appbar hbtn={"0"} bt={bt}/>
+            <Appbar hbtn={"/"} bt={bt}/>
             <div className='register'>
                 <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'

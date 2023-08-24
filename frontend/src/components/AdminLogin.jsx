@@ -50,7 +50,7 @@ const AdminLogin = () => {
 
     return (
     <>
-        <Appbar />
+        <Appbar hbtn={"/"}/>
             <div className='login'>
                 <h2>Login Admin</h2>
 

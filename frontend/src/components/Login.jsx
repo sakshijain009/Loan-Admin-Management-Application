@@ -82,7 +82,7 @@ const Login = ({user, loginUser, bt}) => {
 
     return (
     <>
-        <Appbar bt={bt} hbtn={"0"}/>
+        <Appbar bt={bt} hbtn={"/"}/>
             <div className='login'>
                 <h2>Login User</h2>
 

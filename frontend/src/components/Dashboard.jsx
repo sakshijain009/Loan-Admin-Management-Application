@@ -22,7 +22,7 @@ function Dashboard(){
 
     return (
         <>
-            <Appbar hbtn={"/"} bt={"Register"}/>
+            <Appbar hbtn={"/"}/>
             <div className="dashboard-container">
 
 

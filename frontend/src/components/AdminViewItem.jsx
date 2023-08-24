@@ -101,7 +101,7 @@ const AdminViewItem = () => {
     return (
       <div>
         <Appbar bt={"Logout"} hbtn={goToUrl}/>
-        <h3 className='text-center pt-5' >Customer Master Data Details</h3>
+        <h3 className='text-center pt-5' >Items Master Data Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
