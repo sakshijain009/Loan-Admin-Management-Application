@@ -14,7 +14,7 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	@Query("SELECT l.loan_id from Loan as l where l.type = :type")
 	int findIdByType(ItemCategory type);
 	
-	@Query(nativeQuery=true, value="SELECT l.loan_id , l.duration , l.loan_type as type , c.card_id  FROM loan_master l INNER JOIN card_details c ON l.loan_id=c.loan_id WHERE c.employee_id=?1")
+	@Query(nativeQuery=true, value="SELECT l.loan_id , l.duration , l.loan_type as type , c.card_issue_date FROM loan_master l INNER JOIN card_details c ON l.loan_id=c.loan_id WHERE c.employee_id=?1")
 	public List<Map<String,Object>> getallLoans(String emp_id);
 	
 	Loan findByType(ItemCategory itemCategory);
