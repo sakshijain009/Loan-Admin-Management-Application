@@ -1,5 +1,5 @@
 import React from "react";
-import Appbar from './Appbar';
+import Appbar from "../components/Appbar";
 import './Dash.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";

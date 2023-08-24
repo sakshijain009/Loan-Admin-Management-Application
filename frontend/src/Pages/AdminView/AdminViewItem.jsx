@@ -1,4 +1,4 @@
-import Appbar from './Appbar';
+import Appbar from '../../components/Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -8,8 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button } from 'react-bootstrap';
-import AdminEditLoan from './AdminEditLoan';
+import {Button} from 'react-bootstrap';
+import AdminEditItem from '../../components/AdminEditItem';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -34,15 +34,15 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const AdminViewUser = () => {
+const AdminViewItem = () => {
 
   let goToUrl;
-    const navigate = useNavigate();
-    if(sessionStorage.getItem("admin") === null) {
-        navigate("/loginadmin");
-    } else {
-        goToUrl = "/adminhome";
-    }
+  const navigate = useNavigate();
+  if(sessionStorage.getItem("admin") === null) {
+      navigate("/loginadmin");
+  } else {
+      goToUrl = "/adminhome";
+  }
 
     const [data, setData] = useState([]);
 
@@ -57,26 +57,30 @@ const AdminViewUser = () => {
     const [editDone, setEditDone] = useState(false);
   
     useEffect(() => {
-        const data1 = async () => {
-            const response = await fetch('http://localhost:8080/api/admin/getAllLoan');
-            const res = await response.json();
-            if(response.status===404)
+        const data = async () => {
+            const res = await fetch('http://localhost:8080/getAllItems', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+            }})
+            const dt = await res.json();
+            if(res.status===404)
             {
-                toast("No Loans Available");
+                toast("No Items Available");
             }
             else
             {
-              setData(res);
+                setData(dt);
             }
         }
-        data1();
+        data();
       // setData(json)
     }, [editDone, deleteDone])
 
     const deleteHandler = () => {
         console.log(deleteRow);
         const data = async () => {
-            const res = await fetch(`http://localhost:8080/api/admin/removeLoan/${deleteRow}`, {
+            const res = await fetch(`http://localhost:8080/api/admin/removeItem/${deleteRow}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,42 +89,49 @@ const AdminViewUser = () => {
             console.log(dt.message);
             // setData(dt);
             setDeleteDone(prev => !prev);
+            // window.location.reload();
         }
         data();
     }    
 
     useEffect(() => {
-        console.log("Emp id", deleteRow);
+        console.log("Item id", deleteRow);
         deleteHandler()
     }, [deleteRow]);
     
     return (
       <div>
         <Appbar bt={"Logout"} hbtn={goToUrl}/>
-        <h3 className='text-center pt-5' >Loan Master Data Details</h3>
+        <h3 className='text-center pt-5' >Customer Master Data Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Loan Id</StyledTableCell>
-            <StyledTableCell align="center">Loan Type</StyledTableCell>
-            <StyledTableCell align="center">Duration</StyledTableCell>
+            <StyledTableCell align="center">Item Id</StyledTableCell>
+            <StyledTableCell align="center">Item Category</StyledTableCell>
+            <StyledTableCell align="center">Item Description</StyledTableCell>
+            <StyledTableCell align="center">Item Make</StyledTableCell>
+            <StyledTableCell align="center">Item Status</StyledTableCell>
+            <StyledTableCell align="center">Item Value</StyledTableCell>
             <StyledTableCell align="center">Edit</StyledTableCell>
             <StyledTableCell align="center">Delete</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {Array.from(data).map((row) => (
-            <StyledTableRow key={row.loan_id}>
-              <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
-              <StyledTableCell align="center">{row.type || "-"}</StyledTableCell>
-              <StyledTableCell align="center">{row.duration || "-"}</StyledTableCell>
+            <StyledTableRow key={row.item_id}>
+              <StyledTableCell align="center">{row.item_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.category || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.description || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.make || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.status || "-"}</StyledTableCell>
+              <StyledTableCell align="center">{row.value || "-"}</StyledTableCell>
               <StyledTableCell align="center">
-                <Button variant='warning' onClick={() => {handleShow(), setEditRow(row.loan_id)}}>Edit</Button>
+                <Button variant='warning' onClick={() => {handleShow(), setEditRow(row.item_id)}}>Edit</Button>
               </StyledTableCell>
               <StyledTableCell align="center">
-                <Button variant='danger' onClick={() => setDeleteRow(row.loan_id)}>Delete</Button>
+                <Button variant='danger' onClick={() => setDeleteRow(row.item_id)}>Delete</Button>
               </StyledTableCell>
             </StyledTableRow>
           ))}
@@ -128,11 +139,11 @@ const AdminViewUser = () => {
       </Table>
     </TableContainer>
     </div>
-    {editRow && <AdminEditLoan show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
-    <ToastContainer/>
+    {editRow && <AdminEditItem show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
+    <ToastContainer />
       </div>
 
     )
 }
 
-export default AdminViewUser
+export default AdminViewItem
