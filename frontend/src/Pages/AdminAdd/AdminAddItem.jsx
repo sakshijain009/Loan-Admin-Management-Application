@@ -8,13 +8,9 @@ import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
 import {Link, Navigate, useNavigate} from 'react-router-dom';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
-<<<<<<< HEAD:frontend/src/Pages/AdminAdd/AdminAddItem.jsx
 import '../ApplyLoans.css';
-=======
-import './ApplyLoans.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
->>>>>>> 517b90df9b90e5ab36615cd1b53dd3f19300745b:frontend/src/components/AdminAddItem.jsx
 
 function AdminAddItem() {
     let goToUrl;

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React from 'react';
-=======
 import React, {useEffect} from 'react';
->>>>>>> 517b90df9b90e5ab36615cd1b53dd3f19300745b
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
