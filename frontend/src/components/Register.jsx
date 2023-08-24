@@ -111,6 +111,7 @@ function AddUser({user, loginUser, bt}) {
         console.log(json);
         console.log(response.status);
         if(response.status === 200){
+            sessionStorage.clear();
             loginUser(empid);
             navigate('/home');
         }

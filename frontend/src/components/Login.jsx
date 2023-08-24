@@ -51,9 +51,7 @@ const Login = ({user, loginUser, bt}) => {
     },[user])
 
     async function handleSubmit(e) {
-        e.preventDefault()
-        console.log("Login Submit")
-        loginUser(empid);
+        e.preventDefault();
         let resp = {empid, pwd};
         console.log(resp);
         const response = await fetch("http://localhost:8080/api/users/checkLogin", {
@@ -72,6 +70,8 @@ const Login = ({user, loginUser, bt}) => {
         const json = await response.json();
         console.log(json);
         if(json.message === "Login success"){
+            sessionStorage.clear();
+            loginUser(empid);
             navigate('/home');
         }
         else

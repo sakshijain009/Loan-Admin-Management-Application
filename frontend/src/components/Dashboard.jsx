@@ -7,6 +7,11 @@ import { Button, Card } from 'react-bootstrap';
 function Dashboard(){
     
     const navigate = useNavigate();
+    if(sessionStorage.getItem("admin")) {
+        navigate("/adminhome");
+    } else if(sessionStorage.getItem("username")) {
+        navigate("/home");
+    }
 
     function adminLogin() {
         navigate('/loginadmin');
