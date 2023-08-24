@@ -34,13 +34,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		Employee e = empRepo.findById(id).get();
   
-			if(e!=null)
-			{
-				return new org.springframework.security.core.userdetails.User(e.getId(), e.getPassword(),
-					new ArrayList<>());
-			} else {
-				throw new UsernameNotFoundException("User not found with username: " + id);
-			}
-		
+		if(e!=null)
+		{
+			return new org.springframework.security.core.userdetails.User(e.getId(), e.getPassword(), new ArrayList<>());
+		} else {
+			throw new UsernameNotFoundException("User not found with username: " + id);
 		}
+		
+	}
 }

@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.training.loanapplication.service.JwtUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 
@@ -22,7 +24,7 @@ public class WebSecurityConfig {
 	private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
 	@Autowired
-	private UserDetailsService usrDetailsService;
+	private JwtUserDetailsService usrDetailsService;
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
@@ -40,7 +42,7 @@ public class WebSecurityConfig {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		
 		httpSecurity.csrf().disable()
-				.authorizeHttpRequests().requestMatchers("/register","/welcome").permitAll().
+				.authorizeHttpRequests().requestMatchers("/**").permitAll().
 				anyRequest().authenticated().and().
 				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
