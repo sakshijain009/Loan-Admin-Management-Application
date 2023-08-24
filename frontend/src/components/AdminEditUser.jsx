@@ -1,10 +1,7 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import React from 'react';
-// import axios from 'axios'
-// import Navbar from './Navbar/Navbar';
-import Appbar from './Appbar';
-import './Register.css'
+import '../Pages/Register.css'
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -19,7 +16,7 @@ import Select from '@mui/material/Select';
 // import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 // import Alert from '@mui/material/Alert';
 import { useState, useEffect } from 'react';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+// import {Link, useNavigate, useParams} from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
 import { Modal } from 'react-bootstrap';
 

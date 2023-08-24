@@ -1,4 +1,4 @@
-import Appbar from './Appbar';
+import Appbar from '../../components/Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from 'react-bootstrap';
-import AdminEditLoan from './AdminEditLoan';
+import AdminEditLoan from '../../components/AdminEditLoan';
 import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({

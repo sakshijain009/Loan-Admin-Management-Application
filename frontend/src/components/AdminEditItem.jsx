@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import React from 'react';
 import Appbar from './Appbar';
-import './Register.css'
+import '../Pages/Register.css';
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';

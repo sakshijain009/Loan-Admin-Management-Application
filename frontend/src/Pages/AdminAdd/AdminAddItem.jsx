@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Appbar from './Appbar';
+import Appbar from '../../components/Appbar';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,7 +8,7 @@ import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
 import {Link, Navigate, useNavigate} from 'react-router-dom';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
-import './ApplyLoans.css'
+import '../ApplyLoans.css';
 
 function AdminAddItem() {
     let goToUrl;

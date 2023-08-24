@@ -1,4 +1,4 @@
-import Appbar from './Appbar'
+import Appbar from '../components/Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -30,17 +30,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ViewItems = ({user, bt}) => {
+const ViewLoanDetails = ({user, bt}) => {
+
+    const [data, setData] = useState([])
     const navigate = useNavigate();
     if(sessionStorage.getItem("username") === null) {
         navigate("/login");
     } 
-    const [data, setData] = useState([])
-  
     useEffect(() => {
         const data = async () => {
             user = sessionStorage.getItem('username');
-            const res = await fetch('http://localhost:8080/viewItems', {
+            const res = await fetch('http://localhost:8080/getallLoans', {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,36 +48,36 @@ const ViewItems = ({user, bt}) => {
             }})
             const dt = await res.json();
             console.log(dt);
+            
+            console.log(user)
             setData(dt);
         }
         data();
+      // setData(json)
     }, [])
-  
   
     return (
       <div>
         <Appbar hbtn={"/home"} bt={bt}/>
-        <h3 className='text-center pt-5' >Viewing Issued Item Details</h3>
+        <h3 className='text-center pt-5' >Viewing your Loan details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="center">Issue ID</StyledTableCell>
-            <StyledTableCell align="center">Description</StyledTableCell>
-            <StyledTableCell align="center">Make</StyledTableCell>
-            <StyledTableCell align="center">Category</StyledTableCell>
-            <StyledTableCell align="center">Valuation</StyledTableCell>
+            <StyledTableCell align="center">Loan ID</StyledTableCell>
+            <StyledTableCell align="center">Duration</StyledTableCell>
+            <StyledTableCell align="center">Loan Type</StyledTableCell>
+            <StyledTableCell align="center">Card ID</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {Array.from(data).map((row) => (
             <StyledTableRow>
-              <StyledTableCell key={row.item_id} align="center">{row.issue_id}</StyledTableCell>
-              <StyledTableCell key={row.item_id} align="center">{row.item_description}</StyledTableCell>
-              <StyledTableCell key={row.item_id} align="center">{row.item_make}</StyledTableCell>
-              <StyledTableCell key={row.item_id} align="center">{row.item_category}</StyledTableCell>
-              <StyledTableCell key={row.item_id} align="center">{row.item_value}</StyledTableCell>
+              <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.duration}</StyledTableCell>
+              <StyledTableCell align="center">{row.type}</StyledTableCell>
+              <StyledTableCell align="center">{row.card_id}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
@@ -85,8 +85,7 @@ const ViewItems = ({user, bt}) => {
     </TableContainer>
     </div>
       </div>
-
     )
 }
 
-export default ViewItems
+export default ViewLoanDetails
