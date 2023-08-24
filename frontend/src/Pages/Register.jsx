@@ -1,9 +1,7 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import React from 'react';
-import axios from 'axios'
-import Navbar from './Navbar/Navbar';
-import Appbar from './Appbar';
+import Appbar from '../components/Appbar';
 import './Register.css'
 
 import Box from '@mui/material/Box';
@@ -17,18 +15,11 @@ import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-// import Alert from '@mui/material/Alert';
-// import { useEffect } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 
-function AdminAddUser() {
-    let goToUrl;
+function AddUser({user, loginUser, bt}) {
     const navigate = useNavigate();
-    if(sessionStorage.getItem("admin") === null) {
-        navigate("/loginadmin");
-    } else {
-        goToUrl = "/adminhome";
-    }
     const [empid, setEmpid] = React.useState("");
     const [name, setName] = React.useState("");
     const [dept, setDept] = React.useState("");
@@ -39,6 +30,9 @@ function AdminAddUser() {
 
     const [dobSend, setDobSend] = React.useState("");
     const [dojSend, setDojSend] = React.useState("");
+
+    const [pwd, setPwd] = React.useState("");
+
     const [error, setError] = React.useState({
         "id": '',
         "name": '',
@@ -46,10 +40,16 @@ function AdminAddUser() {
         "designation": '',
         "gender": '',
         "dob": '',
-        "doj": ''
+        "doj": '',
+        "pwd": ''
     });
 
-    // const [pwd, setPwd] = React.useState("");
+    // useEffect(() => {
+    //     if(user!=null && user.length > 0)
+    //     {
+    //         navigate('/login');
+    //     }
+    // },[user])
 
     const dateFormat = e => {
         const year = e['$y'];
@@ -86,9 +86,10 @@ function AdminAddUser() {
             "designation": des? '': 'Please enter Employee Designation',
             "gender": gender? '': 'Please select Employee Gender',
             "dob": dob? '': 'Please select Employee Date of Birth',
-            "doj": doj? '': 'Please select Employee Date of Joining'
+            "doj": doj? '': 'Please select Employee Date of Joining',
+            "pwd": pwd? '': 'Please enter Employee Password'
         })
-        const response = await fetch("http://localhost:8080/api/admin/addUser", {
+        const response = await fetch("http://localhost:8080/api/users/addUser", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -102,7 +103,7 @@ function AdminAddUser() {
                     "gender": gender,
                     "dob": dobSend,
                     "doj": dojSend,
-                    "password": "12345678"
+                    "password": pwd
                 }
             )
         });
@@ -110,19 +111,20 @@ function AdminAddUser() {
         console.log(json);
         console.log(response.status);
         if(response.status === 200){
-            // loginUser(empid);
-            navigate('/adminviewuser');
+            sessionStorage.clear();
+            loginUser(empid);
+            navigate('/home');
         }
         else{
-            // alert("Please fill the details correctly!");
+            console.log(response.message);
         }
     }
 
     return (
         <>
-            <Appbar bt={"Logout"} hbtn={goToUrl} />
+            <Appbar hbtn={"/"} bt={bt}/>
             <div className='register'>
-                <h2>Register a New User</h2>
+                <h2>Register User</h2>
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_register'
                     onChange={
                         e => setEmpid(e.target.value)
@@ -141,9 +143,9 @@ function AdminAddUser() {
                 <TextField id="outlined-basic" label="Employee Designation" variant="outlined" className='text_register'
                     onChange={
                         e => setDes(e.target.value)
-                    }/> 
+                    }/>
                 {error.designation && <p style={{color:'red'}}>{error.designation}</p>}
-                    {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
+                     {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
                     onChange={
                         e => setGender(e.target.value)
                     }/> */}
@@ -168,10 +170,11 @@ function AdminAddUser() {
                     </FormControl>
                 </Box>
                 {error.gender && <p style={{color:'red'}}>{error.gender}</p>}
-                {/* <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
+                <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
                         e => setPwd(e.target.value)
-                    }/>  */}
+                    }/> 
+                {error.pwd && <p style={{color:'red'}}>{error.pwd}</p>}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={
                         ['DatePicker']
@@ -194,11 +197,11 @@ function AdminAddUser() {
                     </DemoContainer>
                 </LocalizationProvider>
                 {error.doj && <p style={{color:'red'}}>{error.doj}</p>}
+
                 <Button variant="contained" className='register_button'
-                    onClick={handleSubmit}>Add User</Button>
-                <Button variant='contained' className='register_button'><Link style={{textDecoration:'none', color:'white'}} to="/adminviewuser">View All Users</Link></Button>
+                    onClick={handleSubmit}>Submit</Button>
             </div>
         </>
     )
 }
-export default AdminAddUser;
+export default AddUser;

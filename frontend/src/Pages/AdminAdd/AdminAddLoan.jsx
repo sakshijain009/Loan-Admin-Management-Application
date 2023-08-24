@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Appbar from './Appbar';
+import Appbar from '../../components/Appbar';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,7 +7,7 @@ import Button from '@mui/material/Button'
 import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
-import './ApplyLoans.css'
+import '../ApplyLoans.css'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import {useNavigate} from 'react-router-dom'
 

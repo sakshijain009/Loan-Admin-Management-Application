@@ -1,25 +1,22 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Register from './components/Register';
-import Login from './components/Login';
-import Dash from './components/Dash';
-import AdminLogin from './components/AdminLogin';
-import Dashboard from './components/Dashboard';
-import ApplyLoans from './components/ApplyLoans';
-import ViewLoanDetails from './components/ViewLoanDetails'
-import ViewItems from './components/ViewItems';
-import AdminDashboard from './components/AdminDashboard';
-import AdminAddUser from './components/AdminAddUser';
-import AdminAddItem from './components/AdminAddItem';
-import AdminAddLoan from './components/AdminAddLoan';
-import AdminViewUser from './components/AdminViewUser';
-import AdminViewItem from './components/AdminViewItem';
-import Logout from './components/logout';
-import AdminEditUser from './components/AdminEditUser';
-import AdminEditItem from './components/AdminEditItem';
-import AdminViewLoan from './components/AdminViewLoan';
-import AdminEditLoan from './components/AdminEditLoan'
-import ErrorPage from './components/ErrorPage';
+import Login from './Pages/Login';
+import Register from './Pages/Register';
+import AdminLogin from './Pages/AdminLogin';
+import Dashboard from './Pages/Dashboard';
+import Dash from './Pages/Dash';
+import ApplyLoans from './Pages/ApplyLoans';
+import ViewLoanDetails from './Pages/ViewLoanDetails';
+import ViewItems from './Pages/ViewItems';
+import AdminDashboard from './Pages/AdminDashboard';
+import AdminAddUser from './Pages/AdminAdd/AdminAddUser';
+import AdminAddLoan from './Pages/AdminAdd/AdminAddLoan';
+import AdminAddItem from './Pages/AdminAdd/AdminAddItem';
+import AdminViewUser from './Pages/AdminView/AdminViewUser';
+import AdminViewLoan from './Pages/AdminView/AdminViewLoan';
+import AdminViewItem from './Pages/AdminView/AdminViewItem';
+import ErrorPage from './Pages/ErrorPage';
+import Logout from './Components/Logout';
 
 function App() {
   
@@ -45,7 +42,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/register' element={<Register user={user} loginUser={loginUser} bt={"login"}/> } />
-          <Route path='/login' element={<Login  user={user} loginUser={loginUser} bt={"register"}/> } />
+          <Route path='/login' element={<Login user={user} loginUser={loginUser} bt={"register"}/> } />
           <Route path='/loginadmin' element={<AdminLogin/>} />
           <Route path='/' element={<Dashboard/>} />
           <Route path='/home' element={<Dash user={user}/>} />
