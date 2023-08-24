@@ -1,4 +1,4 @@
-import Appbar from './Appbar'
+import Appbar from '../components/Appbar';
 import React, {useState, useEffect} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -32,7 +33,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const ViewLoanDetails = ({user, bt}) => {
 
     const [data, setData] = useState([])
-  
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("username") === null) {
+        navigate("/login");
+    } 
     useEffect(() => {
         const data = async () => {
             user = sessionStorage.getItem('username');
@@ -54,7 +58,7 @@ const ViewLoanDetails = ({user, bt}) => {
   
     return (
       <div>
-        <Appbar hbtn={"1"} bt={bt}/>
+        <Appbar hbtn={"/home"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing your Loan details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
@@ -68,7 +72,7 @@ const ViewLoanDetails = ({user, bt}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {Array.from(data).map((row) => (
             <StyledTableRow>
               <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
               <StyledTableCell align="center">{row.duration}</StyledTableCell>

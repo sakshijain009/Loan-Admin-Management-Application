@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Appbar from './Appbar';
+import Appbar from '../components/Appbar';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -11,7 +11,10 @@ import './ApplyLoans.css'
 import { useNavigate } from 'react-router-dom';
 
 function ApplyLoans({user, setUser, bt}) {
-
+    const navigate= useNavigate();
+    if(sessionStorage.getItem("username") === null) {
+        navigate("/login");
+    } 
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
     const [item, setItem] = useState("");
@@ -19,7 +22,7 @@ function ApplyLoans({user, setUser, bt}) {
     const [categories, setCategories] = useState([]);
     const [makeArr, setMakeArr] = useState([]);
     const [description, setDescription] = useState([]);
-    const navigate= useNavigate();
+    
 
     useEffect(() => {
         const username = sessionStorage.getItem("username");
@@ -112,7 +115,7 @@ function ApplyLoans({user, setUser, bt}) {
 
     return (
         <>
-            <Appbar hbtn={"1"} bt={bt}/>
+            <Appbar hbtn={"/home"} bt={bt}/>
             <div className="loan__container">
                 <h3 className="text-center py-3 pt-5">Select Product and Apply for Loan</h3>
                 <div className="loan-select">
@@ -215,7 +218,7 @@ function DropdownItem({
                     autoWidth
                     label={lab}>
                     {
-                    arr.map((ele) => (
+                    Array.from(arr).map((ele) => (
                         <MenuItem key={ele}
                             value={ele}>
                             {ele}</MenuItem>

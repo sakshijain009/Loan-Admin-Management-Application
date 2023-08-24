@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Appbar from './Appbar';
+import Appbar from '../../components/Appbar';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -8,12 +8,17 @@ import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
 import {Link, Navigate, useNavigate} from 'react-router-dom';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
-import './ApplyLoans.css'
+import '../ApplyLoans.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminAddItem() {
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     const [category, setCategory] = useState("");
     const [itemMake, setItemMake] = useState("");
@@ -34,10 +39,17 @@ function AdminAddItem() {
             const response = await fetch("http://localhost:8080/getAllTypes");
             const json = await response.json();
             const res = JSON.stringify(json);
-            setTypes(json);
+            if(response.status===404)
+            {
+                toast("No Item Categories Available");
+            }
+            else
+            {
+                setTypes(json);
+            }
         };
         data();
-    });
+    }, []);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -83,9 +95,9 @@ function AdminAddItem() {
 
     return (
         <>
-            <Appbar/>
+            <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
-                <h3 className="text-center py-3 pt-5">Add Item</h3>
+                <h3 className="text-center py-3 pt-5">Add a New Item</h3>
                 <div className="loan-select">
                     <div className="loan-form">
                         {/* <TextField label={"Item ID"}/> */}
@@ -135,6 +147,7 @@ function AdminAddItem() {
                     <button className="btn btn-success" onClick={()=>(navigate('/adminviewitem'))}>View Items</button>
                 </div>
             </div>
+            <ToastContainer/>
         </>
     )
 }
@@ -166,7 +179,7 @@ function DropdownItems({
                     autoWidth
                     label={lab}>
                     {
-                    arr.map((ele) => (
+                    Array.from(arr).map((ele) => (
                         <MenuItem key={ele}
                             value={ele}>
                             {ele}</MenuItem>

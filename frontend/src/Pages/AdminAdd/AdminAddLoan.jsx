@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import Appbar from './Appbar';
+import Appbar from '../../components/Appbar';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,14 +7,17 @@ import Button from '@mui/material/Button'
 import Select from '@mui/material/Select';
 import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
-import './ApplyLoans.css'
+import '../ApplyLoans.css'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import {useNavigate} from 'react-router-dom'
 
 function AdminAddLoan() {
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     const [loanType, setLoanType] = useState(["FURNITURE", "MEDICAL", "VEHICLE", "HOME_REMODELLING", "CAR_FINANCE", "HOME_EQUITY" ]);
     const [duration, setDuration] = useState(0);
@@ -31,6 +34,7 @@ function AdminAddLoan() {
             "duration": duration !== 0 ? "" : "Please enter a valid duration"
         })
         try {
+            // console.log(typeof(duration))
             if(error.type || duration === 0) {
                 throw new Error("Invalid data");
                 // console.log("Invalid data");
@@ -61,9 +65,9 @@ function AdminAddLoan() {
 
     return (
         <>
-            <Appbar/>
+            <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
-                <h3 className="text-center py-3 pt-5">Add Loan Master Data</h3>
+                <h2 className="text-center py-3 pt-5">Add Loan Master Data</h2>
                 <div className="loan-select">
                     <div className="loan-form" 
                     style=
@@ -85,7 +89,7 @@ function AdminAddLoan() {
                             type="number"
                             variant="outlined"
                             value={duration}
-                            onChange={e => setDuration(parseInt(e.target.value))}/>
+                            onChange={e => setDuration(parseInt(e.target.value || "0"))}/>
                         {error.duration && <p style={{color:'red'}}>{error.duration}</p>}
                         
 

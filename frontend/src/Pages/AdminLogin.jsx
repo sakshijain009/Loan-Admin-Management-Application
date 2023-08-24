@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
-import Appbar from './Appbar';
+import Appbar from '../components/Appbar';
 import { useNavigate } from 'react-router-dom';
 
 import './Login.css';
@@ -15,13 +15,16 @@ const AdminLogin = () => {
         "password": ''
     });
     const navigate = useNavigate();
+    if(sessionStorage.getItem("admin")) {
+        navigate("/adminhome");
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
         // console.log("Login Submit")
         setError({
             "username": empid ? "" : "Username is required",
-            "password": pwd && pwd.length === 8 ? "" : "A 8-digit Password is required"
+            "password": pwd ? pwd.length === 8 ? "" : "Password should contain 8 digits" : "Password is required"
         })
         let resp = {empid, pwd};
         console.log(resp);
@@ -40,6 +43,7 @@ const AdminLogin = () => {
 
         const json = await response.json();
         if(response.status === 200){
+            sessionStorage.clear();
             console.log(JSON.stringify(json))
             sessionStorage.setItem("admin", JSON.stringify({"username": empid, "password": pwd}));
             navigate('/adminhome');
@@ -50,7 +54,7 @@ const AdminLogin = () => {
 
     return (
     <>
-        <Appbar />
+        <Appbar hbtn={"/"}/>
             <div className='login'>
                 <h2>Login Admin</h2>
 

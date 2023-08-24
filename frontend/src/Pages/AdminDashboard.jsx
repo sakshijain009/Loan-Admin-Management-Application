@@ -1,17 +1,20 @@
 import React from "react";
-import Appbar from './Appbar';
+import Appbar from "../components/Appbar";
 import './Dash.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 function AdminDashboard(){
+    let goToUrl;
     const navigate = useNavigate();
     if(sessionStorage.getItem("admin") === null) {
         navigate("/loginadmin");
+    } else {
+        goToUrl = "/adminhome";
     }
     return(
         <>
-            <Appbar bt={"Logout"}/>
+            <Appbar bt={"Logout"} hbtn={"/adminhome"}/>
             <div className="user-dashboard__container">
                 <h1>Loan Management Application</h1>
                 <hr />
