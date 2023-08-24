@@ -28,8 +28,16 @@ function Dashboard(){
     return (
         <>
             <Appbar hbtn={"/"}/>
+            
+            <section className={"summary"}>
+            <h2>LAMA</h2>
+            <p>
+                A Loan Management Application
+            </p>
+        </section>
             <div className="dashboard-container">
 
+            
 
             <Card style={{ width: '18rem' }} className='mx-4'>
       <Card.Body>
