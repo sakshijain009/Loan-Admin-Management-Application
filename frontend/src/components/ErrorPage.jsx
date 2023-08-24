@@ -11,7 +11,7 @@ const ErrorPage = () => {
         <div style={{display:'flex', justifyContent:'center'}}> <h4>Go to Home</h4> </div>
         <div style={{display:'flex', justifyContent:'center'}}>
         <Button variant="primary" className="mx-5 px-5 py-2" >
-            <Link to='/' style={{textDecoration:'none', color:'white'}}>Home</Link>
+            <Link to='/' onClick={() => sessionStorage.clear()} style={{textDecoration:'none', color:'white'}}>Home</Link>
         </Button>
         </div>
       </div>
