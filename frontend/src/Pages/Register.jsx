@@ -44,13 +44,6 @@ function AddUser({user, loginUser, bt}) {
         "pwd": ''
     });
 
-    // useEffect(() => {
-    //     if(user!=null && user.length > 0)
-    //     {
-    //         navigate('/login');
-    //     }
-    // },[user])
-
     const dateFormat = e => {
         const year = e['$y'];
         const month = e['$M']+1;

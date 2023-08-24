@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { Link } from 'react-router-dom';
 import { palette } from '@mui/system';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 export default function Appbar({hbtn, bt}) {
   const navigate = useNavigate();
@@ -41,11 +42,11 @@ export default function Appbar({hbtn, bt}) {
             Loan Management 
           </Typography>
           <div style={{display:'flex', justifyContent:'center', marginRight:30}}>
-          <Box component="span" sx={{flexGrow:1, p:1, borderRadius:8}} className="bg-light text-primary">
-            {prof && <Typography variant="h9" className="font-weight-bold">Welcome {prof}</Typography> }
-          </Box>
+          {prof &&  <Box component="span" sx={{flexGrow:1, p:1, borderRadius:8}} className="bg-light text-primary">
+            <Typography variant="h9" className="font-weight-bold">Welcome {prof}</Typography> 
+          </Box>}
           </div>
-          <Button variant="outlined" color="inherit" onClick={()=>(navigate(`/${bt}`))}>{bt}</Button>
+          {bt &&<Button variant="outlined" color="inherit" onClick={()=>(navigate(`/${bt}`))}>{bt} &nbsp;<LogoutIcon/></Button>}
         </Toolbar>
       </AppBar>
     </Box>
