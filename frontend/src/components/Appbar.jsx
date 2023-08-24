@@ -25,25 +25,14 @@ export default function Appbar({hbtn, bt}) {
   }, [prof])
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{backgroundColor:"#4477CE"}}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
-            // onClick={() => {
-            //   if({hbtn} == "0"){
-            //     console.log("Redirecting to /");
-            //     return(navigate('/'));
-            //   }
-            //   else if({hbtn} == "1"){
-            //     console.log("Redirecting to /home");
-            //     return(navigate('/home'));
-            //   }
-            // }}
-            
+            sx={{ mr: 2 }}            
             onClick={() => (navigate(hbtn))}
           >
           <HomeRoundedIcon />
