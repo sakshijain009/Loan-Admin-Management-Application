@@ -104,7 +104,7 @@ const AdminViewItem = () => {
         <Appbar bt={"Logout"} hbtn={goToUrl}/>
         <h3 className='text-center pt-5' >Customer Master Data Details</h3>
         <div className='mx-auto p-4'>
-        <TableContainer component={Paper}>
+        {data.length != 0 && <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -137,7 +137,7 @@ const AdminViewItem = () => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
     </div>
     {editRow && <AdminEditItem show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
     <ToastContainer />
