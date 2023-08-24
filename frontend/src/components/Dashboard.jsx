@@ -26,7 +26,7 @@ function Dashboard(){
             <div className="dashboard-container">
 
 
-            <Card style={{ width: '18rem' }}>
+            <Card style={{ width: '18rem' }} className='mx-4'>
       <Card.Body>
         <Card.Title>Admin</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Login as Admin</Card.Subtitle>
@@ -34,7 +34,7 @@ function Dashboard(){
       </Card.Body>
     </Card>
 
-    <Card style={{ width: '18rem' }}>
+    <Card style={{ width: '18rem' }} className='mx-4'>
       <Card.Body>
         <Card.Title>Employee</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">Login/Register as Employee</Card.Subtitle>

@@ -25,13 +25,24 @@ function AddUser({user, loginUser, bt}) {
     const [dept, setDept] = React.useState("");
     const [des, setDes] = React.useState("");
     const [gender, setGender] = React.useState("");
-    const [dob, setDob] = React.useState(dayjs('2023-01-01'));
-    const [doj, setDoj] = React.useState(dayjs('2023-01-01'));
+    const [dob, setDob] = React.useState();
+    const [doj, setDoj] = React.useState();
 
     const [dobSend, setDobSend] = React.useState("");
     const [dojSend, setDojSend] = React.useState("");
 
     const [pwd, setPwd] = React.useState("");
+
+    const [error, setError] = React.useState({
+        "id": '',
+        "name": '',
+        "department": '',
+        "designation": '',
+        "gender": '',
+        "dob": '',
+        "doj": '',
+        "pwd": ''
+    });
 
     // useEffect(() => {
     //     if(user!=null && user.length > 0)
@@ -68,6 +79,16 @@ function AddUser({user, loginUser, bt}) {
     async function handleSubmit(e) {
         e.preventDefault()
         // console.log("Registration successful");
+        setError({
+            "id": empid? '': 'Please enter Employee ID',
+            "name": name? '': 'Please enter Employee Name',
+            "department": dept? '': 'Please enter Employee Department',
+            "designation": des? '': 'Please enter Employee Designation',
+            "gender": gender? '': 'Please select Employee Gender',
+            "dob": dob? '': 'Please select Employee Date of Birth',
+            "doj": doj? '': 'Please select Employee Date of Joining',
+            "pwd": pwd? '': 'Please enter Employee Password'
+        })
         const response = await fetch("http://localhost:8080/api/users/addUser", {
             method: "POST",
             headers: {
@@ -107,18 +128,23 @@ function AddUser({user, loginUser, bt}) {
                     onChange={
                         e => setEmpid(e.target.value)
                     }/>
+                {error.id && <p style={{color:'red'}}>{error.id}</p>}
                 <TextField id="outlined-basic" label="Employee Name" variant="outlined" className='text_register'
                     onChange={
                         e => setName(e.target.value)
                     }/>
+                {error.name && <p style={{color:'red'}}>{error.name}</p>}
                 <TextField id="outlined-basic" label="Employee Department" variant="outlined" className='text_register'
                     onChange={
                         e => setDept(e.target.value)
                     }/>
+                {error.department && <p style={{color:'red'}}>{error.department}</p>}
                 <TextField id="outlined-basic" label="Employee Designation" variant="outlined" className='text_register'
                     onChange={
                         e => setDes(e.target.value)
-                    }/> {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
+                    }/>
+                {error.designation && <p style={{color:'red'}}>{error.designation}</p>}
+                     {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
                     onChange={
                         e => setGender(e.target.value)
                     }/> */}
@@ -142,10 +168,12 @@ function AddUser({user, loginUser, bt}) {
                         </Select>
                     </FormControl>
                 </Box>
+                {error.gender && <p style={{color:'red'}}>{error.gender}</p>}
                 <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
                         e => setPwd(e.target.value)
                     }/> 
+                {error.pwd && <p style={{color:'red'}}>{error.pwd}</p>}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={
                         ['DatePicker']
@@ -156,6 +184,7 @@ function AddUser({user, loginUser, bt}) {
                             onChange={dateBirthHandler}/>
                     </DemoContainer>
                 </LocalizationProvider>
+                {error.dob && <p style={{color:'red'}}>{error.dob}</p>}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={
                         ['DatePicker']
@@ -166,6 +195,7 @@ function AddUser({user, loginUser, bt}) {
                             onChange={dateJoinHandler}/>
                     </DemoContainer>
                 </LocalizationProvider>
+                {error.doj && <p style={{color:'red'}}>{error.doj}</p>}
 
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Submit</Button>
