@@ -49,13 +49,13 @@ const ViewLoanDetails = ({user, bt}) => {
                     "emp_id": user
             }})
             const dt = await res.json();
-            if(dt.status===200)
-            {
-              setData(dt);
-            }
             if(dt.status===404)
             {
               toast("No Active Loans Available");
+            }
+            else if(dt.status===200)
+            {
+              setData(dt);
             }
         }
         data();
