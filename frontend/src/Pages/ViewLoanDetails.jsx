@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,10 +49,14 @@ const ViewLoanDetails = ({user, bt}) => {
                     "emp_id": user
             }})
             const dt = await res.json();
-            console.log(dt);
-            
-            console.log(user)
-            setData(dt);
+            if(dt.status===404)
+            {
+              toast("No Active Loans Available");
+            }
+            else
+            {
+              setData(dt);
+            }
         }
         data();
       // setData(json)
@@ -68,7 +74,7 @@ const ViewLoanDetails = ({user, bt}) => {
             <StyledTableCell align="center">Loan ID</StyledTableCell>
             <StyledTableCell align="center">Duration</StyledTableCell>
             <StyledTableCell align="center">Loan Type</StyledTableCell>
-            <StyledTableCell align="center">Card ID</StyledTableCell>
+            <StyledTableCell align="center">Card Issue Date</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -77,13 +83,14 @@ const ViewLoanDetails = ({user, bt}) => {
               <StyledTableCell align="center">{row.loan_id}</StyledTableCell>
               <StyledTableCell align="center">{row.duration}</StyledTableCell>
               <StyledTableCell align="center">{row.type}</StyledTableCell>
-              <StyledTableCell align="center">{row.card_id}</StyledTableCell>
+              <StyledTableCell align="center">{row.card_issue_date}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     </div>
+    <ToastContainer/>
       </div>
     )
 }
