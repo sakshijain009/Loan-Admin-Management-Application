@@ -11,6 +11,8 @@ import Paper from '@mui/material/Paper';
 import {Button} from 'react-bootstrap';
 import AdminEditUser from '../../components/AdminEditUser';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -64,8 +66,7 @@ const AdminViewUser = () => {
             const dt = await res.json();
             if(res.status===404)
             {
-              alert("No users to display");
-              navigate('/adminadduser');
+              toast("No Users Available");
             }
             else
             {
@@ -163,7 +164,7 @@ const AdminViewUser = () => {
       </Modal> */}
 
 
-
+      <ToastContainer/>
     
   </div>
 
