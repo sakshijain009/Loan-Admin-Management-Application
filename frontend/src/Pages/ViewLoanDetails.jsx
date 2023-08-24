@@ -47,10 +47,9 @@ const ViewLoanDetails = ({user, bt}) => {
                     "emp_id": user
             }})
             const dt = await res.json();
-            console.log(dt);
-            
-            console.log(user)
-            setData(dt);
+            if(res.status === 200) {
+              setData(dt);
+            }
         }
         data();
       // setData(json)
@@ -61,7 +60,7 @@ const ViewLoanDetails = ({user, bt}) => {
         <Appbar hbtn={"/home"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing your Loan details</h3>
         <div className='mx-auto p-4'>
-        <TableContainer component={Paper}>
+        {data.length != 0 && <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -82,7 +81,7 @@ const ViewLoanDetails = ({user, bt}) => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
     </div>
       </div>
     )

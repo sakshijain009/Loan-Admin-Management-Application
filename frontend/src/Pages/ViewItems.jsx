@@ -47,8 +47,10 @@ const ViewItems = ({user, bt}) => {
                     "emp_id": user
             }})
             const dt = await res.json();
-            console.log(dt);
-            setData(dt);
+            // console.log(dt);
+            if(res.status === 200) {
+              setData(dt);
+            }
         }
         data();
     }, [])
@@ -59,7 +61,7 @@ const ViewItems = ({user, bt}) => {
         <Appbar hbtn={"/home"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing Issued Item Details</h3>
         <div className='mx-auto p-4'>
-        <TableContainer component={Paper}>
+        {data.length != 0 && <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -82,7 +84,7 @@ const ViewItems = ({user, bt}) => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>}
     </div>
       </div>
 

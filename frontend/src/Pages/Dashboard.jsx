@@ -55,19 +55,6 @@ function Dashboard(){
         <Button variant='dark' onClick={userLogin} className='m-2'>Login</Button>
       </Card.Body>
     </Card>
-
-
-                {/* <div className="dashboard-card">
-                    <span>Admin Login</span>
-                    <button className='dashboard-button' onClick={adminLogin}>Login</button>
-                </div>
-                <div className="dashboard-card">
-                <span>User Register/Login</span>
-                    <div className="dashboard-buttons">
-                    <button className='dashboard-button' onClick={userRegister}>Register</button>
-                    <button className='dashboard-button' onClick={userLogin}>Login</button>
-                    </div>
-                </div> */}
             </div>
         </>
     )
