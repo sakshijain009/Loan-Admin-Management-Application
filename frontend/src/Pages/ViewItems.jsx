@@ -9,6 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -48,7 +50,12 @@ const ViewItems = ({user, bt}) => {
             }})
             const dt = await res.json();
             // console.log(dt);
-            if(res.status === 200) {
+            if(dt.status===404)
+            {
+              toast("No Items Available");
+            }
+            else
+            {
               setData(dt);
             }
         }
@@ -86,6 +93,7 @@ const ViewItems = ({user, bt}) => {
       </Table>
     </TableContainer>}
     </div>
+    <ToastContainer/>
       </div>
 
     )
