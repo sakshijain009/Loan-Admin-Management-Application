@@ -15,6 +15,9 @@ const AdminLogin = () => {
         "password": ''
     });
     const navigate = useNavigate();
+    if(sessionStorage.getItem("admin")) {
+        navigate("/adminhome");
+    }
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -40,6 +43,7 @@ const AdminLogin = () => {
 
         const json = await response.json();
         if(response.status === 200){
+            sessionStorage.clear();
             console.log(JSON.stringify(json))
             sessionStorage.setItem("admin", JSON.stringify({"username": empid, "password": pwd}));
             navigate('/adminhome');
@@ -50,7 +54,7 @@ const AdminLogin = () => {
 
     return (
     <>
-        <Appbar />
+        <Appbar hbtn={"/"}/>
             <div className='login'>
                 <h2>Login Admin</h2>
 

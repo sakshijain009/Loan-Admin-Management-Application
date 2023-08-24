@@ -8,6 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,7 +31,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const ViewItems = ({user, bt}) => {
-
+    const navigate = useNavigate();
+    if(sessionStorage.getItem("username") === null) {
+        navigate("/login");
+    } 
     const [data, setData] = useState([])
   
     useEffect(() => {
@@ -52,7 +56,7 @@ const ViewItems = ({user, bt}) => {
   
     return (
       <div>
-        <Appbar hbtn={"1"} bt={bt}/>
+        <Appbar hbtn={"/home"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing Issued Item Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
@@ -67,7 +71,7 @@ const ViewItems = ({user, bt}) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {Array.from(data).map((row) => (
             <StyledTableRow>
               <StyledTableCell key={row.item_id} align="center">{row.issue_id}</StyledTableCell>
               <StyledTableCell key={row.item_id} align="center">{row.item_description}</StyledTableCell>

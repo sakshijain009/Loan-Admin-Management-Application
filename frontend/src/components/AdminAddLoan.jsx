@@ -67,7 +67,7 @@ function AdminAddLoan() {
         <>
             <Appbar bt={"Logout"} hbtn={goToUrl}/>
             <div className="loan__container">
-                <h3 className="text-center py-3 pt-5">Add Loan Master Data</h3>
+                <h2 className="text-center py-3 pt-5">Add Loan Master Data</h2>
                 <div className="loan-select">
                     <div className="loan-form" 
                     style=
