@@ -9,6 +9,8 @@ import {TextField} from '@mui/material';
 import {Link, Navigate, useNavigate} from 'react-router-dom';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminAddItem() {
     let goToUrl;
@@ -37,10 +39,17 @@ function AdminAddItem() {
             const response = await fetch("http://localhost:8080/getAllTypes");
             const json = await response.json();
             const res = JSON.stringify(json);
-            setTypes(json);
+            if(response.status===404)
+            {
+                toast("No Item Categories Available");
+            }
+            else
+            {
+                setTypes(json);
+            }
         };
         data();
-    });
+    }, []);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -138,6 +147,7 @@ function AdminAddItem() {
                     <button className="btn btn-success" onClick={()=>(navigate('/adminviewitem'))}>View Items</button>
                 </div>
             </div>
+            <ToastContainer/>
         </>
     )
 }

@@ -11,6 +11,8 @@ import Paper from '@mui/material/Paper';
 import { Button } from 'react-bootstrap';
 import AdminEditLoan from './AdminEditLoan';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -60,8 +62,7 @@ const AdminViewUser = () => {
             const res = await response.json();
             if(response.status===404)
             {
-                alert("Nothing to display");
-                navigate('/adminaddloan');
+                toast("No Loans Available");
             }
             else
             {
@@ -96,7 +97,7 @@ const AdminViewUser = () => {
     return (
       <div>
         <Appbar bt={"Logout"} hbtn={goToUrl}/>
-        <h3 className='text-center pt-5' >Customer Master Data Details</h3>
+        <h3 className='text-center pt-5' >Loan Master Data Details</h3>
         <div className='mx-auto p-4'>
         <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -128,6 +129,7 @@ const AdminViewUser = () => {
     </TableContainer>
     </div>
     {editRow && <AdminEditLoan show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
+    <ToastContainer/>
       </div>
 
     )
