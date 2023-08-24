@@ -49,13 +49,13 @@ const ViewLoanDetails = ({user, bt}) => {
                     "emp_id": user
             }})
             const dt = await res.json();
+            if(dt.status===200)
+            {
+              setData(dt);
+            }
             if(dt.status===404)
             {
               toast("No Active Loans Available");
-            }
-            else
-            {
-              setData(dt);
             }
         }
         data();
@@ -67,7 +67,7 @@ const ViewLoanDetails = ({user, bt}) => {
         <Appbar hbtn={"/home"} bt={bt}/>
         <h3 className='text-center pt-5' >Viewing your Loan details</h3>
         <div className='mx-auto p-4'>
-        {data.length != 0 && <TableContainer component={Paper}>
+        {data.length !== 0 && <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
