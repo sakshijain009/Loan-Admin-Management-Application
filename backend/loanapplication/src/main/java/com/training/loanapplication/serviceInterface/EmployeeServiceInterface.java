@@ -12,7 +12,7 @@ import com.training.loanapplication.model.Message;
 import jakarta.validation.Valid;
 
 public interface EmployeeServiceInterface {
-	public Employee saveEmployee(@Valid Employee emp);
+	public Employee saveEmployee(@Valid Employee emp) throws AuthenticationFailedException;
 	public Employee getEmployeeProfile(String emp_id) throws ResourceNotFoundException;
 	public Message validateEmployee(LoginEmployee e) throws AuthenticationFailedException;
 	public Message applyLoan(LoanModel loanModel);

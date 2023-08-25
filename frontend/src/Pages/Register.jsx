@@ -101,12 +101,13 @@ function AddUser({user, loginUser, bt}) {
             )
         });
         const json = await response.json();
-        console.log(json);
-        console.log(response.status);
         if(response.status === 200){
             sessionStorage.clear();
             loginUser(empid);
             navigate('/home');
+        }else if(response.status === 400){
+            alert("User with the id already exists!");
+            console.log(response.message);
         }
         else{
             console.log(response.message);
