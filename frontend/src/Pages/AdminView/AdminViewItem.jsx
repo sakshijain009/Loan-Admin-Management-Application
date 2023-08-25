@@ -58,19 +58,16 @@ const AdminViewItem = () => {
   
     useEffect(() => {
         const data = async () => {
-            const res = await fetch('http://localhost:8080/getAllItems', {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-            }})
+            const res = await fetch('http://localhost:8080/getAllItems')
             const dt = await res.json();
-            if(res.status===404)
+            if(res.status===200)
             {
-                toast("No Items Available");
+              setData(dt);
             }
             else
             {
-                setData(dt);
+              setData([]);
+              toast("No Items Available");
             }
         }
         data();
@@ -86,10 +83,12 @@ const AdminViewItem = () => {
                     "Content-Type": "application/json",
             }})
             const dt = await res.json();
-            console.log(dt.message);
-            // setData(dt);
-            setDeleteDone(prev => !prev);
-            // window.location.reload();
+            if(res.status===200) {
+              console.log(dt.message);
+              setDeleteDone(prev => !prev);
+            } else {
+              toast(dt.message);
+            }
         }
         data();
     }    

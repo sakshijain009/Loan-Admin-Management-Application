@@ -52,6 +52,7 @@ const ViewItems = ({user, bt}) => {
             // console.log(dt);
             if(res.status===404)
             {
+              setData([]);
               toast("No Items Available");
             }
             else if(res.status===200)

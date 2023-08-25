@@ -109,6 +109,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
         if(response.status === 200){
             handleClose();
             setEditDone(prev => !prev);
+            toast(json.message);
         }
         else{
             toast(json.message);

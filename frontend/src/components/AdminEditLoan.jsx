@@ -16,7 +16,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
     // const navigate = useNavigate();
     const [loan_id, setLoan_id] = React.useState("");
     const [type, setType] = React.useState("");
-    const [duration, setDuration] = React.useState("");
+    const [duration, setDuration] = React.useState(0);
 
     const [error, setError] = React.useState({
         "duration": ''
@@ -41,12 +41,12 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
         e.preventDefault();
 
         setError({
-            "duration": duration !== 0 ? "" : "Please enter a valid duration"
+            "duration": duration > 0 ? "" : "Please enter a valid duration"
         })
         try {
     
-            if(duration === 0) {
-                throw new Error("Invalid duration");
+            if(duration <= 0) {
+                throw new Error("Please enter a valid duration");
             }
         // console.log("Registration successful");
         const response = await fetch("http://localhost:8080/api/admin/updateLoan", {
@@ -69,6 +69,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
             // navigate('/adminviewuser');
             handleClose();
             setEditDone(prev => !prev);
+            toast(json.message);
             // alert(json.message);
             // window.location.reload();
         }
@@ -94,11 +95,12 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
                 <TextField className='text_register' disabled placeholder='Loan ID' InputProps={{
         endAdornment: <InputAdornment position="end">{loan_id}</InputAdornment>,
                     }} />
-                <TextField id="outlined-basic" disabled placeholder='Loan Type' className='text_register' value={type}
+                <TextField id="outlined-basic" disabled label='Loan Type' variant='outlined' className='text_register' value={type}
                     onChange={
                         e => setType(e.target.value)
                     }/>
-                <TextField id="outlined-basic" placeholder="Duration" className='text_register' value={duration}
+                <TextField id="outlined-basic" label="Duration" variant='outlined' className='text_register' value={duration}
+                    type='number'
                     onChange={
                         e => setDuration(e.target.value || "0")
                     }/>

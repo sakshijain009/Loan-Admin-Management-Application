@@ -63,11 +63,12 @@ const AdminViewUser = () => {
             if(response.status===200)
             {
               setData(res);
-              console.log(data);
+              // console.log(data);
                 
             }
             else
             {
+              setData([]);
               toast("No Loans Available");
               // if(data.length === 0) {
               //   window.location.reload();

@@ -64,13 +64,14 @@ const AdminViewUser = () => {
                     "Content-Type": "application/json",
             }})
             const dt = await res.json();
-            if(res.status===404)
+            if(res.status===200)
             {
-              toast("No Users Available");
+              setData(dt);
             }
             else
             {
-              setData(dt);
+              setData([]);
+              toast("No Users Available");
             }
         }
         data();

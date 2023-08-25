@@ -57,6 +57,7 @@ const ViewLoanDetails = ({user, bt}) => {
             }
             else if(res.status===404)
             {
+              setData([]);
               toast("No Active Loans Available");
             }
         }

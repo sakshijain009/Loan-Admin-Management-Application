@@ -37,7 +37,7 @@ function AdminAddLoan() {
         })
         try {
             // console.log(typeof(duration))
-            if(duration < 0) {
+            if(duration <= 0) {
                 throw new Error("Please enter a valid duration");
                 // console.log("Invalid data");
             }
