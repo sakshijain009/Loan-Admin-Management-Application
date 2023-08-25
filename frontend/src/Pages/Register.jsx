@@ -17,6 +17,8 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddUser({user, loginUser, bt}) {
     const navigate = useNavigate();
@@ -43,13 +45,6 @@ function AddUser({user, loginUser, bt}) {
         "doj": '',
         "pwd": ''
     });
-
-    // useEffect(() => {
-    //     if(user!=null && user.length > 0)
-    //     {
-    //         navigate('/login');
-    //     }
-    // },[user])
 
     const dateFormat = e => {
         const year = e['$y'];
@@ -108,12 +103,13 @@ function AddUser({user, loginUser, bt}) {
             )
         });
         const json = await response.json();
-        console.log(json);
-        console.log(response.status);
         if(response.status === 200){
             sessionStorage.clear();
             loginUser(empid);
             navigate('/home');
+        }else if(response.status === 400){
+            toast(json.message);
+            // console.log(json.message);
         }
         else{
             console.log(response.message);
@@ -200,6 +196,7 @@ function AddUser({user, loginUser, bt}) {
 
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Submit</Button>
+                <ToastContainer/>
             </div>
         </>
     )

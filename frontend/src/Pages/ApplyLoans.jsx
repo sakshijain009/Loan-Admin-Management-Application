@@ -9,6 +9,8 @@ import {TextField} from '@mui/material';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import './ApplyLoans.css'
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ApplyLoans({user, setUser, bt}) {
     const navigate= useNavigate();
@@ -93,7 +95,7 @@ function ApplyLoans({user, setUser, bt}) {
                 })
             });
             const json = await response.json();
-            alert(json.message);
+            toast(json.message);
             setCategory("");
             setItemMake("")
             setItem("")
@@ -152,6 +154,7 @@ function ApplyLoans({user, setUser, bt}) {
                     }><CreditScoreIcon/>Apply Loan</Button>
                 </div>
             </div>
+            <ToastContainer/>
         </>
     )
 }

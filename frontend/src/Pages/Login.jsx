@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import {Button as Btn} from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import './Login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = ({user, loginUser, bt}) => {
 
@@ -13,6 +15,11 @@ const Login = ({user, loginUser, bt}) => {
     const [pwd, setPwd] = useState("");
 
     const [show, setShow] = useState(false);
+
+    const [error, setError] = useState({
+        "username": '',
+        "password": ''
+    });
 
     const handleClose = () => setShow(false);
     const handleClose2 = async () => {
@@ -31,11 +38,11 @@ const Login = ({user, loginUser, bt}) => {
         const json = await response.json();
         console.log(json);
         if(json.status === 200){
-            alert(json.message);
+            toast(json.message);
             setShow(false);
         }
         else{
-            alert(json.message);
+            toast(json.message);
         }
         
     }
@@ -54,6 +61,13 @@ const Login = ({user, loginUser, bt}) => {
         e.preventDefault();
         let resp = {empid, pwd};
         console.log(resp);
+        setError({
+            "username": empid ? "" : "Employee ID is required",
+            "password": pwd ? pwd.length === 8 ? "" : "Password should contain 8 digits" : "Password is required"
+        })
+
+        if(error.username || error.password) return;
+        
         const response = await fetch("http://localhost:8080/api/users/checkLogin", {
             method: "POST",
             headers: {
@@ -76,7 +90,10 @@ const Login = ({user, loginUser, bt}) => {
         }
         else
         {
-            alert(json.message);
+            if(empid)
+            toast(json.message);
+            setEmpid("");
+            setPwd("");
         }
     }
 
@@ -87,13 +104,17 @@ const Login = ({user, loginUser, bt}) => {
                 <h2>Login User</h2>
 
                 <TextField id="outlined-basic" label="Employee ID" variant="outlined" className='text_login'
+                    value={empid}
                     onChange={
                         e => setEmpid(e.target.value)
                     }/>
+                    {error.username && <p style={{color:'red'}}>{error.username}</p>}
                 <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
+                    value={pwd}
                     onChange={
                         e => setPwd(e.target.value)
                     }/>
+                    {error.password && <p style={{color:'red'}}>{error.password}</p>}
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Login</Button>
 
@@ -125,8 +146,7 @@ const Login = ({user, loginUser, bt}) => {
                 </Modal.Footer>
             </Modal>
             </div>
-
-            
+            <ToastContainer />            
     </>
   )
 }

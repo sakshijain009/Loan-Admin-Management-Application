@@ -1,32 +1,33 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import React from 'react';
-import Appbar from './Appbar';
 import '../Pages/Register.css'
 
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 
 import { useState, useEffect } from 'react';
-// import {Link, useNavigate, useParams} from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
-import { Modal } from 'react-bootstrap';
+import { Modal, Toast } from 'react-bootstrap';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminEditUser({id, show, handleClose, setEditDone}) {
     // const navigate = useNavigate();
     const [loan_id, setLoan_id] = React.useState("");
     const [type, setType] = React.useState("");
     const [duration, setDuration] = React.useState("");
+
+    const [error, setError] = React.useState({
+        "duration": ''
+    });
  
     // const {id} = useParams();
 
     useEffect(() => {
         const data = async () => {
             // console.log(id);
-            const response = await fetch(`http://localhost:8080/api/admin/getLoan/${id}`);
+            const response = await fetch(`http://localhost:8080/api/admin/getLoanById/${id}`);
             const res = await response.json();
             setLoan_id(res.loan_id);
             setType(res.type);
@@ -38,9 +39,15 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        try {
-        
 
+        setError({
+            "duration": duration !== 0 ? "" : "Please enter a valid duration"
+        })
+        try {
+    
+            if(duration === 0) {
+                throw new Error("Invalid duration");
+            }
         // console.log("Registration successful");
         const response = await fetch("http://localhost:8080/api/admin/updateLoan", {
             method: "PUT",
@@ -66,11 +73,11 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
             // window.location.reload();
         }
         else{
-            alert(json.message);
+            toast(json.message);
         }
             
     } catch (error) {
-        alert(json.message);
+        toast(json.message);
     }
     }
 
@@ -93,8 +100,9 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
                     }/>
                 <TextField id="outlined-basic" placeholder="Duration" className='text_register' value={duration}
                     onChange={
-                        e => setDuration(e.target.value)
+                        e => setDuration(e.target.value || "0")
                     }/>
+                    {error.duration && <p style={{color:'red'}}>{error.duration}</p>}
                 <Box sx={
                     {
                         minWidth: 120,
@@ -109,6 +117,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
                 {/* <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Update Loan</Button> */}
             </div>
+            <ToastContainer />
             </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

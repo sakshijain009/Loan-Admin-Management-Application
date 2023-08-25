@@ -1,7 +1,6 @@
 package com.training.loanapplication.service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -23,7 +22,6 @@ import com.training.loanapplication.model.Item;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.LoanModel;
 import com.training.loanapplication.model.LoginEmployee;
-//import com.training.loanapplication.model.LoginResult;
 import com.training.loanapplication.model.Message;
 import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
 
@@ -48,13 +46,14 @@ public class EmployeeService implements EmployeeServiceInterface {
 	ItemRepository itemRepo;
 	
 	// Method to save an employee
-	public Employee saveEmployee(@Valid Employee emp)
+	public Employee saveEmployee(@Valid Employee emp) throws AuthenticationFailedException
 	{
-		if(empRepo.findById(emp.getId()).isPresent()) {
-			return null;
+		Employee op = empRepo.findById(emp.getId()).orElse(null);
+		if(op != null) {
+			throw new AuthenticationFailedException("Employee with same user id exists!");
+		}else {	
+			return empRepo.save(emp);
 		}
-		
-		return empRepo.save(emp);
 	}
 	
 	// Method to get an employee detail
@@ -84,7 +83,6 @@ public class EmployeeService implements EmployeeServiceInterface {
 		if(employee==null)
 		{
 			throw new AuthenticationFailedException("Invalid Employee Id");
-//			result="Invalid Employee Id";
 		}
 		else
 		{
@@ -95,7 +93,6 @@ public class EmployeeService implements EmployeeServiceInterface {
 			else
 			{
 				throw new AuthenticationFailedException("Password is incorrect");
-//				result="Login Failed";
 			}
 		}
 		Message loginresult = new Message();
@@ -137,7 +134,7 @@ public class EmployeeService implements EmployeeServiceInterface {
 			return new Message("Error in issue generation");
 		}
 		
-		return new Message("Sucess");
+		return new Message("Loan has been appliad successfully!");
 
 	}
 

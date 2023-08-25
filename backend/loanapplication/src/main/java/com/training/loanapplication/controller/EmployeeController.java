@@ -37,7 +37,7 @@ public class EmployeeController {
 	EmployeeServiceInterface empServiceInterface;
 	
 	@PostMapping("/addUser")
-	public Employee saveEmployee(@RequestBody @Valid Employee emp)
+	public Employee saveEmployee(@RequestBody @Valid Employee emp) throws AuthenticationFailedException
 	{
 		return empServiceInterface.saveEmployee(emp);
 	}

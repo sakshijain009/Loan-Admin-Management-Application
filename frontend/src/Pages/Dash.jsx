@@ -3,7 +3,7 @@ import './Dash.css';
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 
 function Dash({user}){
     const navigate = useNavigate();
@@ -18,7 +18,42 @@ function Dash({user}){
                 <hr />
                 <h3>User Dash Board</h3>
                 <div className="user-dashboard__buttons mt-5">
-                    <Button variant="primary" className="mx-5 px-5 py-2">
+
+                    
+                <Card style={{ width: '20rem' }} className='mx-3'>
+      <Card.Body style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+        <Card.Title>Customer Data Management</Card.Title>
+        <Button variant='dark' className='m-2'>
+        <Link style={{textDecoration:'none', color:'white', fontWeight:'bold', fontSize:'1.2rem'}} to="/viewloan">
+            View Loans
+        </Link>
+        </Button>
+      </Card.Body>
+    </Card>
+
+    <Card style={{ width: '20rem' }} className='mx-3'>
+      <Card.Body style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+        <Card.Title>Loan Card Management</Card.Title>
+        <Button variant='dark' className='m-2'>
+        <Link style={{textDecoration:'none', color:'white', fontWeight:'bold', fontSize:'1.2rem'}} to="/applyloan">
+            Apply for Loan
+        </Link>
+        </Button>
+      </Card.Body>
+    </Card>
+
+    <Card style={{ width: '20rem' }} className='mx-3'>
+      <Card.Body style={{display:'flex', flexDirection:'column', justifyContent:'center'}}>
+        <Card.Title>Items Master Data</Card.Title>
+        <Button variant='dark' className='m-2'>
+        <Link style={{textDecoration:'none', color:'white', fontWeight:'bold', fontSize:'1.2rem'}} to="/viewitems">
+            View Items Purchased
+        </Link>
+        </Button>
+      </Card.Body>
+    </Card>
+
+                    {/* <Button variant="primary" className="mx-5 px-5 py-2">
                         <Link 
                             style={{textDecoration:'none', color:'white', fontWeight:'bold', fontSize:'1.2rem'}} 
                             to="/viewloan">
@@ -38,7 +73,7 @@ function Dash({user}){
                             to="/viewitems">
                                 View Items Purchased
                         </Link>
-                    </Button>
+                    </Button> */}
                     {/* <Link to="/adminaddloan" className="user-dashboard__button">Loan Card Management</Link>
                     <Link to="/adminadditem" className="user-dashboard__button">Items Master Data</Link> */}
                 </div>

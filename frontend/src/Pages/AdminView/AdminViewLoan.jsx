@@ -60,13 +60,18 @@ const AdminViewUser = () => {
         const data1 = async () => {
             const response = await fetch('http://localhost:8080/api/admin/getAllLoan');
             const res = await response.json();
-            if(response.status===404)
+            if(response.status===200)
             {
-                toast("No Loans Available");
+              setData(res);
+              console.log(data);
+                
             }
             else
             {
-              setData(res);
+              toast("No Loans Available");
+              // if(data.length === 0) {
+              //   window.location.reload();
+              // }
             }
         }
         data1();
@@ -99,7 +104,7 @@ const AdminViewUser = () => {
         <Appbar bt={"Logout"} hbtn={goToUrl}/>
         <h3 className='text-center pt-5' >Loan Master Data Details</h3>
         <div className='mx-auto p-4'>
-        <TableContainer component={Paper}>
+        {data.length != 0 && <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
@@ -127,6 +132,7 @@ const AdminViewUser = () => {
         </TableBody>
       </Table>
     </TableContainer>
+}
     </div>
     {editRow && <AdminEditLoan show={show} handleClose={handleClose} id={editRow} setEditDone={setEditDone} />}
     <ToastContainer/>

@@ -19,6 +19,8 @@ import { useState, useEffect } from 'react';
 // import {Link, useNavigate, useParams} from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
 import { Modal } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminEditUser({id, show, handleClose, setEditDone}) {
     // const navigate = useNavigate();
@@ -34,7 +36,14 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
     const [dobSend, setDobSend] = React.useState("2023-01-01");
     const [dojSend, setDojSend] = React.useState("2023-01-01");
 
-    // const {id} = useParams();
+    const [error, setError] = React.useState({
+        "name": '',
+        "department": '',
+        "designation": '',
+        "gender": '',
+        "dob": '',
+        "doj": ''
+    });
 
     useEffect(() => {
         const data = async () => {
@@ -59,7 +68,17 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+
+        setError({
+            "name": name? '': 'Please enter Employee Name',
+            "department": dept? '': 'Please enter Employee Department',
+            "designation": des? '': 'Please enter Employee Designation',
+            "gender": gender? '': 'Please select Employee Gender',
+            "dob": dobSend? '': 'Please select Employee Date of Birth',
+            "doj": dojSend? '': 'Please select Employee Date of Joining'
+        });
         try {
+            
 
         if(!dateIsValid(new Date(dobSend))) {
             throw new Error("Enter correct DOB in the format YYYY-MM-DD");
@@ -67,7 +86,6 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
         if(!dateIsValid(new Date(dojSend))) {
             throw new Error("Enter correct DOJ in the format YYYY-MM-DD");
         }
-        // console.log("Registration successful");
         const response = await fetch("http://localhost:8080/api/admin/updateUser", {
             method: "PUT",
             headers: {
@@ -89,14 +107,11 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
         const json = await response.json();
         console.log(response.status);
         if(response.status === 200){
-            // navigate('/adminviewuser');
             handleClose();
             setEditDone(prev => !prev);
-            // alert(json.message);
-            // window.location.reload();
         }
         else{
-            alert(json.message);
+            toast(json.message);
         }
 
     } catch (error) {
@@ -116,18 +131,22 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
                 <TextField className='text_register' disabled placeholder='Employee ID' InputProps={{
         endAdornment: <InputAdornment position="end">{empid}</InputAdornment>,
                     }} />
-                <TextField id="outlined-basic" placeholder='Employee Name' className='text_register' value={name}
+                <TextField id="outlined-basic" label='Employee Name' variant='outlined' className='text_register' value={name}
                     onChange={
                         e => setName(e.target.value)
                     }/>
-                <TextField id="outlined-basic" placeholder="Employee Department" className='text_register' value={dept}
+                    {error.name && <p style={{color:'red'}}>{error.name}</p>}
+                <TextField id="outlined-basic" label="Employee Department" variant='outlined' className='text_register' value={dept}
                     onChange={
                         e => setDept(e.target.value)
                     }/>
-                <TextField id="outlined-basic" placeholder="Employee Designation"  className='text_register' value={des}
+                    {error.department && <p style={{color:'red'}}>{error.department}</p>}
+                <TextField id="outlined-basic" label="Employee Designation" variant='outlined'  className='text_register' value={des}
                     onChange={
                         e => setDes(e.target.value)
-                    }/> {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
+                    }/>
+                    {error.designation && <p style={{color:'red'}}>{error.designation}</p>}
+                     {/* <TextField id="outlined-basic" label="Gender" variant="outlined" className='text_register'
                     onChange={
                         e => setGender(e.target.value)
                     }/> */}
@@ -151,20 +170,23 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
                         </Select>
                     </FormControl>
                 </Box>
+                {error.gender && <p style={{color:'red'}}>{error.gender}</p>}
                 {/* <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
                     onChange={
                         e => setPwd(e.target.value)
                     }/>  */}
 
-                <TextField id="outlined-basic" placeholder="Date of Birth" className='text_register' value={dobSend}
+                <TextField id="outlined-basic" label="Date of Birth" variant='outlined' className='text_register' value={dobSend}
                     onChange={
                         e => setDobSend(e.target.value)
                     }/>
+                    {error.dob && <p style={{color:'red'}}>{error.dob}</p>}
 
-                <TextField id="outlined-basic" placeholder="Date of Joining"  className='text_register' value={dojSend}
+                <TextField id="outlined-basic" label="Date of Joining" variant='outlined'  className='text_register' value={dojSend}
                     onChange={
                         e => setDojSend(e.target.value)
                     }/>
+                    {error.doj && <p style={{color:'red'}}>{error.doj}</p>}
                 {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={
                         ['DatePicker']
@@ -189,6 +211,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
                 {/* <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Update User</Button> */}
             </div>
+            <ToastContainer />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

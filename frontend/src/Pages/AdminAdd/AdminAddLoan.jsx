@@ -10,6 +10,8 @@ import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import '../ApplyLoans.css'
 import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 import {useNavigate} from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminAddLoan() {
     let goToUrl;
@@ -31,12 +33,12 @@ function AdminAddLoan() {
         e.preventDefault();
         setError({
             "type": category ? "" : "Please select a category",
-            "duration": duration !== 0 ? "" : "Please enter a valid duration"
+            "duration": duration > 0 ? "" : "Please enter a valid duration"
         })
         try {
             // console.log(typeof(duration))
-            if(error.type || duration === 0) {
-                throw new Error("Invalid data");
+            if(duration < 0) {
+                throw new Error("Please enter a valid duration");
                 // console.log("Invalid data");
             }
             // const data = async () => {
@@ -58,7 +60,7 @@ function AdminAddLoan() {
             // };
             // data();
         } catch (err) {
-            console.log(err);
+            toast(err);
         }
     }
 
@@ -87,6 +89,7 @@ function AdminAddLoan() {
                         <TextField sx={{m: 1,minWidth: 450}}
                             label={"Duration"}
                             type="number"
+                            // min={0}
                             variant="outlined"
                             value={duration}
                             onChange={e => setDuration(parseInt(e.target.value || "0"))}/>
@@ -109,6 +112,7 @@ function AdminAddLoan() {
             <div style={{display:'flex', justifyContent:'center'}} className="container m-auto">
             <button className="btn btn-success" onClick={()=>(navigate('/adminviewloan'))}>View Loans</button>
             </div>
+            <ToastContainer/>
         </>
     )
 }
