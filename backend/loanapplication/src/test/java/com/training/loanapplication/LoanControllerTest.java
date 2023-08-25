@@ -4,8 +4,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -77,23 +80,20 @@ public class LoanControllerTest {
 		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_category.get(0))));
 	}
 	
-//	@Test
-//	public void testGetAllLoans() throws Exception{
-//		Loan loan = new Loan();
-//		List<Card> card_list = new ArrayList<>();
-//		Card card = new Card();
-//		card_list.add(card);
-//		loan.setDuration((short)3);
-//		loan.setLoan_id(1);
-//		loan.setType(ItemCategory.FURNITURE);
-//		loan.setCard(card_list);
-//		List<Loan> all_loans = new ArrayList<>();
-//		all_loans.add(loan);
-//		Mockito.when(loanService.getAllLoans().header("emp_id", "123456")).thenReturn(all_loans);
-//		mvc.perform(get("/getallLoans").contentType(MediaType.APPLICATION_JSON))
-//		.andExpect(status().isOk())
-//		.andExpect(jsonPath("$", Matchers.hasSize(all_category.size())))
-//		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_category.get(0))));
-//	}
+	@Test
+	public void testGetAllLoans() throws Exception{
+		List<Map<String,Object>> loan_list = new ArrayList<>();
+		Map<String,Object> loan = new HashMap<String, Object>();
+		loan.put("loan_id", 1);
+		loan.put("duration", (short)3);
+		loan.put("card_issue_date", LocalDate.now());
+		loan.put("type", ItemCategory.FURNITURE);
+		loan_list.add(loan);
+		Mockito.when(loanService.getAllLoans("123456")).thenReturn(loan_list);
+		mvc.perform(get("/getallLoans/{emp_id}","123456").contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", Matchers.hasSize(loan_list.size())))
+		.andExpect(jsonPath("$[0].loan_id", Matchers.equalTo(loan_list.get(0).get("loan_id"))));
+	}
 	
 }
