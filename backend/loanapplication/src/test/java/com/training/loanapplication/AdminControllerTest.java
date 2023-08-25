@@ -29,6 +29,7 @@ import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Card;
 import com.training.loanapplication.model.Employee;
 import com.training.loanapplication.model.Issue;
@@ -78,6 +79,22 @@ public class AdminControllerTest {
 	ObjectMapper mapper = new ObjectMapper()
 			.findAndRegisterModules()
 			.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+	
+	@Test
+	public void testLogin() throws Exception{
+		Admin admin= new Admin();
+		admin.setUsername("admin");
+		admin.setPassword("12345678");
+		Message mes = new Message("Admin can Log in");
+		Mockito.when(adminService.checkAdmin(ArgumentMatchers.any())).
+		thenReturn(mes);
+		String json = mapper.writeValueAsString(admin);
+		
+		mvc.perform(post("/api/admin/login").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+		.content(json).accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.message", Matchers.equalToIgnoringCase(mes.getMessage())));
+	}
 	
 	@Test
 	public void testAddNewEmployee() throws Exception{

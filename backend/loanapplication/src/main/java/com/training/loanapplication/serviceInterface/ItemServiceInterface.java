@@ -17,5 +17,5 @@ public interface ItemServiceInterface {
 	public List<String> getDistinctMakesByCategory(ItemCategory category);
 	public List<String> getDistinctDescriptionByMakeAndCategory(ItemCategory category, String make);
 	public Item getItemByMakeAndCategoryAndDescription(ItemCategory category, String make, String description);
-	public List<Map<String,Object>> getAllItemsByEmpId(Map<String, String> header) throws ResourceNotFoundException;
+	public List<Map<String,Object>> getAllItemsByEmpId(String emp_id) throws ResourceNotFoundException;
 }

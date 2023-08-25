@@ -70,9 +70,9 @@ public class ItemController {
 		return itemDTO;
 	}
 	
-	@GetMapping("/viewItems")
-	public List<Map<String,Object>> getAllItemsByEmpId(@RequestHeader Map<String, String> header) throws ResourceNotFoundException
+	@GetMapping("/viewItems/{emp_id}")
+	public List<Map<String,Object>> getAllItemsByEmpId(@PathVariable String emp_id) throws ResourceNotFoundException
 	{
-		return itemServiceInterface.getAllItemsByEmpId(header);
+		return itemServiceInterface.getAllItemsByEmpId(emp_id);
 	}
 }
