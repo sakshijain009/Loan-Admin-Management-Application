@@ -23,4 +23,5 @@ public interface AdminServiceInterface {
 	public Message removeItem (int item_id);
 	public Message removeLoan (int loan_id);
 	public Message updateLoan(@Valid Loan loan);
+	public Message addAdmin(@Valid Admin admin);
 }
