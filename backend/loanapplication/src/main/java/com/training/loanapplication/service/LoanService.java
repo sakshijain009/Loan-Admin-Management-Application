@@ -1,8 +1,13 @@
 package com.training.loanapplication.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.sql.Date;
+import java.util.Date;
 //import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,9 +56,20 @@ public class LoanService implements LoanServiceInterface {
 	{
 //		System.out.println(header.get("emp_id"));
 		List<Map<String,Object>> allLoans=loanRepo.getallLoans(header.get("emp_id"));
+//		Map<String, Object> updated_loan = null;
+//		List<Map<String,Object>> updated_loans = new ArrayList<>();
+//		for(int i = 0;i<allLoans.size();i++)
+//		{
+//			LocalDate issue_date =  ((Date) allLoans.get(i).get("card_issue_date")).toInstant().toLocalDate();
+//			LocalDate return_date = issue_date.plusYears((long) allLoans.get(i).get("duration"));
+//			if(return_date.isAfter(LocalDate.now()))
+//			{
+//				updated_loans.add(allLoans.get(i));
+//			}
+//		}
 		if(allLoans.size()==0)
 		{
-			throw new ResourceNotFoundException("No Loans to display for this employee");
+			throw new ResourceNotFoundException("No active Loans to display for this employee");
 		}
 		else
 		return allLoans;
