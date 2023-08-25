@@ -139,7 +139,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addItem")
-	public Item addItem(@RequestBody @Valid Item item)
+	public Item addItem(@RequestBody @Valid Item item) throws DuplicateEntryException
 	{
 		return itemServiceInterface.saveItem(item);	
 	}

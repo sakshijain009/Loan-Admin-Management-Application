@@ -87,7 +87,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
         //     <Appbar/>
         <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit User</Modal.Title>
+          <Modal.Title>Edit Loan</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <div className='modal_register'>
