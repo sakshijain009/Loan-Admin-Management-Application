@@ -100,28 +100,28 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
         <Modal.Body>
             <div className='modal_register'>
                 <h2>Edit Item</h2>
-                <TextField className='text_register' disabled placeholder='Item ID' InputProps={{
+                <TextField className='text_register' disabled label='Item ID' variant='outlined' InputProps={{
         endAdornment: <InputAdornment position="end">{itemId}</InputAdornment>,
                     }} />
-                <TextField id="outlined-basic" placeholder="Category" disabled className='text_register' value={category}
+                <TextField id="outlined-basic" label="Category" variant='outlined' disabled className='text_register' value={category}
                     onChange={
                         e => setCategory(e.target.value)
                     }/>
-                <TextField id="outlined-basic" placeholder="Item Make" disabled  className='text_register' value={make}
+                <TextField id="outlined-basic" label="Item Make" variant='outlined' disabled  className='text_register' value={make}
                     onChange={
                         e => setMake(e.target.value)
                     }/>
                     {error.make && <p style={{color:'red'}}>{error.make}</p>}
-                    <TextField id="outlined-basic" placeholder="Description"  className='text_register' value={description}
+                    <TextField id="outlined-basic" label="Description" variant='outlined'  className='text_register' value={description}
                     onChange={
                         e => setDescription(e.target.value)
                     }/>
-                    <TextField id="outlined-basic" placeholder="Value"  className='text_register' value={value}
+                    <TextField id="outlined-basic" label="Value" variant='outlined'  className='text_register' value={value}
                     onChange={
                         e => setValue(e.target.value)
                     }/>
                     {error.value && <p style={{color:'red'}}>{error.value}</p>}
-                    <TextField id="outlined-basic" placeholder="Status" disabled className='text_register' value={status}
+                    <TextField id="outlined-basic" label="Status" variant='outlined' disabled className='text_register' value={status}
                     onChange={
                         e => setStatus(e.target.value)
                     }/>
