@@ -92,7 +92,7 @@ public class AdminService implements AdminServiceInterface{
 			throw new ResourceNotFoundException("No employees to show");
 		}
 		else
-		return all_emps;
+			return all_emps;
 	}
 	
 	// Function for admin to get all loan
@@ -103,7 +103,7 @@ public class AdminService implements AdminServiceInterface{
 				throw new ResourceNotFoundException("No loans to show");
 			}
 			else
-			return all_loans;
+				return all_loans;
 		}
 	
 	// Function for admin to add new employee
@@ -194,5 +194,11 @@ public class AdminService implements AdminServiceInterface{
 			}else {
 				return new Message("No such loan is present");
 			}
+		}
+
+		// Add admin
+		public Message addAdmin(@Valid Admin admin) {
+			adminRepository.save(admin);
+			return null;
 		}
 }
