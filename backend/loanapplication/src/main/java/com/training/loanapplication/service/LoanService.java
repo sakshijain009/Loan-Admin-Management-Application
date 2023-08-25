@@ -60,10 +60,10 @@ public class LoanService implements LoanServiceInterface {
 	}
 	
 	// Method to get all loans for a particular Employee
-	public List<Map<String,Object>> getAllLoans(Map<String, String> header) throws ResourceNotFoundException
+	public List<Map<String,Object>> getAllLoans(String emp_id) throws ResourceNotFoundException
 	{
 //		System.out.println(header.get("emp_id"));
-		List<Map<String,Object>> allLoans=loanRepo.getallLoans(header.get("emp_id"));
+		List<Map<String,Object>> allLoans=loanRepo.getallLoans(emp_id);
 //		Map<String, Object> updated_loan = null;
 //		List<Map<String,Object>> updated_loans = new ArrayList<>();
 //		for(int i = 0;i<allLoans.size();i++)
