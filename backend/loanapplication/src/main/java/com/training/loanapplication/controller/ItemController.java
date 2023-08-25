@@ -24,7 +24,7 @@ import com.training.loanapplication.serviceInterface.ItemServiceInterface;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173", maxAge=3600)
 public class ItemController {
 	
 	@Autowired
