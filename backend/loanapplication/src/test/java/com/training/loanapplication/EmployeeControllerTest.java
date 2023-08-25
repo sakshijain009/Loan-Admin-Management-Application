@@ -147,10 +147,37 @@ public class EmployeeControllerTest {
 		.andExpect(jsonPath("$.id", Matchers.equalTo(emp.getId())));
 	}
 	
-//	@Test
-//	public void testValidateEmployee() throws Exception{
-//		
-//	}
+	@Test
+	public void testValidateEmployee() throws Exception{
+		Employee emp = new Employee();
+		List<Issue> issueList = new ArrayList<>();
+		List<Card> cardList = new ArrayList<>();
+		Issue issue = new Issue();
+		Card card = new Card();
+		issueList.add(issue);
+		cardList.add(card);
+		
+		emp.setId("123456");
+		emp.setName("ABC");
+		emp.setPassword("12345678");
+		emp.setDepartment("DepA");
+		emp.setDesignation("Des1");
+		emp.setDob(LocalDate.now());
+		emp.setDoj(LocalDate.now());
+		emp.setGender("M");
+		emp.setIssue(issueList);
+		emp.setCard(cardList);
+		
+		Message mes = new Message("Login success");
+		Mockito.when(employeeService.validateEmployee(ArgumentMatchers.any())).
+		thenReturn(mes);
+		String json = mapper.writeValueAsString(emp);
+		
+		mvc.perform(post("/api/users/checkLogin").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
+		.content(json).accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$.message", Matchers.equalToIgnoringCase(mes.getMessage())));
+	}
 	@Test
 	public void testApplyLoan() throws Exception{
 		LoanModel loan_model = new LoanModel();

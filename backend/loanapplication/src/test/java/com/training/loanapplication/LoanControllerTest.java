@@ -24,6 +24,9 @@ import com.training.loanapplication.dao.AdminRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.ItemRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.model.Card;
+import com.training.loanapplication.model.ItemCategory;
+import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.serviceInterface.AdminServiceInterface;
 import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
 import com.training.loanapplication.serviceInterface.ItemServiceInterface;
@@ -74,5 +77,23 @@ public class LoanControllerTest {
 		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_category.get(0))));
 	}
 	
+//	@Test
+//	public void testGetAllLoans() throws Exception{
+//		Loan loan = new Loan();
+//		List<Card> card_list = new ArrayList<>();
+//		Card card = new Card();
+//		card_list.add(card);
+//		loan.setDuration((short)3);
+//		loan.setLoan_id(1);
+//		loan.setType(ItemCategory.FURNITURE);
+//		loan.setCard(card_list);
+//		List<Loan> all_loans = new ArrayList<>();
+//		all_loans.add(loan);
+//		Mockito.when(loanService.getAllLoans().header("emp_id", "123456")).thenReturn(all_loans);
+//		mvc.perform(get("/getallLoans").contentType(MediaType.APPLICATION_JSON))
+//		.andExpect(status().isOk())
+//		.andExpect(jsonPath("$", Matchers.hasSize(all_category.size())))
+//		.andExpect(jsonPath("$[0]", Matchers.equalTo(all_category.get(0))));
+//	}
 	
 }
