@@ -63,7 +63,7 @@ const AdminViewUser = () => {
             if(response.status===200)
             {
               setData(res);
-              console.log(data);
+              // console.log(data);
                 
             }
             else
