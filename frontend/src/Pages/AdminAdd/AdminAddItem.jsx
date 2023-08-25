@@ -24,7 +24,7 @@ function AdminAddItem() {
     const [itemMake, setItemMake] = useState("");
     const [value, setValue] = useState(0);
     const [description, setDescription] = useState("");
-    const [issue, setIssue] = useState("");
+    const [issue, setIssue] = useState("N");
     const [types, setTypes] = useState([]);
     const [error, setError] = React.useState({
         "description":'',
@@ -121,10 +121,12 @@ function AdminAddItem() {
                         e => setDescription(e.target.value)
                     }/>
                     {error.description && <p style={{color:'red'}}>{error.description}</p>}
-                        <TextField id="outlined-basic" label="Issue Status" variant="outlined" className='text_register'
-                    onChange={
-                        e => setIssue(e.target.value)
-                    }/>
+                        <TextField id="outlined-basic" label="Issue Status" disabled variant="outlined" className='text_register'
+                        value={issue}
+                    // onChange={
+                    //     e => setIssue(e.target.value)
+                    // }
+                    />
                     {error.status && <p style={{color:'red'}}>{error.status}</p>}
                         <TextField id="outlined-basic" label="Item Value" type='number' variant="outlined" className='text_register'
                     onChange={
