@@ -38,11 +38,11 @@ const Login = ({user, loginUser, bt}) => {
         const json = await response.json();
         console.log(json);
         if(json.status === 200){
-            alert(json.message);
+            toast(json.message);
             setShow(false);
         }
         else{
-            alert(json.message);
+            toast(json.message);
         }
         
     }

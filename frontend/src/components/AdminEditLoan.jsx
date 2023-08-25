@@ -73,11 +73,11 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
             // window.location.reload();
         }
         else{
-            alert(json.message);
+            toast(json.message);
         }
             
     } catch (error) {
-        alert(json.message);
+        toast(json.message);
     }
     }
 

@@ -14,6 +14,8 @@ import { useState, useEffect } from 'react';
 // import {Link, useNavigate, useParams} from 'react-router-dom';
 import { InputAdornment } from '@mui/material';
 import { Modal } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminEditItem({id, show, handleClose, setEditDone}) {
     // const navigate = useNavigate();
@@ -80,7 +82,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
             // window.location.reload();
         }
         else{
-            alert(json.message);
+            toast(json.message);
         }
             
     } catch (error) {
@@ -128,6 +130,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
                 {/* <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Update Item</Button> */}
             </div>
+            <ToastContainer/>
             </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -138,6 +141,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
           </Button>
         </Modal.Footer>
       </Modal>
+      
         // </>
     )
 }
