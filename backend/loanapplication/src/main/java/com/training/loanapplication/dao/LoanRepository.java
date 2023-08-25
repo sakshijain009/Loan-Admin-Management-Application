@@ -17,6 +17,7 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	@Query(nativeQuery=true, value="SELECT l.loan_id , l.duration , l.loan_type as type , c.card_issue_date FROM loan_master l INNER JOIN card_details c ON l.loan_id=c.loan_id WHERE c.employee_id=?1")
 	public List<Map<String,Object>> getallLoans(String emp_id);
 	
+	@Query("SELECT l from Loan as l where l.type = :itemCategory")
 	Loan findByType(ItemCategory itemCategory);
 	
 	@Query("SELECT DISTINCT l.type FROM Loan as l")

@@ -60,11 +60,11 @@ function AdminAddItem() {
             "value": value !== 0 ? "" : "Value is required",
             "status" : issue ? "" : "Issue Status is required"
         })
-        try {
+        // try {
             // if(error.description || error.make || error.category || error.value || error.status) {
             //     throw new Error("Invalid Form");
             // }
-            // const data = async () => {
+            const data = async () => {
                 const response = await fetch(`http://localhost:8080/api/admin/addItem`, {
                     method: 'POST',
                     headers: {
@@ -78,18 +78,18 @@ function AdminAddItem() {
                         "status" : issue
                     })
                 });
-                // const json = await response.json();
-                // alert(json.message);
-                // sessionStorage.setItem("itemsDB", res);
+                const json = await response.json();
                 if(response.status===200)
                 {
                     navigate("/adminviewitem");
+                } else {
+                    toast(json.message);
                 }
-            // };
-            // data();
-        } catch (err) {
-            console.log(err);
-        }
+            };
+            data();
+        // } catch (err) {
+        //     console.log(err);
+        // }
         
     }
 

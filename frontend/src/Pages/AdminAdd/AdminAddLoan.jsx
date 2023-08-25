@@ -35,13 +35,15 @@ function AdminAddLoan() {
             "type": category ? "" : "Please select a category",
             "duration": duration > 0 ? "" : "Please enter a valid duration"
         })
-        try {
+        // try {
             // console.log(typeof(duration))
             if(duration <= 0) {
-                throw new Error("Please enter a valid duration");
+                // throw new Error("Please enter a valid duration");
+                toast("Please enter a valid duration");
+                return;
                 // console.log("Invalid data");
             }
-            // const data = async () => {
+            const data = async () => {
                 const response = await fetch(`http://localhost:8080/api/admin/addLoan`, {
                     method: 'POST',
                     headers: {
@@ -53,15 +55,20 @@ function AdminAddLoan() {
                     })
                 });
                 const json = await response.json();
-                console.log(json);
                 setCategory("");
-                setDuration();
-                navigate("/adminviewloan");
-            // };
-            // data();
-        } catch (err) {
-            toast(err);
-        }
+                setDuration(0);
+                if(response.status === 200) {
+                    navigate("/adminviewloan");
+                } else {
+                    toast(json.message);
+                }
+                console.log(json);
+                
+            };
+            data();
+        // } catch (err) {
+        //     toast(err);
+        // }
     }
 
 
