@@ -37,7 +37,9 @@ import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -162,5 +164,22 @@ public class ItemControllerTest {
 		mvc.perform(get("/{category}/{make}/{description}/getItem",itemcat,"wood", "new").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("$.item_id", Matchers.equalTo(item.getItem_id())));
+	}
+	
+	@Test
+	public void testGetAllItemsByEmpId() throws Exception{
+		List<Map<String,Object>> item_list = new ArrayList<>();
+		Map<String,Object> item = new HashMap<String, Object>();
+		item.put("issue_id", 1);
+		item.put("item_description", "new");
+		item.put("item_make", "wood");
+		item.put("item_category", ItemCategory.FURNITURE);
+		item.put("item_value", 1500);
+		item_list.add(item);
+		Mockito.when(itemService.getAllItemsByEmpId("123456")).thenReturn(item_list);
+		mvc.perform(get("/viewItems/{emp_id}","123456").contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("$", Matchers.hasSize(1)))
+		.andExpect(jsonPath("$[0].issue_id", Matchers.equalTo(item.get("issue_id"))));
 	}
 }
