@@ -24,6 +24,11 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
     const [value, setValue] = React.useState("");
     const [status, setStatus] = useState("");
 
+    const [error, setError] = React.useState({
+        "make":'',
+        "value":''
+    });
+
     // const {id} = useParams();
 
     useEffect(() => {
@@ -43,6 +48,10 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setError({
+            "make": make ? "" : "Item Make is required",
+            "value": value !== 0 ? "" : "Value is required"
+        })
         try {
         const response = await fetch("http://localhost:8080/api/admin/updateItem", {
             method: "PUT",
@@ -100,6 +109,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
                     onChange={
                         e => setMake(e.target.value)
                     }/>
+                    {error.make && <p style={{color:'red'}}>{error.make}</p>}
                     <TextField id="outlined-basic" placeholder="Description"  className='text_register' value={description}
                     onChange={
                         e => setDescription(e.target.value)
@@ -108,6 +118,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
                     onChange={
                         e => setValue(e.target.value)
                     }/>
+                    {error.value && <p style={{color:'red'}}>{error.value}</p>}
                     <TextField id="outlined-basic" placeholder="Status" disabled className='text_register' value={status}
                     onChange={
                         e => setStatus(e.target.value)

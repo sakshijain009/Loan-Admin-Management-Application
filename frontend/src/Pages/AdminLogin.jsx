@@ -3,6 +3,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
 import Appbar from '../components/Appbar';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './Login.css';
 
@@ -47,6 +49,11 @@ const AdminLogin = () => {
             console.log(JSON.stringify(json))
             sessionStorage.setItem("admin", JSON.stringify({"username": empid, "password": pwd}));
             navigate('/adminhome');
+        } else {
+            if(empid)
+            toast(json.message);
+            setEmpid("");
+            setPwd("");
         }
 
         console.log(json);
@@ -59,11 +66,13 @@ const AdminLogin = () => {
                 <h2>Login Admin</h2>
 
                 <TextField id="outlined-basic" label="Admin ID" variant="outlined" className='text_login'
+                    value={empid}
                     onChange={
                         e => setEmpid(e.target.value)
                     }/>
                 {error.username && <p style={{color:'red'}}>{error.username}</p>}
                 <TextField id="outlined-basic" label="Password" type="password" variant="outlined" className='text_login'
+                    value={pwd}
                     onChange={
                         e => setPwd(e.target.value)
                     }/>
@@ -71,8 +80,7 @@ const AdminLogin = () => {
                  <Button variant="contained" className='login_button'
                     onClick={handleSubmit}>Login</Button>
             </div>
-
-            
+            <ToastContainer />           
     </>
   )
 }
