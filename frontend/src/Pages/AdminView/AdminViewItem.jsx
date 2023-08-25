@@ -64,13 +64,13 @@ const AdminViewItem = () => {
                     "Content-Type": "application/json",
             }})
             const dt = await res.json();
-            if(res.status===404)
+            if(res.status===200)
             {
-                toast("No Items Available");
+              setData(dt);
             }
             else
             {
-                setData(dt);
+              toast("No Items Available");
             }
         }
         data();

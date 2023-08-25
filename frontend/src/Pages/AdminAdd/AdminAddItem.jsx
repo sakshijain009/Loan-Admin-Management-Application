@@ -39,13 +39,13 @@ function AdminAddItem() {
             const response = await fetch("http://localhost:8080/getAllTypes");
             const json = await response.json();
             const res = JSON.stringify(json);
-            if(response.status===404)
+            if(response.status===200)
             {
-                toast("No Item Categories Available");
+                setTypes(json);   
             }
             else
             {
-                setTypes(json);
+                toast("No Item Categories Available");
             }
         };
         data();
