@@ -50,11 +50,11 @@ const ViewItems = ({user, bt}) => {
             }})
             const dt = await res.json();
             // console.log(dt);
-            if(dt.status===404)
+            if(res.status===404)
             {
               toast("No Items Available");
             }
-            else if(dt.status===200)
+            else if(res.status===200)
             {
               setData(dt);
             }

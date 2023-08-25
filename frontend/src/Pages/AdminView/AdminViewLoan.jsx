@@ -60,13 +60,18 @@ const AdminViewUser = () => {
         const data1 = async () => {
             const response = await fetch('http://localhost:8080/api/admin/getAllLoan');
             const res = await response.json();
-            if(response.status===404)
+            if(response.status===200)
             {
-                toast("No Loans Available");
+              setData(res);
+              console.log(data);
+                
             }
             else
             {
-              setData(res);
+              toast("No Loans Available");
+              // if(data.length === 0) {
+              //   window.location.reload();
+              // }
             }
         }
         data1();

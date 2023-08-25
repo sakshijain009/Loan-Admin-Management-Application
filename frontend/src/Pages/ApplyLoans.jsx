@@ -95,7 +95,7 @@ function ApplyLoans({user, setUser, bt}) {
                 })
             });
             const json = await response.json();
-            alert(json.message);
+            toast(json.message);
             setCategory("");
             setItemMake("")
             setItem("")
