@@ -17,6 +17,8 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import { useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddUser({user, loginUser, bt}) {
     const navigate = useNavigate();
@@ -106,8 +108,8 @@ function AddUser({user, loginUser, bt}) {
             loginUser(empid);
             navigate('/home');
         }else if(response.status === 400){
-            alert("User with the id already exists!");
-            console.log(response.message);
+            toast(json.message);
+            // console.log(json.message);
         }
         else{
             console.log(response.message);
@@ -194,6 +196,7 @@ function AddUser({user, loginUser, bt}) {
 
                 <Button variant="contained" className='register_button'
                     onClick={handleSubmit}>Submit</Button>
+                <ToastContainer/>
             </div>
         </>
     )
