@@ -42,11 +42,10 @@ const ViewItems = ({user, bt}) => {
     useEffect(() => {
         const data = async () => {
             user = sessionStorage.getItem('username');
-            const res = await fetch('http://localhost:8080/viewItems', {
+            const res = await fetch(`http://localhost:8080/viewItems/${user}`,{
                 method: "GET",
                 headers: {
-                    "Content-Type": "application/json",
-                    "emp_id": user
+                    "Content-Type": "application/json"
             }})
             const dt = await res.json();
             // console.log(dt);
