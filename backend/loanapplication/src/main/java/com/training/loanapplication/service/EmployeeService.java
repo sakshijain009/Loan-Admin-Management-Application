@@ -110,6 +110,8 @@ public class EmployeeService implements EmployeeServiceInterface {
 		int loan_id = loanRepo.findIdByType(loanModel.getItem_category());
 		Loan loan = loanRepo.findById(loan_id).get();
 		Item item = itemRepo.getItemByMakeAndCategoryAndDescription(loanModel.getItem_category(), loanModel.getItem_make(), loanModel.getItem_description());
+		item.setStatus("Y");;
+		itemRepo.save(item);
 		
 		card.setEmployee(emp);
 		card.setLoan(loan);
@@ -137,11 +139,6 @@ public class EmployeeService implements EmployeeServiceInterface {
 		return new Message("Loan has been appliad successfully!");
 
 	}
-
-	// Find all cards issued for employee
-	// public List<Employee> findCardByEmployeeId(String emp_id) {
-	// 	return empRepo.findCardByEmployeeId(emp_id);
-	// }
 
 	// Change password 
 	public Message changePassword(Map<String, String> header) {

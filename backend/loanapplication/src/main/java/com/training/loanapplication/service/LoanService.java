@@ -7,7 +7,6 @@ import java.sql.Date;
 //import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +47,7 @@ public class LoanService implements LoanServiceInterface {
 		}
 	}
 	
+	// Get loan by loan id
 	public Loan getLoanById(int loan_id) throws ResourceNotFoundException
 	{
 		Loan l =  loanRepo.findById(loan_id).orElse(null);

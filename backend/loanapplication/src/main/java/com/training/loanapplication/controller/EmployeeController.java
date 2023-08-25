@@ -63,12 +63,6 @@ public class EmployeeController {
 		return empServiceInterface.applyLoan(loanModel);
 	}
 	
-//	@GetMapping("/getCards/{emp_id}")
-//	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
-//	{
-//		return empService.findCardByEmployeeId(emp_id);
-//	}
-	
 	@PutMapping("/changePassword")
 	public Message changePassword(@RequestHeader Map<String, String> header)
 	{
