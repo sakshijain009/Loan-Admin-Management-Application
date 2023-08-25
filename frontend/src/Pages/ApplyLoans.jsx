@@ -35,9 +35,14 @@ function ApplyLoans({user, setUser, bt}) {
         const data = async () => {
             const response = await fetch("http://localhost:8080/getAllCategory");
             const json = await response.json();
-            const res = JSON.stringify(json);
+            if(response.status === 200) {
+                setCategories(json);
+            } else {
+                setCategories([]);
+                toast(json.message);
+            }
             // sessionStorage.setItem("itemsDB", res);
-            setCategories(json);
+
         };
         data();
     }, [user]);
@@ -95,11 +100,17 @@ function ApplyLoans({user, setUser, bt}) {
                 })
             });
             const json = await response.json();
-            toast(json.message);
-            setCategory("");
-            setItemMake("")
-            setItem("")
-            setValue(0)
+            if(response.status === 200) {
+                toast(json.message);
+                navigate("/home");
+            } else {
+                toast(json.message);
+            }
+            
+            // setCategory("");
+            // setItemMake("")
+            // setItem("")
+            // setValue(0)
             // sessionStorage.setItem("itemsDB", res);
             
         };

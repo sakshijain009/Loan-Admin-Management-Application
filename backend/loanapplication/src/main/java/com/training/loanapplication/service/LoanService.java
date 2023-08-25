@@ -3,7 +3,7 @@ package com.training.loanapplication.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.sql.Date;
-import java.util.Date;
+//import java.util.Date;
 //import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.training.loanapplication.dao.CardRepository;
 import com.training.loanapplication.dao.EmployeeRepository;
 import com.training.loanapplication.dao.LoanRepository;
+import com.training.loanapplication.exception.DuplicateEntryException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Loan;
 import com.training.loanapplication.model.Message;
@@ -35,22 +36,29 @@ public class LoanService implements LoanServiceInterface {
 	EmployeeRepository employeeRepo;
 	
 	// Method to save loan in loan table
-	public Message saveLoan(@Valid Loan loan)
+	public Message saveLoan (@Valid Loan loan) throws DuplicateEntryException
 	{
-		loanRepo.save(loan);
-		return new Message("Loan has been added successfully");
+		Loan checkLoanExists = loanRepo.findByType(loan.getType());
+		
+		if(checkLoanExists == null) {
+			loanRepo.save(loan);
+			return new Message("Loan has been added successfully");
+		}else {
+			throw new DuplicateEntryException("Loan for the type already exists!");
+		}
 	}
 	
 	public Loan getLoanById(int loan_id) throws ResourceNotFoundException
 	{
 		Loan l =  loanRepo.findById(loan_id).orElse(null);
-		if(l==null)
-		{
+		
+		if(l==null) {
 			throw new ResourceNotFoundException("No Loan for this particular loan id");
 		}
 		else
-		return l;
+			return l;
 	}
+	
 	// Method to get all loans for a particular Employee
 	public List<Map<String,Object>> getAllLoans(Map<String, String> header) throws ResourceNotFoundException
 	{
@@ -78,12 +86,10 @@ public class LoanService implements LoanServiceInterface {
 	// Get all loan types
 		public List<String> getAllTypes() throws ResourceNotFoundException
 		{
-			List<String> all_types= loanRepo.getAllTypes();
-			if(all_types.size()==0)
-			{
+			List<String> all_types = loanRepo.getAllTypes();
+			if(all_types.size()==0) {
 				throw new ResourceNotFoundException("No loan type available");
-			}
-			else
-			return all_types; 
+			} else
+				return all_types; 
 		}
 }

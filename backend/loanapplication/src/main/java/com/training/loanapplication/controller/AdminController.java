@@ -19,6 +19,7 @@ import com.training.loanapplication.dto.EmployeeDTO;
 import com.training.loanapplication.dto.ItemDTO;
 import com.training.loanapplication.dto.LoanDTO;
 import com.training.loanapplication.exception.AuthenticationFailedException;
+import com.training.loanapplication.exception.DuplicateEntryException;
 import com.training.loanapplication.exception.ResourceNotFoundException;
 import com.training.loanapplication.model.Admin;
 import com.training.loanapplication.model.Employee;
@@ -47,6 +48,12 @@ public class AdminController {
 	
 	@Autowired
 	ItemServiceInterface itemServiceInterface;
+	
+	@PostMapping("/register")
+	public Message addAdmin(@RequestBody @Valid Admin admin) throws AuthenticationFailedException
+	{
+		return adminServiceInterface.addAdmin(admin);	
+	}
 	
 	@PostMapping("/login")
 	public Message checkAdmin(@RequestBody @Valid Admin admin) throws AuthenticationFailedException
@@ -96,7 +103,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/addLoan")
-	public Message addNewLoan(@RequestBody @Valid Loan loan)
+	public Message addNewLoan(@RequestBody @Valid Loan loan) throws DuplicateEntryException
 	{
 		return loanServiceInterface.saveLoan(loan);	
 	}
