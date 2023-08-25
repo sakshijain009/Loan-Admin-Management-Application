@@ -78,6 +78,7 @@ function AdminEditItem({id, show, handleClose, setEditDone}) {
             // navigate('/adminviewitem');
             handleClose();
             setEditDone(prev => !prev);
+            toast(json.message);
             // alert(json.message);
             // window.location.reload();
         }
