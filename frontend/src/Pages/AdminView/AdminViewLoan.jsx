@@ -68,6 +68,7 @@ const AdminViewUser = () => {
             }
             else
             {
+              setData([]);
               toast("No Loans Available");
               // if(data.length === 0) {
               //   window.location.reload();

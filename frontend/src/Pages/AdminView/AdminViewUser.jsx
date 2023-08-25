@@ -70,6 +70,7 @@ const AdminViewUser = () => {
             }
             else
             {
+              setData([]);
               toast("No Users Available");
             }
         }

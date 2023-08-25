@@ -69,6 +69,7 @@ function AdminEditUser({id, show, handleClose, setEditDone}) {
             // navigate('/adminviewuser');
             handleClose();
             setEditDone(prev => !prev);
+            toast(json.message);
             // alert(json.message);
             // window.location.reload();
         }
