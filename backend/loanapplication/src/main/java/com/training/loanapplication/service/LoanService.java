@@ -62,25 +62,22 @@ public class LoanService implements LoanServiceInterface {
 	// Method to get all loans for a particular Employee
 	public List<Map<String,Object>> getAllLoans(String emp_id) throws ResourceNotFoundException
 	{
-//		System.out.println(header.get("emp_id"));
-		List<Map<String,Object>> allLoans=loanRepo.getallLoans(emp_id);
-//		Map<String, Object> updated_loan = null;
-//		List<Map<String,Object>> updated_loans = new ArrayList<>();
-//		for(int i = 0;i<allLoans.size();i++)
-//		{
-//			LocalDate issue_date =  ((Date) allLoans.get(i).get("card_issue_date")).toInstant().toLocalDate();
-//			LocalDate return_date = issue_date.plusYears((long) allLoans.get(i).get("duration"));
-//			if(return_date.isAfter(LocalDate.now()))
-//			{
-//				updated_loans.add(allLoans.get(i));
-//			}
-//		}
-		if(allLoans.size()==0)
-		{
+		List<Map<String,Object>> allLoans = loanRepo.getallLoans(emp_id);
+		
+		List<Map<String,Object>> updated_loans = new ArrayList<>();
+		
+		for(int i = 0;i < allLoans.size(); i++) {
+			LocalDate issue_date =  ((Date) allLoans.get(i).get("card_issue_date")).toLocalDate();
+			LocalDate return_date = issue_date.plusYears(Long.valueOf(allLoans.get(i).get("duration").toString()));
+			if(return_date.isAfter(LocalDate.now())) updated_loans.add(allLoans.get(i));
+		}
+
+		if(updated_loans.size()==0){
 			throw new ResourceNotFoundException("No active Loans to display for this employee");
 		}
-		else
-		return allLoans;
+		else {
+			return updated_loans;
+		}	
 	}
 	
 	// Get all loan types
