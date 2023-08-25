@@ -1,17 +1,22 @@
 package com.training.loanapplication.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.training.loanapplication.config.JwtTokenUtil;
 import com.training.loanapplication.model.Employee;
@@ -19,6 +24,8 @@ import com.training.loanapplication.model.JwtRequest;
 import com.training.loanapplication.model.JwtResponse;
 import com.training.loanapplication.service.JwtUserDetailsService;
 
+@RestController
+@CrossOrigin("http://localhost:5173")
 public class JwtAuthenticationController {
 
 	@Autowired
@@ -48,12 +55,6 @@ public class JwtAuthenticationController {
 		return "You are authorized";
 	}
 	
-//	@PostMapping("/authenticate")
-//	public String generateToken(@RequestBody JwtRequest jwtRequest) {
-//		return null;
-//		
-//	}
-	
 	@PostMapping("/register")
 	public ResponseEntity<?> saveUser(@RequestBody Employee emp) throws Exception {
 		return ResponseEntity.ok(userDetailsService.saveEmployee(emp));
@@ -68,4 +69,5 @@ public class JwtAuthenticationController {
 			throw new Exception("Invalid Credentials", e);
 		}
 	}
+
 }
