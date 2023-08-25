@@ -85,10 +85,10 @@ public class ItemService implements ItemServiceInterface {
 	}
 	
 	// Get all items for an employee id
-	public List<Map<String,Object>> getAllItemsByEmpId(Map<String, String> header) throws ResourceNotFoundException
+	public List<Map<String,Object>> getAllItemsByEmpId(String emp_id) throws ResourceNotFoundException
 	{
-		System.out.println(header.get("emp_id"));
-		List<Map<String,Object>> allItems=itemRepo.getAllItemsByEmpId(header.get("emp_id"));
+//		System.out.println(header.get("emp_id"));
+		List<Map<String,Object>> allItems=itemRepo.getAllItemsByEmpId(emp_id);
 		if(allItems.size()==0)
 		{
 			throw new ResourceNotFoundException("No items purchased by employee");
