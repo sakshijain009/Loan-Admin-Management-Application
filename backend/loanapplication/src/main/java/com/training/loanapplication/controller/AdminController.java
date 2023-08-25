@@ -33,7 +33,7 @@ import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173", maxAge=3600)
 @RequestMapping("/api/admin")
 public class AdminController {
 	

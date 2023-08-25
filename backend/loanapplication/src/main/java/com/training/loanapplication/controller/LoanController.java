@@ -15,7 +15,7 @@ import com.training.loanapplication.serviceInterface.LoanServiceInterface;
 
 
 @RestController
-@CrossOrigin("http://localhost:5173") 
+@CrossOrigin(origins = "http://localhost:5173", maxAge=3600)
 public class LoanController {
 	
 	@Autowired
