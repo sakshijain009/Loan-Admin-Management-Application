@@ -7,8 +7,7 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import { useNavigate } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import { Link } from "react-router-dom";
-import { palette } from "@mui/system";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function Appbar({ hbtn, bt }) {
   const navigate = useNavigate();
@@ -55,9 +54,10 @@ export default function Appbar({ hbtn, bt }) {
               <Box
                 component="span"
                 sx={{ flexGrow: 1, p: 1, borderRadius: 8 }}
-                className="bg-light text-primary"
+                className="bg-light text-dark"
               >
                 <Typography variant="h9" className="font-weight-bold px-2">
+                  <PersonIcon />
                   Welcome {prof}
                 </Typography>
               </Box>

@@ -1,17 +1,33 @@
+.loan__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    flex-direction: column;
+    padding: 2rem;
+    width: 50%;
+}
 
-
-/* .loan-select {
-    margin-bottom: 30px;
-    
-} */
+@media screen and (max-width: 768px) {
+    .loan__container {
+        width: 80%;
+    }
+}
 
 .loan-select {
     display: flex;
     justify-content: center;
-    padding: 30px 5px;
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .loan-select {
+        flex-direction: column;
+    }
 }
 
 .loan-form {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 50px 0 50px 30px;
+    padding: 1.5rem 1rem 1.5rem 1rem;
+    /* border-radius: 10px; */
 }

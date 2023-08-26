@@ -10,22 +10,24 @@
 }
 
 .register {
-    /* position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
     background-color: white !important;
     display: flex;
     justify-content: center;
     margin: auto;
     margin-top: 3rem;
     flex-direction: column;
-    width: 60%;
+    width: 50%;
     border: 1px solid gray;
     border-radius: 10px;
     padding: 1rem 2rem;
     margin-bottom: 40px;
     box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 768px) {
+    .register {
+        width: 90%;
+    }
 }
 
 .modal_register {
