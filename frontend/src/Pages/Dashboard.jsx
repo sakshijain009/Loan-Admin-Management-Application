@@ -1,63 +1,56 @@
-import React from 'react'
-import Appbar from '../components/Appbar';
-import { useNavigate } from 'react-router-dom';
-import './dashboard.css';
-import { Button, Card } from 'react-bootstrap';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./dashboard.css";
 
-function Dashboard(){
-    
-    const navigate = useNavigate();
-    if(sessionStorage.getItem("admin")) {
-        navigate("/adminhome");
-    } else if(sessionStorage.getItem("username")) {
-        navigate("/home");
-    }
+function Dashboard() {
+  const navigate = useNavigate();
+  if (sessionStorage.getItem("admin")) {
+    navigate("/adminhome");
+  } else if (sessionStorage.getItem("username")) {
+    navigate("/home");
+  }
 
-    function adminLogin() {
-        navigate('/loginadmin');
-    }
+  return (
+    <div className="cover-bg d-flex text-center text-white bg-dark">
+      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header className="mb-auto">
+          <div>
+            <h3 className="float-md-start mb-0">LAMA</h3>
+            <nav className="nav nav-masthead justify-content-center float-md-end">
+              <Link to="/" className="nav-link active" aria-current="page">
+                Home
+              </Link>
+              <Link to="/login" className="nav-link">
+                Login
+              </Link>
+              <Link to="/register" className="nav-link">
+                Register
+              </Link>
+            </nav>
+          </div>
+        </header>
+        <main className="px-3">
+          <h1>LAMA</h1>
+          <p className="lead">
+            Welcome to LAMA! <br /> Jump right in and apply for loans.
+            <br />
+            Choose among the various categories and find the perfect loan for
+            you!
+          </p>
+          <Link
+            to="/loginadmin"
+            className="btn btn-lg mt-2 btn-secondary fw-bold border-white bg-white text-dark"
+          >
+            Welcome back Admin
+          </Link>
+        </main>
 
-    function userLogin() {
-        navigate('/login');
-    }
-
-    function userRegister() {
-        navigate('/register');
-    }
-
-    return (
-        <>
-            <Appbar hbtn={"/"}/>
-            
-            <section className={"summary"}>
-            <h2>LAMA</h2>
-            <p>
-                A Loan Management Application
-            </p>
-        </section>
-            <div className="dashboard-container">
-
-            
-
-            <Card style={{ width: '18rem' }} className='mx-4'>
-      <Card.Body>
-        <Card.Title>Admin</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">Login as Admin</Card.Subtitle>
-        <Button variant='dark' onClick={adminLogin} className='m-2'>Login</Button>
-      </Card.Body>
-    </Card>
-
-    <Card style={{ width: '18rem' }} className='mx-4'>
-      <Card.Body>
-        <Card.Title>Employee</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">Login/Register as Employee</Card.Subtitle>
-        <Button variant='light' onClick={userRegister} className='m-2'>Register</Button>
-        <Button variant='dark' onClick={userLogin} className='m-2'>Login</Button>
-      </Card.Body>
-    </Card>
-            </div>
-        </>
-    )
+        <footer className="mt-auto text-white-50">
+          <p>&copy; 2023 LAMA</p>
+        </footer>
+      </div>
+    </div>
+  );
 }
 
 export default Dashboard;
