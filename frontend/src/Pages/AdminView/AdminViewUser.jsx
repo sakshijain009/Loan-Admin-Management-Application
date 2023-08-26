@@ -13,6 +13,7 @@ import AdminEditUser from '../../components/AdminEditUser';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -106,6 +107,21 @@ const AdminViewUser = () => {
       <div>
         <Appbar bt={"Logout"} hbtn={goToUrl}/>
         <h3 className='text-center pt-5' >Customer Master Data Details</h3>
+        <div style={{display:'flex', justifyContent:'center'}}>
+          <Button variant="primary" className="m-2">
+            <Link
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: "1.2rem",
+              }}
+              to="/adminadduser"
+            >
+              Add more Users
+            </Link>
+          </Button>
+        </div>
         <div className='mx-auto p-4'>
         {data.length != 0 && <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
