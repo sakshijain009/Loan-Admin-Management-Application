@@ -26,7 +26,7 @@ import com.training.loanapplication.serviceInterface.EmployeeServiceInterface;
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173", maxAge=3600)
 @RequestMapping("/api/users")
 public class EmployeeController {
 	
@@ -62,12 +62,6 @@ public class EmployeeController {
 	{
 		return empServiceInterface.applyLoan(loanModel);
 	}
-	
-//	@GetMapping("/getCards/{emp_id}")
-//	public List<Employee> findCardByEmployeeId(@PathVariable String emp_id)
-//	{
-//		return empService.findCardByEmployeeId(emp_id);
-//	}
 	
 	@PutMapping("/changePassword")
 	public Message changePassword(@RequestHeader Map<String, String> header)
