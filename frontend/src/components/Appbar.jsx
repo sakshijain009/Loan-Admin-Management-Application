@@ -15,7 +15,20 @@ export default function Appbar({ hbtn, bt }) {
   useEffect(() => {
     console.log(prof);
     if (sessionStorage.getItem("username") != null) {
-      setProf(sessionStorage.getItem("username"));
+      // setProf(sessionStorage.getItem("username"));
+      const id = sessionStorage.getItem("username");
+      const data = async () => {
+        const response = await fetch(
+          `http://localhost:8080/api/users/profile/${id}`
+        );
+        const res = await response.json();
+        if (response.status === 200) {
+          setProf(res.name);
+        } else {
+          setProf(id);
+        }
+      };
+      data();
     }
     if (sessionStorage.getItem("admin") != null) {
       const p = JSON.parse(sessionStorage.getItem("admin")).username;

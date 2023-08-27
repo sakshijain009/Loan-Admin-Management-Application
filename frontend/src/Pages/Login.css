@@ -1,14 +1,15 @@
 .login {
-    width: 40%;
+    width: 400px;
+    /* height: 80vh; */
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: auto;
     margin-top: 3rem;
     flex-direction: column;
     background-color: white;
-    box-shadow:  0 1px 18px 10px rgba(0, 0, 0, 0.25);
-    border: 1px solid gray;
-    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
     padding: 2rem;
 }
 
@@ -19,9 +20,10 @@
 }
 
 .login h2{
-    margin-top: 40px;
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
 .text_login {

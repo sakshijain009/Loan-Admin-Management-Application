@@ -4,7 +4,17 @@
     align-items: center;
     justify-content: flex-start;
     /* height: 100vh; */
-    margin-top: 3rem;
+    margin-top: 2rem;
+}
+
+.box__shadow {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.box__shadow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
 }
 
 .user-dashboard__buttons {

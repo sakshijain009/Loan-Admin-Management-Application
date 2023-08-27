@@ -16,12 +16,12 @@
     margin: auto;
     margin-top: 3rem;
     flex-direction: column;
-    width: 50%;
-    border: 1px solid gray;
-    border-radius: 10px;
+    /* width: 50%; */
+    width: 600px;
+    border-radius: 5px;
     padding: 1rem 2rem;
     margin-bottom: 40px;
-    box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
 }
 
 @media screen and (max-width: 768px) {
