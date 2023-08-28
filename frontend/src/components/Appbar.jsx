@@ -50,6 +50,7 @@ export default function Appbar({ hbtn, bt }) {
             <HomeRoundedIcon />
           </IconButton>
           <Typography
+            className="d-none d-sm-block"
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, paddingLeft: 1 }}
