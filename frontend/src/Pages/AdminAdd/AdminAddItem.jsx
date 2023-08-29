@@ -100,6 +100,7 @@ function AdminAddItem() {
                     onChange={
                         e => setCategory(e.target.value)
                     }/> */}
+            <div style={{display:'flex', justifyContent:'center'}}>
             <DropdownItems
               flag={0}
               val={category}
@@ -107,6 +108,7 @@ function AdminAddItem() {
               lab={"Select Categories"}
               arr={types}
             />
+            </div>
             {error.category && <p style={{ color: "red" }}>{error.category}</p>}
             <TextField
               id="outlined-basic"
