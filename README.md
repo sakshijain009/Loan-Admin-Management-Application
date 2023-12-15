@@ -13,3 +13,5 @@ The app provides a facility for employees in the organisation to purchase items 
 - View all loan cards availed
 - View all items purchased on loan
 
+## Tech Stack Used
+![LAMA](https://github.com/sakshijain009/Loan-Admin-Management-Application/assets/62885857/2632b690-cd28-44fd-90e5-66f4dcd2785c)
